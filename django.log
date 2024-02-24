@@ -1,0 +1,20 @@
+INFO 2024-02-24 17:55:35,642 autoreload 5800 6356 Watching for file changes with StatReloader
+INFO 2024-02-24 17:56:00,093 autoreload 13960 13396 Watching for file changes with StatReloader
+INFO 2024-02-24 17:58:20,316 autoreload 13960 13396 C:\Users\Admin\Projects\AetherEShop\AetherEShop\settings.py changed, reloading.
+INFO 2024-02-24 17:58:21,126 autoreload 8056 3392 Watching for file changes with StatReloader
+INFO 2024-02-24 17:58:41,186 autoreload 13308 6024 Watching for file changes with StatReloader
+INFO 2024-02-24 17:59:08,623 autoreload 12956 9368 Watching for file changes with StatReloader
+INFO 2024-02-24 17:59:25,802 autoreload 12108 13404 Watching for file changes with StatReloader
+INFO 2024-02-24 17:59:51,535 autoreload 1284 13228 Watching for file changes with StatReloader
+INFO 2024-02-24 18:04:15,172 autoreload 12480 11896 Watching for file changes with StatReloader
+INFO 2024-02-24 18:05:17,996 autoreload 10056 3808 Watching for file changes with StatReloader
+INFO 2024-02-24 18:06:28,934 views 10056 6504 Successfully retrieved all order statuses.
+ERROR 2024-02-24 18:06:29,139 views 10056 6504 An error occurred while retrieving order statuses: ОШИБКА:  отношение "Aether_orderstatus" не существует
+LINE 1: ...us_name", "Aether_orderstatus"."description" FROM "Aether_or...
+                                                             ^
+
+ERROR 2024-02-24 18:06:29,141 log 10056 6504 Internal Server Error: /demo/api/order_status
+ERROR 2024-02-24 18:06:29,141 basehttp 10056 6504 "GET /demo/api/order_status HTTP/1.1" 500 23
+INFO 2024-02-24 18:07:35,218 autoreload 6924 10672 Watching for file changes with StatReloader
+INFO 2024-02-24 18:07:39,380 views 6924 6876 Successfully retrieved all order statuses.
+INFO 2024-02-24 18:07:39,435 basehttp 6924 6876 "GET /demo/api/order_status HTTP/1.1" 200 2
