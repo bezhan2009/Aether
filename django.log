@@ -1149,3 +1149,5 @@ INFO 2024-02-25 17:01:42,247 basehttp 4968 1052 "POST /demo/api/comment/3/ HTTP/
 INFO 2024-02-25 17:02:20,845 basehttp 4968 1052 "POST /demo/api/comment/3/ HTTP/1.1" 200 93
 INFO 2024-02-25 17:02:44,019 basehttp 4968 1052 "POST /demo/api/comment/3/ HTTP/1.1" 200 93
 INFO 2024-02-25 17:02:49,534 basehttp 4968 1052 "GET /demo/api/comment/3/ HTTP/1.1" 200 818
+INFO 2024-02-25 17:13:50,175 autoreload 4968 1016 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 17:13:52,299 autoreload 11172 11916 Watching for file changes with StatReloader
