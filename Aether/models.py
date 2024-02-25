@@ -123,3 +123,4 @@ class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     parent_id = models.IntegerField(null=True)
     comment_text = models.TextField()
+    children = models.ManyToManyField('self', related_name='parent', blank=True)

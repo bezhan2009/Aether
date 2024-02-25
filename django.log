@@ -18,3 +18,1134 @@ ERROR 2024-02-24 18:06:29,141 basehttp 10056 6504 "GET /demo/api/order_status HT
 INFO 2024-02-24 18:07:35,218 autoreload 6924 10672 Watching for file changes with StatReloader
 INFO 2024-02-24 18:07:39,380 views 6924 6876 Successfully retrieved all order statuses.
 INFO 2024-02-24 18:07:39,435 basehttp 6924 6876 "GET /demo/api/order_status HTTP/1.1" 200 2
+INFO 2024-02-24 18:26:55,904 autoreload 1764 11120 Watching for file changes with StatReloader
+WARNING 2024-02-24 18:27:09,808 log 1764 7780 Unauthorized: /demo/api/address
+WARNING 2024-02-24 18:27:09,809 basehttp 1764 7780 "GET /demo/api/address HTTP/1.1" 401 183
+INFO 2024-02-24 18:27:19,751 basehttp 1764 7780 "POST /auth/sign-in/ HTTP/1.1" 200 483
+ERROR 2024-02-24 18:27:42,282 log 1764 7780 Internal Server Error: /demo/api/address
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 567, in get
+    user_profile = UserProfile.objects.get(id=user_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 649, in get
+    raise self.model.DoesNotExist(
+Aether.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+ERROR 2024-02-24 18:27:42,285 basehttp 1764 7780 "GET /demo/api/address HTTP/1.1" 500 104255
+INFO 2024-02-24 18:28:40,518 autoreload 3648 6772 Watching for file changes with StatReloader
+INFO 2024-02-24 18:28:58,978 autoreload 1416 3316 Watching for file changes with StatReloader
+ERROR 2024-02-24 18:29:55,026 views 1764 7780 Failed to create a new user: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')]}
+WARNING 2024-02-24 18:29:55,026 log 1764 7780 Bad Request: /auth/sign-up/
+WARNING 2024-02-24 18:29:55,026 basehttp 1764 7780 "POST /auth/sign-up/ HTTP/1.1" 400 58
+INFO 2024-02-24 18:30:12,912 views 1764 7780 New user created with ID 11.
+INFO 2024-02-24 18:30:12,914 basehttp 1764 7780 "POST /auth/sign-up/ HTTP/1.1" 200 86
+INFO 2024-02-24 18:30:26,507 basehttp 1764 7780 "POST /auth/sign-in/ HTTP/1.1" 200 486
+WARNING 2024-02-24 18:30:43,943 log 1764 7780 Not Found: /demo/api/address
+WARNING 2024-02-24 18:30:43,944 basehttp 1764 7780 "GET /demo/api/address HTTP/1.1" 404 23
+INFO 2024-02-24 18:31:08,801 basehttp 1764 7780 "GET /demo/api/products/ HTTP/1.1" 200 2
+INFO 2024-02-24 20:24:43,220 autoreload 7648 10084 Watching for file changes with StatReloader
+WARNING 2024-02-24 20:24:49,186 log 1764 7780 Unauthorized: /demo/api/products/
+WARNING 2024-02-24 20:24:49,186 basehttp 1764 7780 "GET /demo/api/products/ HTTP/1.1" 401 183
+WARNING 2024-02-24 20:24:51,347 log 1764 7780 Unauthorized: /demo/api/products/
+WARNING 2024-02-24 20:24:51,347 basehttp 1764 7780 "GET /demo/api/products/ HTTP/1.1" 401 183
+INFO 2024-02-24 20:25:01,665 basehttp 1764 7780 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-02-24 20:25:21,647 basehttp 1764 7780 "GET /demo/api/products/ HTTP/1.1" 200 2
+INFO 2024-02-24 20:25:29,841 views 1764 7780 Request data - User: user, Data: {'user': <UserProfile: user (Admin: True)>, 'category': 3, 'title': 'PC', 'description': 'Good PC for gamings with processor core i3 ', 'price': 233.13, 'amount': 10}, Cover Images: ['Изображения/98ea89ac0413360e106421fced7ef1f3', 'Изображения/apps.13081.13672777200662346.8fa944a0-40ec-47ee-859e-d8aaacad60e0']
+ERROR 2024-02-24 20:25:29,851 views 1764 7780 Invalid data provided: {'category': [ErrorDetail(string='Invalid pk "3" - object does not exist.', code='does_not_exist')]}
+WARNING 2024-02-24 20:25:29,851 log 1764 7780 Bad Request: /demo/api/products/
+WARNING 2024-02-24 20:25:29,852 basehttp 1764 7780 "POST /demo/api/products/ HTTP/1.1" 400 58
+INFO 2024-02-24 20:25:44,853 views 1764 7780 New category created with ID 1.
+INFO 2024-02-24 20:25:44,854 basehttp 1764 7780 "POST /demo/api/category HTTP/1.1" 200 68
+INFO 2024-02-24 20:25:56,558 views 1764 7780 Request data - User: user, Data: {'user': <UserProfile: user (Admin: True)>, 'category': 1, 'title': 'PC', 'description': 'Good PC for gamings with processor core i3 ', 'price': 233.13, 'amount': 10}, Cover Images: ['Изображения/98ea89ac0413360e106421fced7ef1f3', 'Изображения/apps.13081.13672777200662346.8fa944a0-40ec-47ee-859e-d8aaacad60e0']
+INFO 2024-02-24 20:25:56,604 views 1764 7780 Product created successfully. User: user, Product ID: 1, Cover Images: ['Изображения/98ea89ac0413360e106421fced7ef1f3', 'Изображения/apps.13081.13672777200662346.8fa944a0-40ec-47ee-859e-d8aaacad60e0']
+INFO 2024-02-24 20:25:56,608 basehttp 1764 7780 "POST /demo/api/products/ HTTP/1.1" 201 400
+INFO 2024-02-24 20:26:05,094 basehttp 1764 7780 "GET /demo/api/products/ HTTP/1.1" 200 402
+INFO 2024-02-24 20:26:43,268 views 1764 7780 New category created with ID 2.
+INFO 2024-02-24 20:26:43,269 basehttp 1764 7780 "POST /demo/api/category HTTP/1.1" 200 68
+INFO 2024-02-24 20:33:49,186 autoreload 1764 11120 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-02-24 20:33:50,795 autoreload 7812 8400 Watching for file changes with StatReloader
+INFO 2024-02-24 20:34:11,143 basehttp 7812 1340 "GET /demo/api/comment HTTP/1.1" 301 0
+WARNING 2024-02-24 20:34:11,149 log 7812 5448 Unauthorized: /demo/api/comment/
+WARNING 2024-02-24 20:34:11,149 basehttp 7812 5448 "GET /demo/api/comment/ HTTP/1.1" 401 58
+INFO 2024-02-24 20:34:18,175 basehttp 7812 5448 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-02-24 20:34:34,102 basehttp 7812 5448 "GET /demo/api/comment HTTP/1.1" 301 0
+ERROR 2024-02-24 20:34:34,278 log 7812 6644 Internal Server Error: /demo/api/comment/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CommentList.get() missing 1 required positional argument: 'product_id'
+ERROR 2024-02-24 20:34:34,280 basehttp 7812 6644 "GET /demo/api/comment/ HTTP/1.1" 500 93580
+INFO 2024-02-24 20:35:58,242 autoreload 1876 11144 Watching for file changes with StatReloader
+INFO 2024-02-24 20:36:07,427 basehttp 1876 4700 "GET /demo/api/comment/1 HTTP/1.1" 301 0
+ERROR 2024-02-24 20:36:07,533 log 1876 11712 Internal Server Error: /demo/api/comment/1/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CommentList.get() got an unexpected keyword argument '_id'
+ERROR 2024-02-24 20:36:07,535 basehttp 1876 11712 "GET /demo/api/comment/1/ HTTP/1.1" 500 93648
+INFO 2024-02-24 20:36:24,945 autoreload 4108 11276 Watching for file changes with StatReloader
+INFO 2024-02-24 20:36:28,918 basehttp 4108 11040 "GET /demo/api/comment/1 HTTP/1.1" 301 0
+INFO 2024-02-24 20:36:29,003 basehttp 4108 9452 "GET /demo/api/comment/1/ HTTP/1.1" 200 2
+INFO 2024-02-24 20:37:56,192 autoreload 4736 6384 Watching for file changes with StatReloader
+INFO 2024-02-24 20:38:51,864 basehttp 4736 11840 "GET /demo/api/comment/1 HTTP/1.1" 301 0
+INFO 2024-02-24 20:38:51,963 basehttp 4736 5276 "GET /demo/api/comment/1/ HTTP/1.1" 200 2
+ERROR 2024-02-24 20:38:56,310 log 4736 5276 Internal Server Error: /demo/api/comment/1
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/demo/api/comment/1/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2024-02-24 20:38:56,311 basehttp 4736 5276 "POST /demo/api/comment/1 HTTP/1.1" 500 75306
+ERROR 2024-02-24 20:39:00,900 log 4736 9136 Internal Server Error: /demo/api/comment/1/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>`
+ERROR 2024-02-24 20:39:00,902 basehttp 4736 9136 "POST /demo/api/comment/1/ HTTP/1.1" 500 84772
+INFO 2024-02-24 20:40:08,546 autoreload 7384 5988 Watching for file changes with StatReloader
+WARNING 2024-02-24 20:40:12,611 log 7384 5284 Bad Request: /demo/api/comment/1/
+WARNING 2024-02-24 20:40:12,612 basehttp 7384 5284 "POST /demo/api/comment/1/ HTTP/1.1" 400 5
+INFO 2024-02-24 20:40:21,726 basehttp 7384 5284 "GET /demo/api/comment/1/ HTTP/1.1" 200 2
+WARNING 2024-02-24 20:40:33,610 log 7384 5284 Bad Request: /demo/api/comment/1/
+WARNING 2024-02-24 20:40:33,611 basehttp 7384 5284 "POST /demo/api/comment/1/ HTTP/1.1" 400 5
+WARNING 2024-02-24 20:41:00,777 log 7384 5284 Bad Request: /demo/api/comment/1/
+WARNING 2024-02-24 20:41:00,778 basehttp 7384 5284 "POST /demo/api/comment/1/ HTTP/1.1" 400 5
+INFO 2024-02-24 20:41:01,177 autoreload 7384 5988 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-24 20:41:02,079 autoreload 6512 2876 Watching for file changes with StatReloader
+WARNING 2024-02-24 20:41:04,522 log 6512 11396 Bad Request: /demo/api/comment/1/
+WARNING 2024-02-24 20:41:04,523 basehttp 6512 11396 "POST /demo/api/comment/1/ HTTP/1.1" 400 74
+INFO 2024-02-24 20:42:08,739 autoreload 10984 8104 Watching for file changes with StatReloader
+ERROR 2024-02-24 20:42:11,480 views 10984 9804 An error occurred while processing the request: ОШИБКА:  значение NULL в столбце "product_id" отношения "Aether_comment" нарушает ограничение NOT NULL
+DETAIL:  Ошибочная строка содержит (1, null, Good PC For game I really really like it, 11, null).
+
+ERROR 2024-02-24 20:42:11,482 log 10984 9804 Internal Server Error: /demo/api/comment/1/
+ERROR 2024-02-24 20:42:11,483 basehttp 10984 9804 "POST /demo/api/comment/1/ HTTP/1.1" 500 23
+INFO 2024-02-24 20:42:22,937 autoreload 10984 8104 C:\Users\Admin\Projects\AetherEShop\Aether\api\serializers.py changed, reloading.
+INFO 2024-02-24 20:42:24,352 autoreload 7312 11528 Watching for file changes with StatReloader
+INFO 2024-02-24 20:43:24,488 autoreload 7832 2096 Watching for file changes with StatReloader
+INFO 2024-02-24 20:43:26,964 basehttp 7832 1640 "POST /demo/api/comment/1/ HTTP/1.1" 200 105
+INFO 2024-02-24 20:43:35,909 basehttp 7832 1640 "GET /demo/api/comment/1/ HTTP/1.1" 200 107
+INFO 2024-02-24 20:44:08,634 basehttp 7832 1640 "POST /demo/api/comment/1/ HTTP/1.1" 200 77
+INFO 2024-02-24 20:44:13,181 basehttp 7832 1640 "GET /demo/api/comment/1/ HTTP/1.1" 200 185
+INFO 2024-02-24 20:45:19,532 basehttp 7832 1640 "POST /demo/api/comment/1/ HTTP/1.1" 200 74
+INFO 2024-02-24 20:45:24,985 basehttp 7832 1640 "GET /demo/api/comment/1/ HTTP/1.1" 200 260
+INFO 2024-02-24 20:45:55,282 basehttp 7832 1640 "POST /demo/api/comment/1/ HTTP/1.1" 200 83
+INFO 2024-02-24 20:45:59,900 basehttp 7832 1640 "GET /demo/api/comment/1/ HTTP/1.1" 200 344
+INFO 2024-02-24 20:46:31,709 basehttp 7832 1640 "POST /demo/api/comment/1/ HTTP/1.1" 200 91
+INFO 2024-02-24 20:46:35,983 basehttp 7832 1640 "GET /demo/api/comment/1/ HTTP/1.1" 200 436
+ERROR 2024-02-24 20:46:53,062 log 7832 1640 Internal Server Error: /demo/api/comment/1/detail
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CommentDetail.delete() got an unexpected keyword argument '_id'
+ERROR 2024-02-24 20:46:53,064 basehttp 7832 1640 "DELETE /demo/api/comment/1/detail HTTP/1.1" 500 93677
+INFO 2024-02-24 20:47:19,092 autoreload 7624 11992 Watching for file changes with StatReloader
+ERROR 2024-02-24 20:47:21,636 log 7624 5984 Internal Server Error: /demo/api/comment/1/detail
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CommentDetail.delete() got an unexpected keyword argument 'product_id'
+ERROR 2024-02-24 20:47:21,638 basehttp 7624 5984 "DELETE /demo/api/comment/1/detail HTTP/1.1" 500 93761
+ERROR 2024-02-24 20:47:41,795 log 7624 5984 Internal Server Error: /demo/api/comment/1/detail
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CommentDetail.delete() got an unexpected keyword argument 'product_id'
+ERROR 2024-02-24 20:47:41,797 basehttp 7624 5984 "DELETE /demo/api/comment/1/detail HTTP/1.1" 500 93761
+INFO 2024-02-24 20:47:42,182 autoreload 7624 11992 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-02-24 20:47:43,019 autoreload 7632 10524 Watching for file changes with StatReloader
+ERROR 2024-02-24 20:47:45,273 log 7632 11080 Internal Server Error: /demo/api/comment/1/detail
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CommentDetail.delete() got an unexpected keyword argument '_comment_id'
+ERROR 2024-02-24 20:47:45,275 basehttp 7632 11080 "DELETE /demo/api/comment/1/detail HTTP/1.1" 500 93773
+ERROR 2024-02-24 20:47:46,592 log 7632 11080 Internal Server Error: /demo/api/comment/1/detail
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CommentDetail.delete() got an unexpected keyword argument '_comment_id'
+ERROR 2024-02-24 20:47:46,593 basehttp 7632 11080 "DELETE /demo/api/comment/1/detail HTTP/1.1" 500 93773
+INFO 2024-02-24 20:48:10,060 autoreload 2608 7568 Watching for file changes with StatReloader
+INFO 2024-02-24 20:48:12,296 views 2608 4036 Attempting to delete order detail with ID 1.
+ERROR 2024-02-24 20:48:12,344 log 2608 4036 Internal Server Error: /demo/api/comment/1/detail
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 971, in delete
+    for i in comment.parent_id:
+             ^^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'parent_id'
+ERROR 2024-02-24 20:48:12,349 basehttp 2608 4036 "DELETE /demo/api/comment/1/detail HTTP/1.1" 500 98138
+INFO 2024-02-24 20:48:45,235 views 2608 4036 Attempting to update order detail with ID 1.
+ERROR 2024-02-24 20:48:45,237 views 2608 4036 Failed to update Comment with ID 1: {'category': [ErrorDetail(string='This field is required.', code='required')], 'title': [ErrorDetail(string='This field is required.', code='required')], 'description': [ErrorDetail(string='This field is required.', code='required')], 'price': [ErrorDetail(string='This field is required.', code='required')], 'amount': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-02-24 20:48:45,237 log 2608 4036 Unauthorized: /demo/api/comment/1/detail
+WARNING 2024-02-24 20:48:45,237 basehttp 2608 4036 "PUT /demo/api/comment/1/detail HTTP/1.1" 401 191
+INFO 2024-02-24 20:50:50,486 views 2608 4036 Attempting to update order detail with ID 1.
+ERROR 2024-02-24 20:50:50,488 views 2608 4036 Failed to update Comment with ID 1: {'category': [ErrorDetail(string='This field is required.', code='required')], 'title': [ErrorDetail(string='This field is required.', code='required')], 'description': [ErrorDetail(string='This field is required.', code='required')], 'price': [ErrorDetail(string='This field is required.', code='required')], 'amount': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-02-24 20:50:50,488 log 2608 4036 Unauthorized: /demo/api/comment/1/detail
+WARNING 2024-02-24 20:50:50,489 basehttp 2608 4036 "PUT /demo/api/comment/1/detail HTTP/1.1" 401 191
+WARNING 2024-02-24 20:51:16,199 log 2608 4036 Not Found: /demo/api/comment/1/detail/
+WARNING 2024-02-24 20:51:16,199 basehttp 2608 4036 "PUT /demo/api/comment/1/detail/ HTTP/1.1" 404 7349
+WARNING 2024-02-24 20:51:23,542 log 2608 4036 Not Found: /demo/api/comment/1/detail/
+WARNING 2024-02-24 20:51:23,543 basehttp 2608 4036 "PUT /demo/api/comment/1/detail/ HTTP/1.1" 404 7349
+INFO 2024-02-24 20:51:23,808 autoreload 2608 7568 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-02-24 20:51:24,636 autoreload 12204 12056 Watching for file changes with StatReloader
+INFO 2024-02-24 20:51:27,059 views 12204 11716 Attempting to update order detail with ID 1.
+ERROR 2024-02-24 20:51:27,062 views 12204 11716 Failed to update Comment with ID 1: {'category': [ErrorDetail(string='This field is required.', code='required')], 'title': [ErrorDetail(string='This field is required.', code='required')], 'description': [ErrorDetail(string='This field is required.', code='required')], 'price': [ErrorDetail(string='This field is required.', code='required')], 'amount': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-02-24 20:51:27,064 log 12204 11716 Unauthorized: /demo/api/comment/1/detail/
+WARNING 2024-02-24 20:51:27,065 basehttp 12204 11716 "PUT /demo/api/comment/1/detail/ HTTP/1.1" 401 191
+INFO 2024-02-24 20:51:56,230 views 12204 11716 Attempting to update order detail with ID 1.
+ERROR 2024-02-24 20:51:56,232 views 12204 11716 Failed to update Comment with ID 1: {'category': [ErrorDetail(string='This field is required.', code='required')], 'title': [ErrorDetail(string='This field is required.', code='required')], 'description': [ErrorDetail(string='This field is required.', code='required')], 'price': [ErrorDetail(string='This field is required.', code='required')], 'amount': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-02-24 20:51:56,232 log 12204 11716 Unauthorized: /demo/api/comment/1/detail/
+WARNING 2024-02-24 20:51:56,233 basehttp 12204 11716 "PUT /demo/api/comment/1/detail/ HTTP/1.1" 401 191
+INFO 2024-02-24 20:51:56,632 autoreload 12204 12056 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-24 20:51:57,443 autoreload 10380 7312 Watching for file changes with StatReloader
+INFO 2024-02-24 20:51:59,972 views 10380 6324 Attempting to update order detail with ID 1.
+ERROR 2024-02-24 20:52:00,056 log 10380 6324 Internal Server Error: /demo/api/comment/1/detail/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 951, in put
+    serializer.save()
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 207, in save
+    self.instance = self.update(self.instance, validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 993, in update
+    info = model_meta.get_field_info(instance)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\utils\model_meta.py", line 35, in get_field_info
+    opts = model._meta.concrete_model._meta
+           ^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute '_meta'
+ERROR 2024-02-24 20:52:00,060 basehttp 10380 6324 "PUT /demo/api/comment/1/detail/ HTTP/1.1" 500 112206
+INFO 2024-02-24 20:52:24,922 autoreload 10380 7312 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-24 20:52:25,816 autoreload 9000 3152 Watching for file changes with StatReloader
+INFO 2024-02-24 20:52:27,571 views 9000 11252 Attempting to delete order detail with ID 1.
+ERROR 2024-02-24 20:52:27,613 log 9000 11252 Internal Server Error: /demo/api/comment/1/detail/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 949, in delete
+    for i in comment.parent_id:
+             ^^^^^^^^^^^^^^^^^
+AttributeError: 'QuerySet' object has no attribute 'parent_id'
+ERROR 2024-02-24 20:52:27,619 basehttp 9000 11252 "DELETE /demo/api/comment/1/detail/ HTTP/1.1" 500 98154
+INFO 2024-02-24 20:56:14,173 autoreload 7904 7632 Watching for file changes with StatReloader
+WARNING 2024-02-24 20:56:19,871 views 7904 2544 Failed to get comments. Comment not found.
+INFO 2024-02-24 20:56:19,872 views 7904 2544 Attempting to delete comment with ID 1.
+ERROR 2024-02-24 20:56:19,910 log 7904 2544 Internal Server Error: /demo/api/comment/1/detail/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 946, in delete
+    for i in comment.parent_id:
+             ^^^^^^^^^^^^^^^^^
+AttributeError: 'Response' object has no attribute 'parent_id'
+ERROR 2024-02-24 20:56:19,915 basehttp 7904 2544 "DELETE /demo/api/comment/1/detail/ HTTP/1.1" 500 98110
+WARNING 2024-02-24 20:56:24,844 views 7904 2544 Failed to get comments. Comment not found.
+INFO 2024-02-24 20:56:24,845 views 7904 2544 Attempting to delete comment with ID 1.
+ERROR 2024-02-24 20:56:24,869 log 7904 2544 Internal Server Error: /demo/api/comment/1/detail/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 946, in delete
+    for i in comment.parent_id:
+             ^^^^^^^^^^^^^^^^^
+AttributeError: 'Response' object has no attribute 'parent_id'
+ERROR 2024-02-24 20:56:24,872 basehttp 7904 2544 "DELETE /demo/api/comment/1/detail/ HTTP/1.1" 500 98110
+INFO 2024-02-24 20:57:28,434 autoreload 9336 11820 Watching for file changes with StatReloader
+WARNING 2024-02-24 20:57:33,147 views 9336 10084 Failed to get comments. Comment not found.
+INFO 2024-02-24 20:57:33,148 views 9336 10084 Attempting to delete comment with ID 1.
+ERROR 2024-02-24 20:57:33,212 log 9336 10084 Internal Server Error: /demo/api/comment/1/detail/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 946, in delete
+    if comment.parent_id is not None:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'Response' object has no attribute 'parent_id'
+ERROR 2024-02-24 20:57:33,220 basehttp 9336 10084 "DELETE /demo/api/comment/1/detail/ HTTP/1.1" 500 98073
+INFO 2024-02-24 20:59:32,906 autoreload 11840 12056 Watching for file changes with StatReloader
+WARNING 2024-02-24 20:59:37,706 views 11840 2524 Failed to get comments. Comment not found.
+INFO 2024-02-24 20:59:37,706 views 11840 2524 Attempting to delete comment with ID 1.
+ERROR 2024-02-24 20:59:37,747 log 11840 2524 Internal Server Error: /demo/api/comment/1/detail/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 946, in delete
+    if comment.parent_id is not None:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'Response' object has no attribute 'parent_id'
+ERROR 2024-02-24 20:59:37,752 basehttp 11840 2524 "DELETE /demo/api/comment/1/detail/ HTTP/1.1" 500 98073
+INFO 2024-02-24 21:00:32,886 autoreload 8524 12184 Watching for file changes with StatReloader
+WARNING 2024-02-24 21:00:35,903 views 8524 9676 Failed to delete Comment. Comment with ID 1 not found.
+WARNING 2024-02-24 21:00:35,903 log 8524 9676 Not Found: /demo/api/comment/1/detail/
+WARNING 2024-02-24 21:00:35,904 basehttp 8524 9676 "DELETE /demo/api/comment/1/detail/ HTTP/1.1" 404 0
+WARNING 2024-02-24 21:00:58,217 log 8524 9676 Method Not Allowed: /demo/api/comment/1/detail/
+WARNING 2024-02-24 21:00:58,217 basehttp 8524 9676 "GET /demo/api/comment/1/detail/ HTTP/1.1" 405 40
+INFO 2024-02-24 21:01:03,700 basehttp 8524 9676 "GET /demo/api/comment/1/ HTTP/1.1" 200 436
+INFO 2024-02-24 21:01:37,473 autoreload 11700 9836 Watching for file changes with StatReloader
+INFO 2024-02-24 21:02:11,842 basehttp 11700 860 "POST /demo/api/comment/1/ HTTP/1.1" 200 89
+INFO 2024-02-24 21:02:31,381 views 11700 860 Attempting to delete comment with ID 2.
+INFO 2024-02-24 21:02:31,395 basehttp 11700 860 "DELETE /demo/api/comment/2/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:02:47,119 basehttp 11700 860 "GET /demo/api/comment/1 HTTP/1.1" 301 0
+INFO 2024-02-24 21:02:47,200 basehttp 11700 2088 "GET /demo/api/comment/1/ HTTP/1.1" 200 352
+INFO 2024-02-24 21:05:15,330 autoreload 4408 10168 Watching for file changes with StatReloader
+ERROR 2024-02-24 21:05:31,222 log 4408 8196 Internal Server Error: /demo/api/comment/1
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/demo/api/comment/1/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2024-02-24 21:05:31,224 basehttp 4408 8196 "POST /demo/api/comment/1 HTTP/1.1" 500 75306
+INFO 2024-02-24 21:05:36,097 basehttp 4408 556 "POST /demo/api/comment/1/ HTTP/1.1" 200 89
+WARNING 2024-02-24 21:05:44,963 log 4408 556 Method Not Allowed: /demo/api/comment/1/
+WARNING 2024-02-24 21:05:44,964 basehttp 4408 556 "PATCH /demo/api/comment/1/ HTTP/1.1" 405 42
+INFO 2024-02-24 21:05:49,583 basehttp 4408 556 "GET /demo/api/comment/1/ HTTP/1.1" 200 442
+WARNING 2024-02-24 21:06:11,361 log 4408 556 Not Found: /demo/api/comment/2/details
+WARNING 2024-02-24 21:06:11,361 basehttp 4408 556 "DELETE /demo/api/comment/2/details HTTP/1.1" 404 7353
+WARNING 2024-02-24 21:06:15,914 log 4408 556 Not Found: /demo/api/comment/2/details/
+WARNING 2024-02-24 21:06:15,914 basehttp 4408 556 "DELETE /demo/api/comment/2/details/ HTTP/1.1" 404 7356
+INFO 2024-02-24 21:06:24,388 views 4408 556 Attempting to delete comment with ID 2.
+INFO 2024-02-24 21:06:24,395 basehttp 4408 556 "DELETE /demo/api/comment/2/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:06:32,364 basehttp 4408 556 "GET /demo/api/comment/1/ HTTP/1.1" 200 442
+INFO 2024-02-24 21:08:19,681 autoreload 7400 7712 Watching for file changes with StatReloader
+INFO 2024-02-24 21:08:25,991 basehttp 7400 4256 "POST /demo/api/comment/1/ HTTP/1.1" 200 90
+INFO 2024-02-24 21:08:47,137 basehttp 7400 4256 "POST /demo/api/comment/1/ HTTP/1.1" 200 92
+INFO 2024-02-24 21:08:53,384 basehttp 7400 4256 "GET /demo/api/comment/1/ HTTP/1.1" 200 626
+INFO 2024-02-24 21:09:27,638 views 7400 4256 Attempting to delete comment with ID 10.
+INFO 2024-02-24 21:09:27,647 basehttp 7400 4256 "DELETE /demo/api/comment/10/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:09:34,427 basehttp 7400 4256 "GET /demo/api/comment/1/ HTTP/1.1" 200 626
+INFO 2024-02-24 21:10:30,817 autoreload 1724 8652 Watching for file changes with StatReloader
+INFO 2024-02-24 21:11:09,657 basehttp 1724 1876 "POST /demo/api/comment/1/ HTTP/1.1" 200 115
+INFO 2024-02-24 21:11:30,638 basehttp 1724 1876 "POST /demo/api/comment/1/ HTTP/1.1" 200 175
+INFO 2024-02-24 21:11:34,687 basehttp 1724 1876 "GET /demo/api/comment/1/ HTTP/1.1" 200 918
+INFO 2024-02-24 21:12:10,543 autoreload 1724 8652 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-24 21:12:11,830 autoreload 4532 5832 Watching for file changes with StatReloader
+INFO 2024-02-24 21:12:35,526 views 4532 11668 Attempting to delete comment with ID 15.
+INFO 2024-02-24 21:12:35,535 basehttp 4532 11668 "DELETE /demo/api/comment/15/detail/ HTTP/1.1" 204 4
+WARNING 2024-02-24 21:12:39,009 log 4532 11668 Method Not Allowed: /demo/api/comment/15/detail/
+WARNING 2024-02-24 21:12:39,010 basehttp 4532 11668 "GET /demo/api/comment/15/detail/ HTTP/1.1" 405 40
+INFO 2024-02-24 21:12:45,616 basehttp 4532 11668 "GET /demo/api/comment/1/ HTTP/1.1" 200 918
+INFO 2024-02-24 21:13:04,764 basehttp 4532 11668 "POST /demo/api/comment/1/ HTTP/1.1" 200 175
+INFO 2024-02-24 21:13:25,409 views 4532 11668 Attempting to delete comment with ID 14.
+INFO 2024-02-24 21:13:25,421 basehttp 4532 11668 "DELETE /demo/api/comment/14/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:13:33,115 basehttp 4532 11668 "GET /demo/api/comment/1/ HTTP/1.1" 200 1094
+ERROR 2024-02-24 21:13:53,874 views 4532 11668 An error occurred while processing the request: No Product matches the given query.
+ERROR 2024-02-24 21:13:53,950 log 4532 11668 Internal Server Error: /demo/api/comment/2/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 900, in get
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\template\response.py", line 127, in __iter__
+    raise ContentNotRenderedError(
+django.template.response.ContentNotRenderedError: The response content must be rendered before it can be iterated over.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 901, in get
+    except Response as response:
+TypeError: catching classes that do not inherit from BaseException is not allowed
+ERROR 2024-02-24 21:13:53,953 basehttp 4532 11668 "GET /demo/api/comment/2/ HTTP/1.1" 500 121410
+WARNING 2024-02-24 21:14:33,552 log 4532 11668 Unauthorized: /demo/api/products/
+WARNING 2024-02-24 21:14:33,553 basehttp 4532 11668 "GET /demo/api/products/ HTTP/1.1" 401 183
+INFO 2024-02-24 21:14:39,265 basehttp 4532 11668 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-02-24 21:15:06,548 views 4532 11668 Request data - User: user, Data: {'user': <UserProfile: user (Admin: True)>, 'category': 1, 'title': 'PC', 'description': 'Good PC for gamings with processor core i7 ', 'price': 263.13, 'amount': 1}, Cover Images: ['Изображения/98ea89ac0413360e106421fced7ef1f3', 'Изображения/apps.13081.13672777200662346.8fa944a0-40ec-47ee-859e-d8aaacad60e0']
+INFO 2024-02-24 21:15:06,578 views 4532 11668 Product created successfully. User: user, Product ID: 2, Cover Images: ['Изображения/98ea89ac0413360e106421fced7ef1f3', 'Изображения/apps.13081.13672777200662346.8fa944a0-40ec-47ee-859e-d8aaacad60e0']
+INFO 2024-02-24 21:15:06,581 basehttp 4532 11668 "POST /demo/api/products/ HTTP/1.1" 201 399
+INFO 2024-02-24 21:15:14,986 basehttp 4532 11668 "GET /demo/api/comment/2/ HTTP/1.1" 200 2
+INFO 2024-02-24 21:15:39,446 basehttp 4532 11668 "POST /demo/api/comment/2/ HTTP/1.1" 200 101
+INFO 2024-02-24 21:16:09,201 basehttp 4532 11668 "POST /demo/api/comment/2/ HTTP/1.1" 200 103
+INFO 2024-02-24 21:16:21,141 basehttp 4532 11668 "POST /demo/api/comment/2/ HTTP/1.1" 200 103
+INFO 2024-02-24 21:16:31,229 basehttp 4532 11668 "POST /demo/api/comment/2/ HTTP/1.1" 200 101
+INFO 2024-02-24 21:16:51,846 basehttp 4532 11668 "POST /demo/api/comment/2/ HTTP/1.1" 200 101
+INFO 2024-02-24 21:17:05,361 basehttp 4532 11668 "POST /demo/api/comment/2/ HTTP/1.1" 200 101
+INFO 2024-02-24 21:17:18,395 basehttp 4532 11668 "POST /demo/api/comment/2/ HTTP/1.1" 200 101
+INFO 2024-02-24 21:17:22,333 basehttp 4532 11668 "GET /demo/api/comment/2/ HTTP/1.1" 200 719
+INFO 2024-02-24 21:17:44,936 basehttp 4532 11668 "DELETE /demo/api/comment/21/detail HTTP/1.1" 301 0
+WARNING 2024-02-24 21:17:44,997 log 4532 7804 Method Not Allowed: /demo/api/comment/21/detail/
+WARNING 2024-02-24 21:17:44,997 basehttp 4532 7804 "GET /demo/api/comment/21/detail/ HTTP/1.1" 405 40
+INFO 2024-02-24 21:17:49,810 views 4532 7804 Attempting to delete comment with ID 21.
+INFO 2024-02-24 21:17:49,821 basehttp 4532 7804 "DELETE /demo/api/comment/21/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:17:55,332 basehttp 4532 7804 "GET /demo/api/comment/2 HTTP/1.1" 301 0
+INFO 2024-02-24 21:17:55,398 basehttp 4532 8476 "GET /demo/api/comment/2/ HTTP/1.1" 200 719
+INFO 2024-02-24 21:18:44,965 views 4532 8476 Request data - User: user, Data: {'user': <UserProfile: user (Admin: True)>, 'category': 1, 'title': 'PC', 'description': 'Good PC for gamings with processor core i9 ', 'price': 263.13, 'amount': 1}, Cover Images: ['Изображения/98ea89ac0413360e106421fced7ef1f3', 'Изображения/apps.13081.13672777200662346.8fa944a0-40ec-47ee-859e-d8aaacad60e0']
+INFO 2024-02-24 21:18:44,978 views 4532 8476 Product created successfully. User: user, Product ID: 3, Cover Images: ['Изображения/98ea89ac0413360e106421fced7ef1f3', 'Изображения/apps.13081.13672777200662346.8fa944a0-40ec-47ee-859e-d8aaacad60e0']
+INFO 2024-02-24 21:18:44,981 basehttp 4532 8476 "POST /demo/api/products/ HTTP/1.1" 201 399
+WARNING 2024-02-24 21:19:04,160 log 4532 8476 Unauthorized: /demo/api/comment/21/
+WARNING 2024-02-24 21:19:04,161 basehttp 4532 8476 "GET /demo/api/comment/21/ HTTP/1.1" 401 58
+ERROR 2024-02-24 21:19:12,487 views 4532 8476 An error occurred while processing the request: No Product matches the given query.
+ERROR 2024-02-24 21:19:12,527 log 4532 8476 Internal Server Error: /demo/api/comment/21/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 900, in get
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\template\response.py", line 127, in __iter__
+    raise ContentNotRenderedError(
+django.template.response.ContentNotRenderedError: The response content must be rendered before it can be iterated over.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 901, in get
+    except Response as response:
+TypeError: catching classes that do not inherit from BaseException is not allowed
+ERROR 2024-02-24 21:19:12,529 basehttp 4532 8476 "GET /demo/api/comment/21/ HTTP/1.1" 500 121636
+INFO 2024-02-24 21:19:20,945 basehttp 4532 8476 "GET /demo/api/comment/2/ HTTP/1.1" 200 719
+INFO 2024-02-24 21:19:27,382 basehttp 4532 8476 "GET /demo/api/comment/3/ HTTP/1.1" 200 2
+INFO 2024-02-24 21:26:12,758 autoreload 4532 5832 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-24 21:26:13,756 autoreload 232 11528 Watching for file changes with StatReloader
+INFO 2024-02-24 21:26:41,902 autoreload 232 11528 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-24 21:26:42,712 autoreload 9012 4100 Watching for file changes with StatReloader
+INFO 2024-02-24 21:28:17,874 autoreload 9880 7756 Watching for file changes with StatReloader
+INFO 2024-02-24 21:28:38,071 basehttp 9880 2768 "POST /demo/api/comment/3/ HTTP/1.1" 200 70
+INFO 2024-02-24 21:29:07,917 basehttp 9880 2768 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-24 21:29:19,976 basehttp 9880 2768 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-24 21:29:30,990 basehttp 9880 2768 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-24 21:29:43,782 basehttp 9880 2768 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-24 21:29:59,272 basehttp 9880 2768 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-24 21:30:04,141 basehttp 9880 2768 "GET /demo/api/comment/3/ HTTP/1.1" 200 462
+INFO 2024-02-24 21:30:20,694 views 9880 2768 Attempting to delete comment with ID 31.
+INFO 2024-02-24 21:30:20,708 basehttp 9880 2768 "DELETE /demo/api/comment/31/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:30:27,768 basehttp 9880 2768 "GET /demo/api/comment/3/ HTTP/1.1" 200 72
+INFO 2024-02-24 21:31:28,717 autoreload 8628 10532 Watching for file changes with StatReloader
+INFO 2024-02-24 21:31:36,865 autoreload 588 12144 Watching for file changes with StatReloader
+INFO 2024-02-24 21:31:54,039 views 588 11252 Attempting to delete comment with ID 31.
+INFO 2024-02-24 21:31:54,047 basehttp 588 11252 "DELETE /demo/api/comment/31/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:32:00,014 basehttp 588 11252 "GET /demo/api/comment/3 HTTP/1.1" 301 0
+INFO 2024-02-24 21:32:00,115 basehttp 588 11080 "GET /demo/api/comment/3/ HTTP/1.1" 200 72
+INFO 2024-02-24 21:32:03,972 basehttp 588 11080 "GET /demo/api/comment/3/ HTTP/1.1" 200 72
+INFO 2024-02-24 21:32:42,766 views 588 11080 Attempting to delete comment with ID 37.
+INFO 2024-02-24 21:32:42,773 basehttp 588 11080 "DELETE /demo/api/comment/37/detail/ HTTP/1.1" 204 4
+INFO 2024-02-24 21:32:50,849 basehttp 588 11080 "GET /demo/api/comment/3/ HTTP/1.1" 200 72
+INFO 2024-02-24 21:34:25,790 autoreload 7464 11964 Watching for file changes with StatReloader
+INFO 2024-02-24 21:34:50,872 views 7464 10704 Attempting to delete comment with ID 38.
+INFO 2024-02-24 21:34:50,876 basehttp 7464 10704 "DELETE /demo/api/comment/38/detail/ HTTP/1.1" 204 4
+WARNING 2024-02-24 21:34:56,082 log 7464 10704 Method Not Allowed: /demo/api/comment/38/detail/
+WARNING 2024-02-24 21:34:56,083 basehttp 7464 10704 "GET /demo/api/comment/38/detail/ HTTP/1.1" 405 40
+INFO 2024-02-24 21:35:02,365 basehttp 7464 10704 "GET /demo/api/comment/3/ HTTP/1.1" 200 2
+INFO 2024-02-25 14:36:13,482 autoreload 2068 2604 Watching for file changes with StatReloader
+WARNING 2024-02-25 14:36:36,007 log 2068 1492 Unauthorized: /demo/api/comment/3/
+WARNING 2024-02-25 14:36:36,007 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 401 183
+INFO 2024-02-25 14:36:52,109 basehttp 2068 1492 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-02-25 14:37:21,530 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 70
+INFO 2024-02-25 14:37:53,677 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-25 14:38:10,939 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-25 14:38:24,036 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-25 14:38:40,876 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-25 14:39:04,104 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 77
+INFO 2024-02-25 14:39:09,675 basehttp 2068 1492 "GET /demo/api/comment/3/ HTTP/1.1" 200 462
+INFO 2024-02-25 14:39:39,199 views 2068 1492 Attempting to delete comment with ID 39.
+INFO 2024-02-25 14:39:39,212 basehttp 2068 1492 "DELETE /demo/api/comment/39/detail/ HTTP/1.1" 204 4
+INFO 2024-02-25 14:39:49,067 basehttp 2068 1492 "GET /demo/api/comment/3/ HTTP/1.1" 200 2
+INFO 2024-02-25 14:41:24,901 basehttp 2068 1492 "GET /demo/api/comment/3/ HTTP/1.1" 200 2
+INFO 2024-02-25 14:41:33,045 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 70
+INFO 2024-02-25 14:42:22,611 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 80
+INFO 2024-02-25 14:42:45,652 basehttp 2068 1492 "POST /demo/api/comment/3/ HTTP/1.1" 200 80
+INFO 2024-02-25 14:46:33,365 basehttp 2068 1492 "GET /demo/api/comment/3/ HTTP/1.1" 200 234
+INFO 2024-02-25 14:48:00,855 autoreload 3756 7576 Watching for file changes with StatReloader
+ERROR 2024-02-25 14:48:07,679 views 3756 12040 An error occurred while processing the request: 'Comment' object has no attribute 'text'
+ERROR 2024-02-25 14:48:07,754 log 3756 12040 Internal Server Error: /demo/api/comment/3/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 918, in get
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\template\response.py", line 127, in __iter__
+    raise ContentNotRenderedError(
+django.template.response.ContentNotRenderedError: The response content must be rendered before it can be iterated over.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 919, in get
+    except Response as response:
+TypeError: catching classes that do not inherit from BaseException is not allowed
+ERROR 2024-02-25 14:48:07,760 basehttp 3756 12040 "GET /demo/api/comment/3/ HTTP/1.1" 500 121579
+INFO 2024-02-25 14:49:44,310 autoreload 5412 10132 Watching for file changes with StatReloader
+ERROR 2024-02-25 14:49:47,620 views 5412 5728 An error occurred while processing the request: 'Comment' object has no attribute 'text'
+ERROR 2024-02-25 14:49:47,620 views 5412 5728 An error occurred while processing the request: The response content must be rendered before it can be iterated over.
+ERROR 2024-02-25 14:49:47,621 log 5412 5728 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 14:49:47,621 basehttp 5412 5728 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 14:50:59,545 autoreload 1488 5392 Watching for file changes with StatReloader
+INFO 2024-02-25 14:51:03,855 basehttp 1488 3544 "GET /demo/api/comment/3/ HTTP/1.1" 200 50
+INFO 2024-02-25 14:52:02,728 autoreload 1488 5392 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 14:52:03,840 autoreload 11040 192 Watching for file changes with StatReloader
+INFO 2024-02-25 14:52:43,445 autoreload 11040 192 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 14:52:44,863 autoreload 2856 6872 Watching for file changes with StatReloader
+INFO 2024-02-25 14:53:36,342 autoreload 10132 11520 Watching for file changes with StatReloader
+INFO 2024-02-25 14:54:07,063 autoreload 8596 4736 Watching for file changes with StatReloader
+INFO 2024-02-25 14:54:11,379 basehttp 8596 4700 "GET /demo/api/comment/3/ HTTP/1.1" 200 50
+INFO 2024-02-25 14:54:46,442 basehttp 8596 4700 "POST /demo/api/comment/3/ HTTP/1.1" 200 80
+INFO 2024-02-25 14:54:51,528 basehttp 8596 4700 "GET /demo/api/comment/3/ HTTP/1.1" 200 50
+INFO 2024-02-25 14:55:22,240 autoreload 8596 4736 C:\Users\Admin\Projects\AetherEShop\Aether\api\serializers.py changed, reloading.
+INFO 2024-02-25 14:55:23,414 autoreload 6372 2180 Watching for file changes with StatReloader
+INFO 2024-02-25 14:58:09,462 autoreload 6372 2180 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 14:58:10,342 autoreload 5844 1192 Watching for file changes with StatReloader
+INFO 2024-02-25 14:59:13,303 autoreload 5844 1192 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 14:59:14,288 autoreload 8164 3540 Watching for file changes with StatReloader
+INFO 2024-02-25 14:59:36,606 autoreload 7488 12112 Watching for file changes with StatReloader
+ERROR 2024-02-25 14:59:45,569 views 7488 7656 An error occurred while processing the request: 'dict' object has no attribute 'parent_id'
+ERROR 2024-02-25 14:59:45,569 log 7488 7656 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 14:59:45,570 basehttp 7488 7656 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 15:01:16,623 autoreload 5884 3412 Watching for file changes with StatReloader
+INFO 2024-02-25 15:01:20,298 basehttp 5884 8164 "GET /demo/api/comment/3/ HTTP/1.1" 200 64
+INFO 2024-02-25 15:01:37,696 basehttp 5884 8164 "POST /demo/api/comment/3/ HTTP/1.1" 200 80
+INFO 2024-02-25 15:01:43,247 basehttp 5884 8164 "GET /demo/api/comment/3/ HTTP/1.1" 200 64
+INFO 2024-02-25 15:01:58,159 basehttp 5884 8164 "GET /demo/api/comment/3/ HTTP/1.1" 200 64
+INFO 2024-02-25 15:02:04,474 basehttp 5884 8164 "POST /demo/api/comment/3/ HTTP/1.1" 200 70
+INFO 2024-02-25 15:02:12,868 basehttp 5884 8164 "GET /demo/api/comment/3/ HTTP/1.1" 200 127
+INFO 2024-02-25 15:03:22,647 autoreload 7104 8420 Watching for file changes with StatReloader
+INFO 2024-02-25 15:03:27,105 basehttp 7104 12096 "GET /demo/api/comment/3/ HTTP/1.1" 200 127
+INFO 2024-02-25 15:04:37,761 autoreload 6508 11548 Watching for file changes with StatReloader
+INFO 2024-02-25 15:04:41,709 basehttp 6508 9792 "GET /demo/api/comment/3/ HTTP/1.1" 200 127
+INFO 2024-02-25 15:04:49,001 autoreload 9596 11508 Watching for file changes with StatReloader
+INFO 2024-02-25 15:04:52,465 basehttp 9596 3804 "GET /demo/api/comment/3/ HTTP/1.1" 200 127
+INFO 2024-02-25 15:06:35,484 autoreload 4736 6340 Watching for file changes with StatReloader
+INFO 2024-02-25 15:06:39,330 basehttp 4736 5848 "GET /demo/api/comment/3/ HTTP/1.1" 200 127
+INFO 2024-02-25 15:08:49,284 autoreload 8532 10228 Watching for file changes with StatReloader
+ERROR 2024-02-25 15:08:54,276 views 8532 5476 An error occurred while processing the request: Comment() got unexpected keyword arguments: 'children'
+ERROR 2024-02-25 15:08:54,276 log 8532 5476 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:08:54,277 basehttp 8532 5476 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 15:09:40,370 autoreload 8532 10228 C:\Users\Admin\Projects\AetherEShop\Aether\api\serializers.py changed, reloading.
+INFO 2024-02-25 15:09:41,785 autoreload 8704 11480 Watching for file changes with StatReloader
+INFO 2024-02-25 15:10:00,484 autoreload 6376 5288 Watching for file changes with StatReloader
+ERROR 2024-02-25 15:10:04,552 views 6376 8680 An error occurred while processing the request: Comment() got unexpected keyword arguments: 'children'
+ERROR 2024-02-25 15:10:04,553 log 6376 8680 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:10:04,553 basehttp 6376 8680 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 15:11:58,927 autoreload 6376 5288 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 15:11:59,784 autoreload 3664 1348 Watching for file changes with StatReloader
+INFO 2024-02-25 15:13:15,837 autoreload 7324 2784 Watching for file changes with StatReloader
+INFO 2024-02-25 15:13:28,738 basehttp 7324 5132 "GET /demo/api/comment/3/ HTTP/1.1" 200 303
+INFO 2024-02-25 15:44:33,521 autoreload 7324 2784 C:\Users\Admin\Projects\AetherEShop\Aether\api\serializers.py changed, reloading.
+INFO 2024-02-25 15:44:34,501 autoreload 6004 1064 Watching for file changes with StatReloader
+INFO 2024-02-25 15:45:48,428 autoreload 8464 1564 Watching for file changes with StatReloader
+WARNING 2024-02-25 15:45:53,385 log 8464 2544 Unauthorized: /demo/api/comment/3/
+WARNING 2024-02-25 15:45:53,386 basehttp 8464 2544 "GET /demo/api/comment/3/ HTTP/1.1" 401 183
+INFO 2024-02-25 15:46:00,243 basehttp 8464 2544 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-02-25 15:46:16,221 basehttp 8464 2544 "GET /demo/api/comment/3/ HTTP/1.1" 200 303
+INFO 2024-02-25 15:53:24,011 autoreload 6640 7432 Watching for file changes with StatReloader
+ERROR 2024-02-25 15:53:40,476 views 6640 4580 An error occurred while processing the request: list index out of range
+ERROR 2024-02-25 15:53:40,477 log 6640 4580 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:53:40,477 basehttp 6640 4580 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 15:56:20,381 autoreload 6104 9156 Watching for file changes with StatReloader
+ERROR 2024-02-25 15:56:25,579 views 6104 7852 An error occurred while processing the request: 'list' object has no attribute 'get'
+ERROR 2024-02-25 15:56:25,580 log 6104 7852 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:56:25,580 basehttp 6104 7852 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 15:56:40,237 autoreload 6104 9156 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 15:56:41,256 autoreload 8656 10744 Watching for file changes with StatReloader
+INFO 2024-02-25 15:57:40,587 autoreload 7920 12192 Watching for file changes with StatReloader
+ERROR 2024-02-25 15:57:43,773 views 7920 8120 An error occurred while processing the request: 'list' object has no attribute 'get'
+ERROR 2024-02-25 15:57:43,774 log 7920 8120 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:57:43,775 basehttp 7920 8120 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 15:58:01,769 autoreload 10192 5084 Watching for file changes with StatReloader
+ERROR 2024-02-25 15:58:05,124 views 10192 12120 An error occurred while processing the request: 'list' object has no attribute 'get'
+ERROR 2024-02-25 15:58:05,125 log 10192 12120 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:58:05,125 basehttp 10192 12120 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 15:59:14,477 autoreload 5576 2052 Watching for file changes with StatReloader
+ERROR 2024-02-25 15:59:21,291 views 5576 9344 An error occurred while processing the request: 'list' object has no attribute 'get'
+ERROR 2024-02-25 15:59:21,292 log 5576 9344 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:59:21,293 basehttp 5576 9344 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+ERROR 2024-02-25 15:59:26,410 views 5576 9344 An error occurred while processing the request: 'list' object has no attribute 'get'
+ERROR 2024-02-25 15:59:26,411 log 5576 9344 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 15:59:26,411 basehttp 5576 9344 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:02:38,877 autoreload 4300 1832 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:02:43,145 views 4300 7636 An error occurred while processing the request: 'list' object has no attribute 'get'
+ERROR 2024-02-25 16:02:43,145 log 4300 7636 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:02:43,146 basehttp 4300 7636 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:05:15,795 autoreload 4576 10984 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:05:21,221 views 4576 9812 An error occurred while processing the request: name 'comments_dict' is not defined
+ERROR 2024-02-25 16:05:21,222 log 4576 9812 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:05:21,222 basehttp 4576 9812 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:10:28,721 autoreload 10768 7432 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:10:32,579 views 10768 9456 An error occurred while processing the request: 'dict' object has no attribute 'id'
+ERROR 2024-02-25 16:10:32,580 log 10768 9456 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:10:32,581 basehttp 10768 9456 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:12:32,057 autoreload 692 10832 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:12:34,702 views 692 6708 An error occurred while processing the request: 'Comment' object is not subscriptable
+ERROR 2024-02-25 16:12:34,703 log 692 6708 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:12:34,704 basehttp 692 6708 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:12:47,639 autoreload 692 10832 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 16:12:48,546 autoreload 9452 6884 Watching for file changes with StatReloader
+INFO 2024-02-25 16:13:41,575 autoreload 8460 8260 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:13:45,615 views 8460 7336 An error occurred while processing the request: 'Comment' object has no attribute 'children'
+ERROR 2024-02-25 16:13:45,615 log 8460 7336 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:13:45,616 basehttp 8460 7336 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:16:11,881 autoreload 1240 8708 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:16:15,603 views 1240 10648 An error occurred while processing the request: 'Comment' object has no attribute 'children'
+ERROR 2024-02-25 16:16:15,604 log 1240 10648 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:16:15,604 basehttp 1240 10648 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:17:58,255 autoreload 1240 8708 C:\Users\Admin\Projects\AetherEShop\Aether\models.py changed, reloading.
+INFO 2024-02-25 16:17:59,117 autoreload 1168 10844 Watching for file changes with StatReloader
+INFO 2024-02-25 16:18:40,468 autoreload 5516 804 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:18:53,155 views 5516 10908 An error occurred while processing the request: Direct assignment to the forward side of a many-to-many set is prohibited. Use children.set() instead.
+ERROR 2024-02-25 16:18:53,155 log 5516 10908 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:18:53,156 basehttp 5516 10908 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:21:39,515 autoreload 5516 804 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 16:21:40,446 autoreload 9148 10940 Watching for file changes with StatReloader
+INFO 2024-02-25 16:23:56,331 autoreload 9148 10940 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 16:23:57,236 autoreload 252 100 Watching for file changes with StatReloader
+INFO 2024-02-25 16:25:37,035 autoreload 11668 6868 Watching for file changes with StatReloader
+INFO 2024-02-25 16:26:48,930 autoreload 11760 11444 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:26:52,954 log 11760 7636 Internal Server Error: /demo/api/comment/3/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+          ^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Comment is not JSON serializable
+ERROR 2024-02-25 16:26:52,956 basehttp 11760 7636 "GET /demo/api/comment/3/ HTTP/1.1" 500 105869
+INFO 2024-02-25 16:28:38,392 autoreload 11760 11444 C:\Users\Admin\Projects\AetherEShop\Aether\api\serializers.py changed, reloading.
+INFO 2024-02-25 16:28:39,267 autoreload 564 5508 Watching for file changes with StatReloader
+INFO 2024-02-25 16:29:56,110 autoreload 6316 6416 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:30:00,303 log 6316 1900 Internal Server Error: /demo/api/comment/3/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\renderers.py", line 99, in render
+    ret = json.dumps(
+          ^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\utils\json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\utils\encoders.py", line 67, in default
+    return super().default(obj)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Comment is not JSON serializable
+ERROR 2024-02-25 16:30:00,306 basehttp 6316 1900 "GET /demo/api/comment/3/ HTTP/1.1" 500 105869
+INFO 2024-02-25 16:32:10,046 autoreload 9036 10584 Watching for file changes with StatReloader
+INFO 2024-02-25 16:32:48,096 autoreload 12064 9828 Watching for file changes with StatReloader
+WARNING 2024-02-25 16:32:58,180 log 12064 2344 Unauthorized: /demo/api/comment/3/
+WARNING 2024-02-25 16:32:58,181 basehttp 12064 2344 "GET /demo/api/comment/3/ HTTP/1.1" 401 183
+INFO 2024-02-25 16:33:06,793 basehttp 12064 2344 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-02-25 16:33:22,233 basehttp 12064 2344 "GET /demo/api/comment/3/ HTTP/1.1" 200 171
+INFO 2024-02-25 16:36:31,635 autoreload 11640 6468 Watching for file changes with StatReloader
+INFO 2024-02-25 16:36:38,420 basehttp 11640 3452 "GET /demo/api/comment/3/ HTTP/1.1" 200 171
+INFO 2024-02-25 16:38:04,400 autoreload 11080 8632 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:38:08,530 views 11080 716 An error occurred while processing the request: 'Comment' object is not iterable
+ERROR 2024-02-25 16:38:08,531 log 11080 716 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:38:08,532 basehttp 11080 716 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:39:40,172 autoreload 1596 2624 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:39:44,350 views 1596 7688 An error occurred while processing the request: 'Comment' object is not iterable
+ERROR 2024-02-25 16:39:44,352 log 1596 7688 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:39:44,353 basehttp 1596 7688 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:40:51,649 autoreload 2252 1412 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:41:01,239 views 2252 7944 An error occurred while processing the request: maximum recursion depth exceeded
+ERROR 2024-02-25 16:41:01,241 log 2252 7944 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:41:01,242 basehttp 2252 7944 "GET /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:43:09,719 autoreload 10936 3276 Watching for file changes with StatReloader
+INFO 2024-02-25 16:43:56,975 basehttp 10936 9180 "GET /demo/api/comment/3/ HTTP/1.1" 200 171
+INFO 2024-02-25 16:46:47,108 autoreload 2876 7360 Watching for file changes with StatReloader
+INFO 2024-02-25 16:46:52,942 basehttp 2876 10340 "GET /demo/api/comment/3/ HTTP/1.1" 200 549
+INFO 2024-02-25 16:48:46,853 autoreload 2876 7360 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-02-25 16:48:48,000 autoreload 7088 5476 Watching for file changes with StatReloader
+INFO 2024-02-25 16:52:14,281 autoreload 3108 4364 Watching for file changes with StatReloader
+INFO 2024-02-25 16:52:18,756 basehttp 3108 5984 "GET /demo/api/comment/3/ HTTP/1.1" 200 549
+INFO 2024-02-25 16:52:24,121 basehttp 3108 5984 "GET /demo/api/comment/3/ HTTP/1.1" 200 549
+ERROR 2024-02-25 16:52:32,093 views 3108 5984 An error occurred while processing the request: UserProfile matching query does not exist.
+ERROR 2024-02-25 16:52:32,093 log 3108 5984 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:52:32,094 basehttp 3108 5984 "POST /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 16:55:12,335 autoreload 11608 6552 Watching for file changes with StatReloader
+WARNING 2024-02-25 16:55:19,802 log 11608 6816 Bad Request: /demo/api/comment/3/
+WARNING 2024-02-25 16:55:19,802 basehttp 11608 6816 "POST /demo/api/comment/3/ HTTP/1.1" 400 74
+INFO 2024-02-25 16:56:37,543 autoreload 9576 8676 Watching for file changes with StatReloader
+WARNING 2024-02-25 16:56:41,878 log 9576 6472 Bad Request: /demo/api/comment/3/
+WARNING 2024-02-25 16:56:41,879 basehttp 9576 6472 "POST /demo/api/comment/3/ HTTP/1.1" 400 74
+INFO 2024-02-25 16:57:51,614 autoreload 8168 3052 Watching for file changes with StatReloader
+WARNING 2024-02-25 16:57:55,540 log 8168 5656 Bad Request: /demo/api/comment/3/
+WARNING 2024-02-25 16:57:55,541 basehttp 8168 5656 "POST /demo/api/comment/3/ HTTP/1.1" 400 74
+INFO 2024-02-25 16:59:06,011 autoreload 4968 1172 Watching for file changes with StatReloader
+INFO 2024-02-25 16:59:11,415 autoreload 4968 1172 C:\Users\Admin\Projects\AetherEShop\Aether\api\serializers.py changed, reloading.
+INFO 2024-02-25 16:59:12,812 autoreload 11508 2216 Watching for file changes with StatReloader
+ERROR 2024-02-25 16:59:13,324 views 11508 8396 An error occurred while processing the request: ОШИБКА:  значение NULL в столбце "user_id" отношения "Aether_comment" нарушает ограничение NOT NULL
+DETAIL:  Ошибочная строка содержит (51, null, hi 6, null, 3).
+
+ERROR 2024-02-25 16:59:13,324 log 11508 8396 Internal Server Error: /demo/api/comment/3/
+ERROR 2024-02-25 16:59:13,325 basehttp 11508 8396 "POST /demo/api/comment/3/ HTTP/1.1" 500 23
+INFO 2024-02-25 17:01:14,845 autoreload 4968 1016 Watching for file changes with StatReloader
+WARNING 2024-02-25 17:01:19,735 views 4968 1052 Failed to create a new comment. User not found.
+WARNING 2024-02-25 17:01:19,736 log 4968 1052 Not Found: /demo/api/comment/3/
+WARNING 2024-02-25 17:01:19,737 basehttp 4968 1052 "POST /demo/api/comment/3/ HTTP/1.1" 404 15
+INFO 2024-02-25 17:01:29,840 basehttp 4968 1052 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-02-25 17:01:42,247 basehttp 4968 1052 "POST /demo/api/comment/3/ HTTP/1.1" 200 84
+INFO 2024-02-25 17:02:20,845 basehttp 4968 1052 "POST /demo/api/comment/3/ HTTP/1.1" 200 93
+INFO 2024-02-25 17:02:44,019 basehttp 4968 1052 "POST /demo/api/comment/3/ HTTP/1.1" 200 93
+INFO 2024-02-25 17:02:49,534 basehttp 4968 1052 "GET /demo/api/comment/3/ HTTP/1.1" 200 818
