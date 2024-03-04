@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether</title>
+    <style type="text/css">html, body {
+            background: #2c3e50;
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        input{
+            outline: none
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="number"]  {
+            width: 100%;
+            padding: 12px; /* Increased padding for better visibility and touch interaction */
+            margin: 10px 0;
+            border: none;
+            background-color: #34495e;
+            color: #ecf0f1;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="number"]:focus  {
+            background-color: #2c3e50; /* Darker background on focus */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Adding a subtle box shadow on focus */
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            border: none;
+            color: #ecf0f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .container {
+            width: 400px;
+            margin: 70px auto;
+            padding: 20px;
+            background: #34495e;
+            border-radius: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .login-link, .signup-link {
+            text-align: center;
+            margin-top: 20px; /* Added margin for better spacing */
+        }
+
+        .login-link a, .signup-link a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .login-link a:hover, .signup-link a:hover {
+            color: #2980b9;
+        }/* Стиль для красивого чекбокса с анимацией и красивой галочкой */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+input[type="checkbox"]:checked::before {
+    content: '\2713'; /* Unicode для галочки */
+    font-size: 14px;
+    color: #ecf0f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeIn 0.3s ease-in-out; /* Анимация появления галочки */
+}
+
+label {
+    color: #ecf0f1;
+    font-size: 14px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration</h2>
+        <form id="registrationForm" action="http://localhost:8000/auth/sign-up/" method="post">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="email" name="email" placeholder="Email">
+            <input type="number" name="age" placeholder="Age">
+                <div>
+                    <input type="checkbox" id="isAdminCheckbox" name="is_admin">
+                    <label for="isAdminCheckbox">Вы продавец?</label>
+                </div>
+            <input type="submit" value="Register">
+        </form>
+        <div class="login-link">
+            <p>Уже имеется аккаунт? <a href="login.html">Вход</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Предотвращаем стандартное поведение браузера
+            // Далее можно добавить логику для отправки данных на сервер через AJAX или другие обработки
+        });
+    </script>
+</body>
+</html>

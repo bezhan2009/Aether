@@ -1,22 +1,48 @@
-
-from datetime import date
 from django.shortcuts import get_object_or_404
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
+from rest_framework import permissions
+from drf_yasg import openapi
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import AllowAny
 from rest_framework.decorators import api_view
-from rest_framework.views import APIView
+from django.db import transaction
 from .serializers import *
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, APIException
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import AccessToken
 import logging
 from django.db.models import Q
 from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
+from .serializers import ProductUpdateSerializer, ProductSerializer
 
 logger = logging.getLogger('django')
 deposit = 15
+
+
+@swagger_auto_schema(method='post', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={
+        'username': openapi.Schema(type=openapi.TYPE_STRING),
+        'password': openapi.Schema(type=openapi.TYPE_STRING),
+        'email': openapi.Schema(type=openapi.TYPE_STRING),
+        'age': openapi.Schema(type=openapi.TYPE_INTEGER),
+        'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+    }
+))
+@api_view(["POST"])
+def create_user(request):
+    serializer = UserProfileSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        serializer = UserProfileSerializer(user)
+        logger.info(f"New user created with ID {user.id}.")
+        return Response(serializer.data)
+    logger.error(f"Failed to create a new user: {serializer.errors}")
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def get_user_id_from_token(request):
@@ -33,53 +59,67 @@ def get_user_id_from_token(request):
 
 
 class ProductDetail(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [AllowAny]
 
-    def get_object(self, request, _id):
-        user_id = get_user_id_from_token(request)
-        user_profile = UserProfile.objects.get(id=user_id)
-        return Product.objects.filter(user=user_profile, is_admin=True)
+    def get_object(self, _id):
+        try:
+            user_id = get_user_id_from_token(self.request)
+            user_profile = UserProfile.objects.get(id=user_id)
+        except UserProfile.DoesNotExist:
+            return get_object_or_404(Product, id=_id)
+        return get_object_or_404(Product, id=_id, user=user_profile)
 
+    @transaction.atomic
     def get(self, request, _id):
         try:
-            product = self.get_object(request, _id)
-        except Product.DoesNotExist:
+            product = self.get_object(_id)
+        except Http404:
             logger.error(f"Product with ID {_id} not found.")
-            return Response(status=404)
+            return Response(f"Not Found", status=404)
 
         serializer = ProductSerializer(product)
-        logger.info(f"User with ID {get_user_id_from_token(request)} retrieved product with ID {_id}.")
-        return Response(serializer.data)
+        product.views += 1
+        product.save()
+        return Response(serializer.data, status=200)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=ProductUpdateSerializer,
+    )
     def put(self, request, _id):
-        try:
-            product = self.get_object(request, _id)
-        except Product.DoesNotExist:
-            logger.error(f"Product with ID {_id} not found.")
-            return Response(status=404)
+        product = self.get_object(_id)
+        serializer = ProductUpDateNewSerializer(product, data=request.data)
 
-        user_id = get_user_id_from_token(request)
-        user_profile = UserProfile.objects.get(id=user_id)
+        if serializer.is_valid():
+            cover_imgs = request.data.get('cover_img')
 
-        if not product.is_deleted and user_profile.is_admin:
-            serializer = ProductSerializer(product, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                logger.info(f"User with ID {user_id} modified product {_id} sending the following data to the server: {serializer.data}")
-                return Response(serializer.data, status=200)
-            else:
-                logger.error(f"Invalid data received while modifying product {_id}: {serializer.errors}")
-                return Response(serializer.errors, status=401)
-        else:
-            logger.warning(f"Attempt to modify a deleted product or unauthorized access by user with ID {user_id}.")
-            return Response("Product has already been deleted or unauthorized access.", status=401)
+            # Удаляем старые изображения перед добавлением новых
+            product.images.all().delete()
 
+            if cover_imgs:
+                for cover_img in cover_imgs:
+                    ProductImage.objects.create(product=product, image=cover_img)
+
+            serializer.validated_data["category"] = product.category
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],)
     def delete(self, request, _id):
         try:
-            product = self.get_object(request, _id)
+            product = self.get_object(_id)
             logger.info(f"Attempting to delete product with ID {_id}.")
-        except Product.DoesNotExist:
+        except Http404:
             logger.warning(f"Failed to delete product. Product with ID {_id} not found.")
             return Response(False, status=404)
 
@@ -90,54 +130,94 @@ class ProductDetail(APIView):
             product.is_deleted = True
             product.save()
             logger.info(f"Product with ID {_id} marked as deleted.")
+            return Response(True, status=200)
         else:
-            logger.warning(f"Failed to delete product. Product with ID {_id} has already been deleted or user is not an admin.")
-            return Response("Product has already been deleted.", status=200)
-
-        return Response(True, status=200)
+            logger.warning(
+                f"Failed to delete product. Product with ID {_id} has already been deleted or user is not an admin.")
+            return Response("Product has already been deleted or unauthorized access.", status=404)
 
 
 class ProductList(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        query_serializer=YourQuerySerializer,
+    )
     def get(self, request):
-        show_own_products = request.query_params.get('show_own_products', False)
+        query_serializer = YourQuerySerializer(data=request.query_params)
+        query_serializer.is_valid(raise_exception=True)
+
+        show_own_products = query_serializer.validated_data.get('show_own_products', False)
+        search_query = query_serializer.validated_data.get('search', None)
+
+        # If the user is authenticated, consider user-specific filters
+        print(request.user.is_authenticated)
         try:
             user_id = get_user_id_from_token(request)
             user_profile = UserProfile.objects.get(id=user_id)
-
-            if user_profile.is_admin and not show_own_products:
-                products = Product.objects.all()
-            elif user_profile.is_admin and show_own_products:
-                products = Product.objects.filter(user=user_profile)
+            if user_profile.is_admin:
+                products = Product.objects.filter(user=user_profile, is_deleted=False)
             else:
-                products = Product.objects.all()
+                products = Product.objects.filter(is_deleted=False)
+            if user_profile.is_admin and not show_own_products:
+                products = Product.objects.filter(is_deleted=False)
+            elif user_profile.is_admin and show_own_products:
+                products = Product.objects.filter(user=user_profile, is_deleted=False)
 
-            search_query = request.query_params.get('search', None)
+            # Apply user-specific filters based on search query
             if search_query:
                 products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
-            products = products[:30]  # Apply slicing after filtering
-
-            # Serialize products along with related ProductImage instances
             serializer = ProductSerializer(products, many=True)
-            return Response(serializer.data)
+            return Response(serializer.data, status=200)
 
+        # If the user is not authenticated or there is no user-specific filter, consider public data
         except UserProfile.DoesNotExist:
-            user_id = get_user_id_from_token(request)
-            products = Product.objects.all()[:30]
-            logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-            serializer = ProductSerializer(products, many=True)
-            return Response(serializer.data)
+            products = Product.objects.filter(is_deleted=False)
 
-        except Product.DoesNotExist:
-            user_id = get_user_id_from_token(request)
-            logger.warning(f"Failed to retrieve products for user with ID {user_id}. No products found.")
-            return Response("No products found for the user", status=status.HTTP_404_NOT_FOUND)
+            # Apply public filters based on search query
+            if search_query:
+                products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
+        products = products[:30]  # Apply slicing after filtering
+
+        # Serialize products along with related ProductImage instances
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'category': openapi.Schema(type=openapi.TYPE_INTEGER, description="ID of the category"),
+                'title': openapi.Schema(type=openapi.TYPE_STRING, description="Title of the item"),
+                'description': openapi.Schema(type=openapi.TYPE_STRING, description="Description of the item"),
+                'price': openapi.Schema(type=openapi.TYPE_INTEGER, description="Price of the item"),
+                'amount': openapi.Schema(type=openapi.TYPE_INTEGER, description="Amount of the item"),
+                'default_account': openapi.Schema(type=openapi.TYPE_INTEGER, description="Default account for money")
+            },
+            required=['category', 'title', 'description', 'price', 'amount']
+        ),
+        security=[],
+    )
+    @transaction.atomic
     def post(self, request):
         try:
             # Get the array of images from the request data
             cover_imgs = request.data.get('cover_img')
-
+            if cover_imgs:
+                pass
+            else:
+                cover_imgs = []
             # Get the user profile based on the token or however you identify the user
             user_id = get_user_id_from_token(request)
             user_profile = UserProfile.objects.get(id=user_id)
@@ -153,6 +233,7 @@ class ProductList(APIView):
                 'description': request.data.get('description'),
                 'price': request.data.get('price'),
                 'amount': request.data.get('amount'),
+                'default_account': request.data.get('default_account')
             }
 
             # Log request data
@@ -160,6 +241,23 @@ class ProductList(APIView):
 
             # Create a ProductSerializer instance with the data and cover_imgs
             serializer = ProductSerializer(data=data)
+            try:
+                account = Account.objects.filter(user=user_profile).first()
+                if account:
+                    if data["default_account"] is None:
+                        data["default_account"] = account.id
+                    else:
+                        try:
+                            account = Account.objects.get(id=data["default_account"], user=user_profile)
+                        except Account.DoesNotExist:
+                            user_id = get_user_id_from_token(request)
+                            logger.warning(
+                                f"Failed to retrieve products for user with ID {user_id}. Account Not Found.")
+                            data["default_account"] = account.id
+            except Account.DoesNotExist:
+                user_id = get_user_id_from_token(request)
+                logger.warning(f"Failed to retrieve products for user with ID {user_id}. Account Not Found.")
+                return Response("You are have not account please create account and replay.", status=status.HTTP_404_NOT_FOUND)
 
             if serializer.is_valid():
                 # Save the product instance
@@ -170,7 +268,9 @@ class ProductList(APIView):
                     ProductImage.objects.create(product=product, image=cover_img)
 
                 # Log information including user details, product ID, and image details
-                logger.info(f"Product created successfully. User: {user_profile.username}, Product ID: {product.id}, Cover Images: {cover_imgs}")
+                logger.info(
+                    f"Product created successfully. User: {user_profile.username}, Product ID: {product.id}, Cover "
+                    f"Images: {cover_imgs}")
 
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
@@ -186,31 +286,30 @@ class ProductList(APIView):
 
 class OrderDetail(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self, request, _id):
         user_id = get_user_id_from_token(request)
-        user_profile = UserProfile.objects.get(user_id=user_id)
-        return get_object_or_404(OrderDetails, id=_id, user=user_profile, is_admin=False)
+        user_profile = UserProfile.objects.get(id=user_id)
+        return get_object_or_404(Order, id=_id, user=user_profile, is_paid=False)
 
-    def get(self, request, _id):
-        try:
-            orders = self.get_object(request, _id)
-            logger.info(f"Order details retrieved successfully for user with ID {get_user_id_from_token(request)}.")
-        except UserProfile.DoesNotExist:
-            user_id = get_user_id_from_token(request)
-            logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
-        except OrderDetails.DoesNotExist:
-            logger.warning(f"Failed to retrieve order details for user with ID {get_user_id_from_token(request)}.")
-            return Response("You have not registered yet", status=404)
-
-        serializer = OrderDetailsSerializer(orders, many=True)
-        return Response(serializer.data, status=200)
-
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'quantity': openapi.Schema(type=openapi.TYPE_INTEGER, description="Amount of the item", default=1)
+            },
+            required=['quantity']
+        ),
+        security=[],
+    )
     def put(self, request, _id):
         try:
-            product = self.get_object(request, _id)
+            order = self.get_object(request, _id)
             logger.info(f"Attempting to update order detail with ID {_id}.")
         except UserProfile.DoesNotExist:
             user_id = get_user_id_from_token(request)
@@ -218,19 +317,33 @@ class OrderDetail(APIView):
             return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
         except Product.DoesNotExist:
             logger.warning(f"Failed to update order detail. Order detail with ID {_id} not found.")
-            return Response(status=404)
+            return Response("Order Not Found.", status=404)
 
-        serializer = ProductSerializer(product, data=request.data)
+        serializer = OrderNewSerializer(order, data=request.data)
         if serializer.is_valid():
+            order.order_details.quantity += serializer.validated_data["quantity"]
+            order.order_details.price = order.order_details.quantity * order.order_details.product.price
+            order.order_details.save()
             serializer.save()
             logger.info(f"Order detail with ID {_id} updated successfully.")
-            return Response(serializer.data, status=200)
+            return Response(True, status=200)
         logger.error(f"Failed to update order detail with ID {_id}: {serializer.errors}")
         return Response(serializer.errors, status=401)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def delete(self, request, _id):
         try:
-            product = self.get_object(request, _id)
+            order = self.get_object(request, _id)
+        except Http404:
+            user_id = get_user_id_from_token(request)
+            logger.warning(f"Failed to retrieve products for user with ID {user_id}. order not found.")
+            return Response("This order has payed.", status=status.HTTP_404_NOT_FOUND)
         except UserProfile.DoesNotExist:
             user_id = get_user_id_from_token(request)
             logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
@@ -239,113 +352,54 @@ class OrderDetail(APIView):
             logger.warning(f"Failed to delete order detail. Order detail with ID {_id} not found.")
             return Response(False, status=status.HTTP_404_NOT_FOUND)
 
-        product.is_deleted = True
-        product.save()
+        order.is_deleted = True
+        order.save()
 
         logger.info(f"Order detail with ID {_id} marked as deleted.")
         return Response(True, status=status.HTTP_200_OK)
 
 
-class OrderPay(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get_order(self, _id):
-        return get_object_or_404(Order, id=_id, is_paid=False)
-
-    def post(self, request, _id):
-        try:
-            order = self.get_order(_id)
-            logger.info(f"Attempting to process payment for order with ID {_id}.")
-        except Order.DoesNotExist:
-            logger.warning(f"Failed to process payment. Order with ID {_id} not found.")
-            return Response(False, status=404)
-
-        try:
-            order_details = OrderDetails.objects.get(id=order.order_details.id)
-        except OrderDetails.DoesNotExist:
-            logger.warning(f"Failed to process payment. Order details not found for order with ID {_id}.")
-            return Response(False, status=404)
-
-        _account_number = request.data.get('account_number')
-
-        try:
-            account = Account.objects.get(account_number=_account_number)
-        except Account.DoesNotExist:
-            logger.warning(f"Failed to process payment. Account not found for account number {_account_number}.")
-            return Response(False, status=404)
-
-        try:
-            user_profile = UserProfile.objects.get(id=order.user.id)
-        except UserProfile.DoesNotExist:
-            logger.warning(f"Failed to process payment. User profile not found for user with ID {order.user.id}.")
-            return Response(False, status=404)
-
-        if account.balance > 0 and account.balance > order_details.price:
-            account.balance -= order_details.price
-            product = Product.objects.get(id=order_details.product.id)
-            user_product = UserProfile.objects.get(id=product.user.id)
-            account_user_product = Account.objects.filter(user=user_product).first()
-            account_user_product.balance += order_details.price
-            order.is_paid = True
-            order.is_in_the_card = False
-            order.status = 3
-        else:
-            logger.warning(f"Failed to process payment. Insufficient funds for order with ID {_id}.")
-            return Response("You do not have enough funds to make the purchase", status=401)
-
-        payment = Payment.objects.create(
-            order=order_details,
-            account=account,
-            user=user_profile,
-            amount=order_details.quantity,
-            price=order_details.price
-        )
-
-        payment.save()
-        order.save()
-        account.save()
-        account_user_product.save()
-
-        logger.info(f"Payment processed successfully for order with ID {_id}.")
-        serializer = PaymentSerializer(payment)
-        return Response(serializer.data, status=200)
-
-
 class OrderPaid(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request):
         user_id = get_user_id_from_token(request)
         user_profile = UserProfile.objects.get(id=user_id, is_admin=False)
-        orders = Order.objects.filter(is_paid=True)
-        product = Product.objects.filter(id=orders.product.id, user=user_profile)
-        if product:
-            serializer = OrderSerializer(orders, many=True)
+        payments = Payment.objects.filter(user=user_profile, is_deleted=False)
+        if payments:
+            serializer = OrderSerializer(payments, many=True)
             return Response(serializer.data, status=200)
         else:
-            return Response(False, status=404)
+            return Response("Вы пока не оплатили не один из заказов!!!", status=404)
 
 
 class PayMentDetail(APIView):
-    def get(self, request, _id):
-        try:
-            payment = Payment.objects.get(id=_id)
-            logger.info(f"Payment details retrieved successfully for payment with ID {_id}.")
-        except Payment.DoesNotExist:
-            logger.warning(f"Failed to retrieve payment details. Payment with ID {_id} not found.")
-            return Response(False, status=status.HTTP_404_NOT_FOUND)
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
 
-        serializer = PaymentSerializer(payment, many=False)
-        return Response(serializer.data, status=200)
-
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def delete(self, request, _id):
+        user_id = get_user_id_from_token(request)
         try:
-            payment = Payment.objects.get(id=_id)
+            user_profile = UserProfile.objects.get(id=user_id)
+            payment = Payment.objects.get(id=_id, user=user_profile, is_deleted=False)
         except Payment.DoesNotExist:
             logger.warning(f"Failed to delete payment. Payment with ID {_id} not found.")
-            return Response(False, status=status.HTTP_404_NOT_FOUND)
+            return Response(f"Payment with ID {_id} not found.", status=status.HTTP_404_NOT_FOUND)
 
         if not payment.is_deleted:
             payment.is_deleted = True
@@ -358,76 +412,225 @@ class PayMentDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class OrderPay(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
+    def get_order(self, _id):
+        return get_object_or_404(Order, id=_id, is_paid=False)
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'account_number': openapi.Schema(type=openapi.TYPE_STRING, description="Amount of the item", default=1)
+            },
+            required=['account_number']
+        ),
+        security=[],
+    )
+    @transaction.atomic
+    def post(self, request, _id):
+        try:
+            order = self.get_order(_id)
+            logger.info(f"Attempting to process payment for order with ID {_id}.")
+        except Order.DoesNotExist:
+            logger.warning(f"Failed to process payment. Order with ID {_id} not found.")
+            return Response(f"Failed to process payment. Order with ID {_id} not found.", status=404)
+
+        try:
+            order_details = OrderDetails.objects.get(id=order.order_details.id)
+        except OrderDetails.DoesNotExist:
+            logger.warning(f"Failed to process payment. Order details not found for order with ID {_id}.")
+            return Response(f"Failed to process payment. Order details not found for order with ID {_id}.", status=404)
+
+        _account_number = request.data.get('account_number')
+        try:
+            account = Account.objects.get(account_number=_account_number)
+        except Account.DoesNotExist:
+            logger.warning(f"Failed to process payment. Account not found for account number {_account_number}.")
+            return Response(f"Failed to process payment. Account not found for account number {_account_number}.",
+                            status=404)
+
+        try:
+            user_profile = UserProfile.objects.get(id=order.user.id)
+        except UserProfile.DoesNotExist:
+            logger.warning(f"Failed to process payment. User profile not found for user with ID {order.user.id}.")
+            return Response(f"Failed to process payment. User profile not found for user with ID {order.user.id}.",
+                            status=404)
+
+        if account and hasattr(account, 'balance') and account.balance >= order_details.price:
+            account.balance -= order_details.price
+
+            try:
+                product = Product.objects.get(id=order_details.product.id)
+            except Product.DoesNotExist:
+                logger.warning(f"Failed to process payment. Product not found.")
+                return Response(f"Failed to process payment. Product not found.", status=404)
+
+            if product.default_account:
+                account_user_product = Account.objects.get(id=product.default_account.id)
+            else:
+                user_product = UserProfile.objects.get(id=product.user.id)
+                try:
+                    account_user_product = Account.objects.filter(user=user_product).first()
+                except Account.DoesNotExist:
+                    logger.warning(f"Failed to process payment. Account not found.")
+                    return Response(f"Failed to process payment. Account not found.", status=404)
+
+            account_user_product.balance += order_details.price
+            order.is_paid = True
+            order.is_in_the_card = False
+            order.status = OrderStatus.objects.get(id=3)
+
+            payment = Payment.objects.create(
+                order=order_details,
+                account=account,
+                user=user_profile,
+                amount=order_details.quantity,
+                price=order_details.price
+            )
+
+            payment.save()
+            order.save()
+            account.save()
+            logger.info(f"Payment processed successfully for order with ID {_id}.")
+            serializer = PaymentSerializer(payment)
+            return Response(serializer.data, status=200)
+        else:
+            logger.warning(f"Failed to process payment. Insufficient funds for order with ID {_id}.")
+            return Response("You do not have enough funds to make the purchase", status=401)
+
+
 class OrderList(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request):
         user_id = get_user_id_from_token(request)
-        user_profile = UserProfile.objects.get(id=user_id, is_admin=False)
         try:
+            user_profile = UserProfile.objects.get(id=user_id)
+            if user_profile.is_admin:
+                product_orders = Order.objects.prefetch_related(
+                    'status',
+                    'order_details__product',
+                    'order_details__address',
+                ).filter(order_details__product__user=user_profile, is_paid=True).distinct()
+                serializer = OrderSerializer(product_orders, many=True)
+                if not product_orders.exists():
+                    return Response("No one has purchased your products yet.", status=status.HTTP_404_NOT_FOUND)
+                logger.info(f"User with ID {user_id} retrieved their orders and product orders.")
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
             orders = Order.objects.prefetch_related(
                 'status',
                 'order_details__product',
-                'order_details__address'
+                'order_details__address',
             ).filter(user=user_profile)
+            serializer = OrderSerializer(orders, many=True)
+            if not orders.exists():
+                return Response("You have no orders yet.", status=status.HTTP_404_NOT_FOUND)
+            logger.info(f"User with ID {user_id} retrieved their orders.")
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except UserProfile.DoesNotExist:
-            user_id = get_user_id_from_token(request)
-            logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
+            logger.warning(f"Failed to retrieve orders for user with ID {user_id}. User profile not found.")
+            return Response("User profile not found", status=status.HTTP_404_NOT_FOUND)
         except Order.DoesNotExist:
-            logger.warning(f"User with ID {user_id} has not registered yet.")
-            return Response("You are not registered yet", status=404)
+            logger.warning(f"Failed to retrieve orders for user with ID {user_id}. Order not found.")
+            return Response("Order not found", status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.warning(f"Failed to retrieve orders for user with ID {user_id}. {str(e)}")
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        # Сериализация данных
-        serializer = OrderSerializer(orders, many=True)
-        logger.info(f"User with ID {user_id} retrieved their orders.")
-        return Response(serializer.data, status=200)
-
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'product': openapi.Schema(type=openapi.TYPE_INTEGER, description="ID of the product"),
+                'address': openapi.Schema(type=openapi.TYPE_INTEGER, description="ID of the address"),
+                'quantity': openapi.Schema(type=openapi.TYPE_INTEGER, description="Quantity of the product"),
+            },
+            required=['product', 'address', 'quantity']
+        ),
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
+    @transaction.atomic
     def post(self, request):
+        user_id = get_user_id_from_token(request)
+        try:
+            user_profile = UserProfile.objects.get(id=user_id)
+            if user_profile.is_admin:
+                raise PermissionDenied("Admins are not allowed to create orders.")
+        except PermissionDenied as pd:
+            logger.warning(f"Permission Denied: {str(pd)}")
+            return Response(str(pd), status=status.HTTP_403_FORBIDDEN)
+        except UserProfile.DoesNotExist:
+            logger.warning(f"Failed to retrieve user with ID {user_id}. User profile not found.")
+            return Response("User profile not found", status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.warning(f"Failed to retrieve user with ID {user_id}. {str(e)}")
+            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         serializer = OrderDetailsNewSerializer(data=request.data)
         if serializer.is_valid():
-            product_id = serializer.validated_data['product'].id
+            product_id = serializer.validated_data["product"].id  # Получаем идентификатор продукта
             try:
                 product = Product.objects.get(id=product_id)
-            except UserProfile.DoesNotExist:
-                user_id = get_user_id_from_token(request)
-                logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-                return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
             except Product.DoesNotExist:
                 logger.error(f"Product with ID {product_id} not found.")
-                return Response(status=404)
-
-            address_id = serializer.validated_data['address']
+                return Response(f"Product with ID {product_id} not found.", status=404)
+            address_instance = serializer.validated_data['address']
+            address = address_instance
+            print(address)
             amount = serializer.validated_data['quantity']
 
             if amount > product.amount:
                 logger.warning(f"Insufficient stock for product with ID {product_id}.")
-                return Response(False, status=401)
+                return Response(f"Insufficient stock for product with ID {product_id}.", status=401)
             else:
                 product.amount -= amount
-                product.save()
-                if not product.amount:
+                if product.amount == 0:
                     product.is_deleted = True
-            user_id = get_user_id_from_token(request)
-            user_profile = UserProfile.objects.get(id=user_id)
-
             order_details = OrderDetails.objects.create(
-                user=user_profile,
                 product=product,
-                price=product.price,
+                price=product.price * amount,
                 quantity=amount,
-                address=address_id
+                address=address_instance
             )
 
             # Получаем объект OrderStatus по его id или любым другим способом
             order_status = OrderStatus.objects.get(id=1)
 
             order = Order.objects.create(
+                user=user_profile,
                 status=order_status,
                 order_details=order_details
             )
-
+            order.save()
+            order_details.save()
+            product.save()
             logger.info(f"User with ID {user_id} placed a new order with ID {order.id}.")
             return Response(True, status=200)
 
@@ -436,9 +639,24 @@ class OrderList(APIView):
 
 
 class UserProfileDetails(APIView):
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get_user(self, _id):
         return get_object_or_404(UserProfile, id=_id)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request, _id):
         try:
             user = self.get_user(_id)
@@ -450,6 +668,21 @@ class UserProfileDetails(APIView):
         serializer = UserProfileSerializer(user, many=False)
         return Response(serializer.data, status=200)
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'username': openapi.Schema(type=openapi.TYPE_STRING),
+                'password': openapi.Schema(type=openapi.TYPE_STRING),
+            },
+            required=['username', 'password']
+        ),
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def put(self, request, _id):
         try:
             user = self.get_user(_id)
@@ -480,32 +713,6 @@ def get_user_all(request):
     return Response(serializer.data, status=200)
 
 
-@api_view(["POST"])
-def create_user(request):
-    serializer = UserProfileSerializer(data=request.data)
-    if serializer.is_valid():
-        user = serializer.save()
-        serializer = UserProfileSerializer(user)
-        logger.info(f"New user created with ID {user.id}.")
-        return Response(serializer.data)
-    logger.error(f"Failed to create a new user: {serializer.errors}")
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class UserProfileAuthorization(APIView):
-    def post(self, request):
-        try:
-            userProfile = UserProfile.objects.get(password=request.data.get('password'), name=request.data.get('name'),
-                                                  email=request.data.get('email'))
-            logger.info(f"User with ID {userProfile.id} authorized successfully.")
-        except UserProfile.DoesNotExist:
-            logger.warning("User authorization failed. User not found.")
-            return Response(False, status=404)
-
-        serializer = UserProfileSerializer(userProfile)
-        return Response(serializer.data, status=200)
-
-
 class CategoryList(APIView):
     def get(self, request):
         category = Category.objects.all()
@@ -527,7 +734,10 @@ class CategoryDetails(APIView):
         return get_object_or_404(Category, id=_id)
 
     def get(self, request, _id):
-        category = self.get_object(_id)
+        try:
+            category = self.get_object(_id)
+        except Http404:
+            return Response(False, status=404)
         if category:
             serializer = CategorySerializer(category, many=False)
             return Response(serializer.data, status=200)
@@ -562,11 +772,41 @@ class CategoryDetails(APIView):
 
 
 class AddressList(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request):
         user_id = get_user_id_from_token(request)
         user_profile = UserProfile.objects.get(id=user_id)
-        return get_object_or_404(Address, user=user_profile)
+        try:
+            address = Address.objects.filter(user=user_profile, is_deleted=False)
+            serializer = AddressSerializer(address, many=True)
+        except Address.DoesNotExist:
+            logger.error(f"Address not found.")
+            return Response(f"You don't have any addresses.", status=404)
+        return Response(serializer.data, status=200)
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'address_name': openapi.Schema(type=openapi.TYPE_STRING),
+            },
+            required=['address_name']
+        ),
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def post(self, request):
         serializer = AddressSerializer(data=request.data)
         if serializer.is_valid():
@@ -582,25 +822,47 @@ class AddressList(APIView):
 
 class AddressDetails(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self, request, _id):
         user_id = get_user_id_from_token(request)
-        return get_object_or_404(Address, id=_id)
+        user_profile = UserProfile.objects.get(id=user_id)
+        return get_object_or_404(Address, user=user_profile, id=_id, is_deleted=False)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request, _id):
         try:
             address = self.get_object(request, _id)
             serializer = AddressSerializer(address, many=False)
             return Response(serializer.data, status=200)
-        except Address.DoesNotExist:
+        except Http404:
             logger.warning(f"Failed to retrieve address. Address with ID {_id} not found.")
             return Response("Address not found", status=404)
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'address_name': openapi.Schema(type=openapi.TYPE_STRING),
+            },
+            required=['address_name']
+        ),
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def put(self, request, _id):
         try:
             address = self.get_object(request, _id)
-        except Address.DoesNotExist:
+        except Http404:
             logger.warning(f"Failed to update address. Address with ID {_id} not found.")
             return Response("Address not found", status=404)
 
@@ -612,6 +874,13 @@ class AddressDetails(APIView):
         logger.error(f"Failed to update address with ID {_id}: {serializer.errors}")
         return Response(serializer.errors, status=401)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def delete(self, request, _id):
         try:
             address = self.get_object(request, _id)
@@ -620,17 +889,40 @@ class AddressDetails(APIView):
             return Response(False, status=404)
 
         address.is_deleted = True
+        address.save()
         logger.info(f"Address with ID {_id} marked as deleted.")
         return Response(True, status=200)
 
 
 class OrderStatusDetail(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get_object(self, request, _id):
         return get_object_or_404(OrderStatus, id=_id)
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'status_name': openapi.Schema(type=openapi.TYPE_STRING),
+                'description': openapi.Schema(type=openapi.TYPE_STRING),
+            },
+            required=['status_name', 'description']
+        ),
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def put(self, request, _id):
         try:
             order_status = self.get_object(request, _id)
@@ -648,6 +940,16 @@ class OrderStatusDetail(APIView):
 
 
 class OrderStatusList(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request):
         try:
             order_statuses = OrderStatus.objects.all()
@@ -658,6 +960,21 @@ class OrderStatusList(APIView):
             logger.error(f"An error occurred while retrieving order statuses: {str(e)}")
             return Response("Internal server error", status=500)
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'status_name': openapi.Schema(type=openapi.TYPE_STRING),
+                'description': openapi.Schema(type=openapi.TYPE_STRING),
+            },
+            required=['status_name', 'description']
+        ),
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def post(self, request):
         try:
             serializer = OrderStatusSerializer(data=request.data)
@@ -675,8 +992,15 @@ class OrderStatusList(APIView):
 
 class AccountList(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request):
         user_id = get_user_id_from_token(request)
         try:
@@ -689,6 +1013,20 @@ class AccountList(APIView):
         logger.info(f"User with ID {user_id} retrieved their accounts.")
         return Response(serializer.data, status=200)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'account_number': openapi.Schema(type=openapi.TYPE_STRING, description="Account number for new account"),
+            },
+            required=['account_number']
+        ),
+        security=[],
+    )
     def post(self, request):
         serializer = AccountSerializer(data=request.data)
         if serializer.is_valid():
@@ -703,8 +1041,15 @@ class AccountList(APIView):
 
 class AccountDetails(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get_object(self, request, _id):
         user_id = get_user_id_from_token(request)
         try:
@@ -721,6 +1066,13 @@ class AccountDetails(APIView):
             logger.error(f"An error occurred while processing the request: {str(e)}")
             raise Http404("Account not found")
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request, _id):
         try:
             account = self.get_object(request, _id)
@@ -733,6 +1085,21 @@ class AccountDetails(APIView):
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response("Internal server error", status=500)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'fill': openapi.Schema(type=openapi.TYPE_NUMBER, description="Amount to fill the account balance"),
+                # Add other properties as needed
+            },
+            required=['fill']
+        ),
+        security=[],
+    )
     def put(self, request, _id):
         try:
             account = self.get_object(request, _id)
@@ -757,6 +1124,13 @@ class AccountDetails(APIView):
             logger.warning(f"Failed to update account with ID {_id}. Fill value is too high.")
             return Response("Fill value is too high. Maximum allowed is 10000.", status=401)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def delete(self, request, _id):
         try:
             account = self.get_object(request, _id)
@@ -775,13 +1149,27 @@ class AccountDetails(APIView):
 
 class ReviewDetail(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get_object(self, request, _id):
         user_id = get_user_id_from_token(request)
         user_profile = UserProfile.objects.get(id=user_id)
-        return get_object_or_404(Review, id=_id, user=user_profile)
+        return get_object_or_404(Review, id=_id, is_deleted=False)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def get(self, request, _id):
         try:
             review = self.get_object(request, _id)
@@ -797,6 +1185,21 @@ class ReviewDetail(APIView):
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response("Internal server error", status=500)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'rating': openapi.Schema(type=openapi.TYPE_NUMBER, description="Amount to fill the account balance"),
+                'title': openapi.Schema(type=openapi.TYPE_STRING, description="Amount to fill the account balance"),
+                'content': openapi.Schema(type=openapi.TYPE_STRING, description="Amount to fill the account balance"),
+            },
+        ),
+        security=[],
+    )
     def put(self, request, _id):
         try:
             review = self.get_object(request, _id)
@@ -820,10 +1223,18 @@ class ReviewDetail(APIView):
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response("Internal server error", status=500)
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def delete(self, request, _id):
         try:
             review = self.get_object(request, _id)
             review.is_deleted = True
+            review.save()
             logger.info(f"Review with ID {_id} marked as deleted.")
             return Response(True, status=200)
 
@@ -839,78 +1250,159 @@ class ReviewDetail(APIView):
 
 
 class ReviewList(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user_id = get_user_id_from_token(request)
+    def get(self, request, product_id):
         try:
-            user_profile = UserProfile.objects.get(id=user_id)
-            return get_object_or_404(Review, user=user_profile)
+            review = Review.objects.get(product=Product.objects.get(id=product_id), is_deleted=False)
+            serializer = ReviewSerializer(review)
+        except Review.DoesNotExist:
+            logger.warning(f"Failed to get reviews. Review not found.")
+            return Response("Review not found", status=404)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to get reviews. User profile not found.")
             return Response("User profile not found", status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response("Internal server error", status=500)
+        return Response(serializer.data, status=200)
 
-    def post(self, request):
-        serializer = ReviewSerializer(data=request.data)
 
-        if serializer.is_valid():
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'rating': openapi.Schema(type=openapi.TYPE_NUMBER),
+                'title': openapi.Schema(type=openapi.TYPE_STRING),
+                'content': openapi.Schema(type=openapi.TYPE_STRING),
+            },
+            required=['rating', 'title', 'content']
+        ),
+        security=[],
+    )
+    def post(self, request, product_id):
+        try:
             user_id = get_user_id_from_token(request)
+            user_profile = UserProfile.objects.get(id=user_id)
+            product = Product.objects.get(id=product_id)
+
+            # Проверка, существует ли отзыв от данного пользователя для данного продукта
+            existing_review = Review.objects.filter(product=product, user=user_profile).first()
+
+            if existing_review:
+                return Response("Отзыв от этого пользователя для данного продукта уже существует", status=status.HTTP_400_BAD_REQUEST)
+
+            serializer = ReviewSerializer(data=request.data)
+
             try:
-                user_profile = UserProfile.objects.get(id=user_id)
-                serializer.save(user=user_profile)
-                logger.info(f"New review created with ID {serializer.data.get('id')} for user {user_id}.")
-                return Response(serializer.data, status=200)
-            except UserProfile.DoesNotExist:
-                logger.warning(f"Failed to create a new review. User profile not found.")
-                return Response("User profile not found", status=404)
-            except Exception as e:
-                logger.error(f"An error occurred while processing the request: {str(e)}")
-                return Response("Internal server error", status=500)
-        else:
-            logger.error(f"Failed to create a new review: {serializer.errors}")
-            return Response(serializer.errors, status=400)
+                order_details = OrderDetails.objects.get(product=product)
+
+                if order_details.order.is_paid:
+                    if serializer.is_valid():
+                        serializer.save(product=product, user=user_profile)
+                        return Response(serializer.data, status=status.HTTP_201_CREATED)
+                    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    return Response("Купите товар прежде чем его осуждать", status=status.HTTP_401_UNAUTHORIZED)
+
+            except OrderDetails.DoesNotExist:
+                return Response("Купите товар прежде чем его осуждать", status=status.HTTP_401_UNAUTHORIZED)
+
+        except UserProfile.DoesNotExist:
+            return Response("User profile not found", status=status.HTTP_404_NOT_FOUND)
+
+        except Product.DoesNotExist:
+            logger.warning(f"Failed to create a new comment. Product not found.")
+            return Response("Product not found", status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            logger.error(f"An error occurred while processing the request: {str(e)}")
+            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def build_comment_tree(comment, comments_dict):
+    comment_data = CommentSerializer(instance=comment).data
+    children_comments = comments_dict.get(comment.id, [])
+
+    if children_comments:
+        comment_data['children'] = [build_comment_tree(child, comments_dict) for child in children_comments]
+
+    return comment_data
 
 
 class CommentList(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [AllowAny]
 
     def get_object(self, product_id):
         try:
             product = get_object_or_404(Product, id=product_id)
-            return Comment.objects.filter(product=product)
+            comments = Comment.objects.filter(product=product)
+            comments_dict = {comment.id: [] for comment in comments}
+
+            for comment in comments:
+                if comment.parent_id:
+                    comments_dict[comment.parent_id].append(comment)
+
+            main_comments = [comment for comment in comments if not comment.parent_id]
+
+            return main_comments, comments_dict
         except Product.DoesNotExist:
             logger.warning(f"Failed to get comments. Product not found.")
-            return Response("Product not found", status=status.HTTP_404_NOT_FOUND)
-        except Comment.DoesNotExist:
-            logger.warning(f"Failed to get comments. Comment not found.")
-            return Response("Comment not found", status=status.HTTP_404_NOT_FOUND)
+            raise Http404("Product not found")
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            raise APIException("Internal server error")
 
     def get(self, request, product_id):
         try:
-            comments = self.get_object(product_id)
-            serializer = CommentSerializer(comments, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Response as response:
-            return response
+            main_comments, comments_dict = self.get_object(product_id)
+            main_comments_tree = [build_comment_tree(comment, comments_dict) for comment in main_comments]
+            return Response(main_comments_tree, status=status.HTTP_200_OK)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def post(self, request):
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'parent_id': openapi.Schema(type=openapi.TYPE_NUMBER),
+                'comment_text': openapi.Schema(type=openapi.TYPE_STRING),
+            },
+            required=['comment_text']
+        ),
+        security=[],
+    )
+    def post(self, request, product_id):
         try:
             user_id = get_user_id_from_token(request)
             user_profile = UserProfile.objects.get(id=user_id)
             serializer = CommentSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save(user=user_profile)
+                parent_comment_id = request.data.get('parent_id')
+                product = Product.objects.get(id=product_id)
+
+                if parent_comment_id:
+                    parent_comment = Comment.objects.get(id=parent_comment_id)
+                    new_comment = serializer.save(user=user_profile,
+                                                  product=product)  # Сначала сохраняем новый комментарий
+                    parent_comment.children.add(
+                        new_comment)  # Устанавливаем связь между родительским и дочерним комментариями
+                else:
+                    serializer.save(user=user_profile, product=product)
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except UserProfile.DoesNotExist:
+            logger.warning(f"Failed to create a new comment. User profile not found.")
+            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -918,56 +1410,48 @@ class CommentList(APIView):
 
 class CommentDetail(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self, _comment_id):
         try:
-            return Comment.objects.filter(id=_comment_id)
+            return Comment.objects.get(id=_comment_id)
         except Comment.DoesNotExist:
             logger.warning(f"Failed to get comments. Comment not found.")
-            return Response("Comment not found", status=status.HTTP_404_NOT_FOUND)
+            raise Http404("Comment not found")
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            raise APIException("Internal server error")
 
-    def put(self, request, comment_id):
-        try:
-            comment = self.get_object(comment_id)
-            logger.info(f"Attempting to update order detail with ID {comment_id}.")
-        except UserProfile.DoesNotExist:
-            user_id = get_user_id_from_token(request)
-            logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
-        except Comment.DoesNotExist:
-            logger.warning(f"Failed to update Comment. Comment with ID {comment_id} not found.")
-            return Response(status=404)
-        except Exception as e:
-            logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        serializer = ProductSerializer(comment, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            logger.info(f"Comment with ID {comment_id} updated successfully.")
-            return Response(serializer.data, status=200)
-        logger.error(f"Failed to update Comment with ID {comment_id}: {serializer.errors}")
-        return Response(serializer.errors, status=401)
+    @transaction.atomic
+    def delete_comment_chain(self, comment):
+        # Recursively delete comment chain
+        child_comments = Comment.objects.filter(parent_id=comment.id)
+        for child_comment in child_comments:
+            self.delete_comment_chain(child_comment)
+            child_comment.delete()
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        security=[],
+    )
     def delete(self, request, comment_id):
         try:
-            comment = self.get_object(comment_id)
-            logger.info(f"Attempting to delete order detail with ID {comment_id}.")
-        except UserProfile.DoesNotExist:
-            user_id = get_user_id_from_token(request)
-            logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
+            comment = Comment.objects.get(id=comment_id)
+            logger.info(f"Attempting to delete comment with ID {comment_id}.")
         except Comment.DoesNotExist:
             logger.warning(f"Failed to delete Comment. Comment with ID {comment_id} not found.")
             return Response(status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        # Delete the entire comment chain
+        self.delete_comment_chain(comment)
+
+        # Delete the parent comment
         comment.delete()
-        return Response(status=204)
 
-
-
+        return Response(True, status=204)

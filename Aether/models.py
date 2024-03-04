@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.contrib.postgres.fields import ArrayField  # Import ArrayField
 
 
 class UserProfile(User):
@@ -11,6 +10,16 @@ class UserProfile(User):
 
     def __str__(self):
         return f"{self.username} (Admin: {self.is_admin})"
+
+
+class Account(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    account_number = models.CharField(unique=True)
+    balance = models.FloatField(default=12100.09)
+    is_deleted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Account {self.account_number}"
 
 
 class Category(models.Model):
@@ -24,6 +33,7 @@ class Category(models.Model):
 class Address(models.Model):
     address_name = models.CharField(max_length=100)
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.address_name
@@ -37,7 +47,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     price = models.FloatField()
     amount = models.IntegerField()
+    default_account = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
     is_deleted = models.BooleanField(default=False)
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -80,16 +92,6 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id} by {self.user.username}"
-
-
-class Account(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    account_number = models.CharField(unique=True)
-    balance = models.FloatField(default=100.09)
-    is_deleted = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"Account {self.account_number}"
 
 
 class Payment(models.Model):

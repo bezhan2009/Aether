@@ -1,6 +1,5 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
-from rest_framework.fields import ListField, CharField
 from Aether.models import *
 
 
@@ -33,14 +32,34 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(),
-                                              required=False)  # Делаем поле user необязательным
-
+    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
     images = ProductImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
-        fields = ['id', 'user', 'category', 'title', 'description', 'price', 'amount', 'images']
+        fields = ['id', 'user', 'category', 'title', 'description', 'price', 'amount', 'images', 'default_account', "views"]
+
+
+class ProductUpDateNewSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
+    images = ProductImageSerializer(many=True, read_only=True)
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
+    class Meta:
+        model = Product
+        fields = ['id', 'user', 'category', 'title', 'description', 'price', 'amount', 'images', 'default_account', "views"]
+
+
+class ProductUpdateSerializer(serializers.Serializer):
+    title = serializers.CharField(required=False)
+    description = serializers.CharField(required=False)
+    price = serializers.FloatField(required=False)
+    amount = serializers.IntegerField(required=False)
+    default_account = serializers.PrimaryKeyRelatedField(queryset=Account.objects.all(), required=False)
+    is_deleted = serializers.BooleanField(required=False)
+
+    def validate(self, data):
+        # Your validation logic if needed
+        return data
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -74,7 +93,6 @@ class OrderStatusSerializer(serializers.ModelSerializer):
 
 
 class OrderDetailsSerializer(serializers.ModelSerializer):
-    product = serializers.CharField(source='product.name', read_only=True)
     address = serializers.CharField(source='address.address', read_only=True)
 
     class Meta:
@@ -83,11 +101,11 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
 
 
 class OrderDetailsNewSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(),
-                                              required=False)  # Делаем поле user необязательным
-    product_s = serializers.CharField(source='product.name', read_only=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
+    product_write_only = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), write_only=True, required=False, source='product')  # Переименовано поле
     address_s = serializers.CharField(source='address.address', read_only=True)
-    product = ProductSerializer()
+    product_s = serializers.CharField(source='product.name', read_only=True)
+    product_detail = ProductSerializer(source='product', read_only=True)  # Изменено имя поля для ProductSerializer
 
     class Meta:
         model = OrderDetails
@@ -114,6 +132,13 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class OrderNewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderDetails
+        fields = ('quantity',)
+
+
 class PaymentSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
     order = OrderDetailsSerializer()
@@ -126,7 +151,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
-    product = ProductSerializer()
+    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), required=False)
 
     class Meta:
         model = Review
@@ -161,3 +186,23 @@ class CommentMainSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'comment_text', 'parent_id', 'children']
+
+
+class ProductUpdateSerializer(serializers.Serializer):
+    title = serializers.CharField(required=False)
+    description = serializers.CharField(required=False)
+    price = serializers.IntegerField(required=False)
+    amount = serializers.IntegerField(required=False)
+
+    def validate(self, data):
+        # Ensure that only specified fields are allowed
+        allowed_fields = {'title', 'description', 'price', 'amount'}
+        for key in data.keys():
+            if key not in allowed_fields:
+                raise serializers.ValidationError(f"Field '{key}' is not allowed for update.")
+        return data
+
+
+class YourQuerySerializer(serializers.Serializer):
+    show_own_products = serializers.BooleanField(default=False, help_text="Show own products or not")
+    search = serializers.CharField(allow_blank=True, required=False, help_text="Search query")
