@@ -7798,3 +7798,418 @@ INFO 2024-03-04 23:20:22,348 basehttp 8168 9896 "DELETE /demo/api/review/4/detai
 WARNING 2024-03-04 23:20:26,878 views 8168 4276 Failed to get reviews. Review not found.
 WARNING 2024-03-04 23:20:26,878 log 8168 4276 Not Found: /demo/api/review/8/
 WARNING 2024-03-04 23:20:26,879 basehttp 8168 4276 "GET /demo/api/review/8/ HTTP/1.1" 404 18
+INFO 2024-03-05 09:09:59,586 autoreload 5940 13092 Watching for file changes with StatReloader
+WARNING 2024-03-05 09:10:13,995 log 5940 10800 Not Found: /
+WARNING 2024-03-05 09:10:13,996 basehttp 5940 10800 "GET / HTTP/1.1" 404 2989
+WARNING 2024-03-05 09:10:14,287 log 5940 10800 Not Found: /favicon.ico
+WARNING 2024-03-05 09:10:14,288 basehttp 5940 10800 "GET /favicon.ico HTTP/1.1" 404 3040
+INFO 2024-03-05 09:10:20,862 basehttp 5940 10800 "GET /swagger/ HTTP/1.1" 200 2155
+INFO 2024-03-05 09:10:20,905 basehttp 5940 10800 "GET /static/drf-yasg/style.css HTTP/1.1" 304 0
+INFO 2024-03-05 09:10:20,907 basehttp 5940 4548 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui.css HTTP/1.1" 304 0
+INFO 2024-03-05 09:10:20,908 basehttp 5940 5916 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-bundle.js HTTP/1.1" 304 0
+INFO 2024-03-05 09:10:20,909 basehttp 5940 10800 "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js HTTP/1.1" 304 0
+INFO 2024-03-05 09:10:20,909 basehttp 5940 4548 "GET /static/drf-yasg/insQ.min.js HTTP/1.1" 304 0
+INFO 2024-03-05 09:10:20,912 basehttp 5940 10800 "GET /static/drf-yasg/swagger-ui-init.js HTTP/1.1" 304 0
+INFO 2024-03-05 09:10:20,913 basehttp 5940 5916 "GET /static/drf-yasg/immutable.min.js HTTP/1.1" 304 0
+INFO 2024-03-05 09:10:21,227 basehttp 5940 5916 "GET /swagger/?format=openapi HTTP/1.1" 200 21362
+ERROR 2024-03-05 09:10:51,039 log 5940 5916 Internal Server Error: /demo/api/products/13/user
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: ProductUser.get() got multiple values for argument 'user_id'
+ERROR 2024-03-05 09:10:51,040 basehttp 5940 5916 "GET /demo/api/products/13/user HTTP/1.1" 500 21718
+INFO 2024-03-05 09:12:34,601 autoreload 5940 13092 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:12:35,613 autoreload 9364 2992 Watching for file changes with StatReloader
+WARNING 2024-03-05 09:12:38,173 views 9364 5892 Failed to get Product with this user profile userr (Admin: False). Product not found.
+ERROR 2024-03-05 09:12:38,199 log 9364 5892 Internal Server Error: /demo/api/products/13/user
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'django.http.response.Http404'>`
+ERROR 2024-03-05 09:12:38,201 basehttp 9364 5892 "GET /demo/api/products/13/user HTTP/1.1" 500 21592
+INFO 2024-03-05 09:13:09,606 autoreload 9364 2992 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:13:10,532 autoreload 12692 8548 Watching for file changes with StatReloader
+WARNING 2024-03-05 09:13:12,638 views 12692 13164 Failed to get Product with this user profile userr (Admin: False). Product not found.
+INFO 2024-03-05 09:13:12,640 basehttp 12692 13164 "GET /demo/api/products/13/user HTTP/1.1" 200 19
+WARNING 2024-03-05 09:13:21,286 views 12692 13164 Failed to get Product with this user profile bekon (Admin: False). Product not found.
+INFO 2024-03-05 09:13:21,287 basehttp 12692 13164 "GET /demo/api/products/14/user HTTP/1.1" 200 19
+INFO 2024-03-05 09:13:37,491 basehttp 12692 13164 "GET /demo/api/products/?show_own_products=false HTTP/1.1" 200 113536
+ERROR 2024-03-05 09:13:48,982 views 12692 13164 An error occurred while processing the request: get() returned more than one Product -- it returned 7!
+INFO 2024-03-05 09:13:48,983 basehttp 12692 13164 "GET /demo/api/products/11/user HTTP/1.1" 200 23
+INFO 2024-03-05 09:14:41,375 autoreload 12692 8548 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:14:42,954 autoreload 7992 12672 Watching for file changes with StatReloader
+ERROR 2024-03-05 09:14:44,359 views 7992 12432 An error occurred while processing the request: get() returned more than one Product -- it returned 7!
+ERROR 2024-03-05 09:14:44,360 log 7992 12432 Internal Server Error: /demo/api/products/11/user
+ERROR 2024-03-05 09:14:44,361 basehttp 7992 12432 "GET /demo/api/products/11/user HTTP/1.1" 500 23
+INFO 2024-03-05 09:15:01,097 autoreload 2948 4500 Watching for file changes with StatReloader
+ERROR 2024-03-05 09:15:05,537 views 2948 7952 An error occurred while processing the request: get() returned more than one Product -- it returned 7!
+ERROR 2024-03-05 09:15:05,538 log 2948 7952 Internal Server Error: /demo/api/products/11/user
+ERROR 2024-03-05 09:15:05,538 basehttp 2948 7952 "GET /demo/api/products/11/user HTTP/1.1" 500 23
+INFO 2024-03-05 09:15:39,100 autoreload 2948 4500 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:15:40,275 autoreload 9792 10604 Watching for file changes with StatReloader
+ERROR 2024-03-05 09:16:57,433 views 9792 2192 An error occurred while processing the request: get() returned more than one Product -- it returned 7!
+ERROR 2024-03-05 09:16:57,434 log 9792 2192 Internal Server Error: /demo/api/products/11/user
+ERROR 2024-03-05 09:16:57,434 basehttp 9792 2192 "GET /demo/api/products/11/user HTTP/1.1" 500 23
+INFO 2024-03-05 09:18:32,732 autoreload 9792 10604 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:18:33,686 autoreload 2964 13076 Watching for file changes with StatReloader
+INFO 2024-03-05 09:18:37,896 basehttp 2964 3800 "GET /demo/api/products/11/user HTTP/1.1" 200 2512
+INFO 2024-03-05 09:39:45,151 autoreload 2964 13076 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:39:46,735 autoreload 10936 13064 Watching for file changes with StatReloader
+ERROR 2024-03-05 09:43:28,223 log 10936 3352 Internal Server Error: /demo/api/review/4
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/demo/api/review/4/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2024-03-05 09:43:28,225 basehttp 10936 3352 "POST /demo/api/review/4 HTTP/1.1" 500 75336
+WARNING 2024-03-05 09:43:31,419 log 10936 8332 Unauthorized: /demo/api/review/4/
+WARNING 2024-03-05 09:43:31,420 basehttp 10936 8332 "POST /demo/api/review/4/ HTTP/1.1" 401 183
+INFO 2024-03-05 09:43:41,542 basehttp 10936 8332 "POST /auth/sign-in/ HTTP/1.1" 200 486
+ERROR 2024-03-05 09:44:03,068 views 10936 8332 An error occurred while processing the request: 'OrderDetails' object has no attribute 'order'
+ERROR 2024-03-05 09:44:03,068 log 10936 8332 Internal Server Error: /demo/api/review/4/
+ERROR 2024-03-05 09:44:03,069 basehttp 10936 8332 "POST /demo/api/review/4/ HTTP/1.1" 500 23
+ERROR 2024-03-05 09:45:59,103 views 10936 8332 An error occurred while processing the request: 'OrderDetails' object has no attribute 'order'
+ERROR 2024-03-05 09:45:59,103 log 10936 8332 Internal Server Error: /demo/api/review/4/
+ERROR 2024-03-05 09:45:59,103 basehttp 10936 8332 "POST /demo/api/review/4/ HTTP/1.1" 500 23
+INFO 2024-03-05 09:48:41,803 autoreload 10936 13064 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:48:43,079 autoreload 11804 9652 Watching for file changes with StatReloader
+ERROR 2024-03-05 09:48:43,958 views 11804 6740 An error occurred while processing the request: Order matching query does not exist.
+ERROR 2024-03-05 09:48:43,959 log 11804 6740 Internal Server Error: /demo/api/review/4/
+ERROR 2024-03-05 09:48:43,959 basehttp 11804 6740 "POST /demo/api/review/4/ HTTP/1.1" 500 23
+INFO 2024-03-05 09:49:18,485 autoreload 11804 9652 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:49:19,632 autoreload 10136 8100 Watching for file changes with StatReloader
+ERROR 2024-03-05 09:49:23,792 views 10136 8040 An error occurred while processing the request: The QuerySet value for an exact lookup must be limited to one result using slicing.
+ERROR 2024-03-05 09:49:23,793 log 10136 8040 Internal Server Error: /demo/api/review/4/
+ERROR 2024-03-05 09:49:23,794 basehttp 10136 8040 "POST /demo/api/review/4/ HTTP/1.1" 500 23
+INFO 2024-03-05 09:50:01,784 autoreload 10136 8100 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:50:02,910 autoreload 8180 3244 Watching for file changes with StatReloader
+WARNING 2024-03-05 09:50:03,895 log 8180 1964 Unauthorized: /demo/api/review/4/
+WARNING 2024-03-05 09:50:03,896 basehttp 8180 1964 "POST /demo/api/review/4/ HTTP/1.1" 401 69
+INFO 2024-03-05 09:51:19,651 autoreload 8180 3244 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:51:20,701 autoreload 7932 7508 Watching for file changes with StatReloader
+INFO 2024-03-05 09:53:00,113 autoreload 7932 7508 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:53:01,073 autoreload 9784 3684 Watching for file changes with StatReloader
+WARNING 2024-03-05 09:53:03,090 log 9784 8100 Unauthorized: /demo/api/review/4/
+WARNING 2024-03-05 09:53:03,091 basehttp 9784 8100 "POST /demo/api/review/4/ HTTP/1.1" 401 45
+WARNING 2024-03-05 09:53:23,398 log 9784 8100 Unauthorized: /demo/api/orders/
+WARNING 2024-03-05 09:53:23,398 basehttp 9784 8100 "GET /demo/api/orders/ HTTP/1.1" 401 183
+INFO 2024-03-05 09:53:39,576 basehttp 9784 8100 "POST /auth/sign-in/ HTTP/1.1" 200 486
+WARNING 2024-03-05 09:54:19,335 log 9784 8100 Not Found: /demo/api/orders/
+WARNING 2024-03-05 09:54:19,336 basehttp 9784 8100 "GET /demo/api/orders/ HTTP/1.1" 404 25
+INFO 2024-03-05 09:54:27,284 views 9784 8100 User with ID 24 placed a new order with ID 6.
+INFO 2024-03-05 09:54:27,292 basehttp 9784 8100 "POST /demo/api/orders/ HTTP/1.1" 200 4
+INFO 2024-03-05 09:54:55,852 basehttp 9784 8100 "GET /demo/api/address/ HTTP/1.1" 200 2
+INFO 2024-03-05 09:56:32,354 autoreload 9784 3684 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:56:33,366 autoreload 5940 12704 Watching for file changes with StatReloader
+INFO 2024-03-05 09:57:31,462 autoreload 5940 12704 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:57:32,549 autoreload 8608 4232 Watching for file changes with StatReloader
+INFO 2024-03-05 09:59:05,640 autoreload 8608 4232 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 09:59:06,797 autoreload 12184 5524 Watching for file changes with StatReloader
+INFO 2024-03-05 10:02:42,168 autoreload 12184 5524 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 10:02:43,216 autoreload 6180 8480 Watching for file changes with StatReloader
+WARNING 2024-03-05 10:03:55,273 log 6180 13056 Unauthorized: /demo/api/orders/
+WARNING 2024-03-05 10:03:55,273 basehttp 6180 13056 "POST /demo/api/orders/ HTTP/1.1" 401 58
+ERROR 2024-03-05 10:04:00,990 log 6180 13056 Internal Server Error: /demo/api/orders/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2117, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'Address'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 607, in post
+    address = Address.objects.get(id=address_instance, user=user_profile)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1389, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\lookups.py", line 30, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\lookups.py", line 364, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\lookups.py", line 88, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 2119, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <Address: ַאנאפרמם>.
+ERROR 2024-03-05 10:04:00,998 basehttp 6180 13056 "POST /demo/api/orders/ HTTP/1.1" 500 173291
+INFO 2024-03-05 10:04:31,571 autoreload 6180 8480 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 10:04:32,587 autoreload 7264 11628 Watching for file changes with StatReloader
+ERROR 2024-03-05 10:04:33,735 views 7264 7580 Address with ID 7 not found.
+WARNING 2024-03-05 10:04:33,736 log 7264 7580 Not Found: /demo/api/orders/
+WARNING 2024-03-05 10:04:33,736 basehttp 7264 7580 "POST /demo/api/orders/ HTTP/1.1" 404 30
+INFO 2024-03-05 10:05:06,156 autoreload 7264 11628 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 10:05:07,935 autoreload 8436 6284 Watching for file changes with StatReloader
+ERROR 2024-03-05 10:05:09,432 views 8436 11656 Address with ID 2 not found.
+WARNING 2024-03-05 10:05:09,434 log 8436 11656 Not Found: /demo/api/orders/
+WARNING 2024-03-05 10:05:09,434 basehttp 8436 11656 "POST /demo/api/orders/ HTTP/1.1" 404 30
+ERROR 2024-03-05 10:05:26,842 views 8436 11656 Address with ID 2 not found.
+WARNING 2024-03-05 10:05:26,843 log 8436 11656 Not Found: /demo/api/orders/
+WARNING 2024-03-05 10:05:26,843 basehttp 8436 11656 "POST /demo/api/orders/ HTTP/1.1" 404 30
+ERROR 2024-03-05 10:05:32,481 views 8436 11656 Invalid data received while creating a new order: {'product': [ErrorDetail(string='Invalid pk "0" - object does not exist.', code='does_not_exist')]}
+WARNING 2024-03-05 10:05:32,481 log 8436 11656 Unauthorized: /demo/api/orders/
+WARNING 2024-03-05 10:05:32,482 basehttp 8436 11656 "POST /demo/api/orders/ HTTP/1.1" 401 57
+INFO 2024-03-05 10:06:19,537 autoreload 8436 6284 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 10:06:20,690 autoreload 5204 1104 Watching for file changes with StatReloader
+WARNING 2024-03-05 10:59:00,056 log 5204 13084 Unauthorized: /demo/api/address/
+WARNING 2024-03-05 10:59:00,056 basehttp 5204 13084 "GET /demo/api/address/ HTTP/1.1" 401 183
+INFO 2024-03-05 10:59:07,696 basehttp 5204 13084 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-03-05 10:59:24,524 views 5204 13084 New address created with ID 5 for user 24.
+INFO 2024-03-05 10:59:24,524 basehttp 5204 13084 "POST /demo/api/address/ HTTP/1.1" 200 71
+WARNING 2024-03-05 10:59:46,792 log 5204 13084 Unauthorized: /demo/api/orders/
+WARNING 2024-03-05 10:59:46,793 basehttp 5204 13084 "POST /demo/api/orders/ HTTP/1.1" 401 183
+INFO 2024-03-05 10:59:52,944 views 5204 13084 User with ID 24 placed a new order with ID 7.
+INFO 2024-03-05 10:59:52,947 basehttp 5204 13084 "POST /demo/api/orders/ HTTP/1.1" 200 4
+INFO 2024-03-05 10:59:56,553 views 5204 13084 User with ID 24 retrieved their orders.
+INFO 2024-03-05 10:59:56,579 basehttp 5204 13084 "GET /demo/api/orders/ HTTP/1.1" 200 1129
+INFO 2024-03-05 11:16:54,417 autoreload 5204 1104 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 11:16:56,574 autoreload 6076 8812 Watching for file changes with StatReloader
+INFO 2024-03-05 11:19:28,366 autoreload 6076 8812 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 11:19:29,306 autoreload 128 7412 Watching for file changes with StatReloader
+WARNING 2024-03-05 11:19:38,813 log 128 4476 Unauthorized: /demo/api/pay_order/5/
+WARNING 2024-03-05 11:19:38,814 basehttp 128 4476 "POST /demo/api/pay_order/5/ HTTP/1.1" 401 183
+INFO 2024-03-05 11:19:45,401 basehttp 128 4476 "POST /auth/sign-in/ HTTP/1.1" 200 486
+WARNING 2024-03-05 11:19:57,901 log 128 4476 Not Found: /demo/api/pay_order/5/
+WARNING 2024-03-05 11:19:57,902 basehttp 128 4476 "POST /demo/api/pay_order/5/ HTTP/1.1" 404 23
+WARNING 2024-03-05 11:20:39,150 log 128 4476 Not Found: /demo/api/pay_order/5/
+WARNING 2024-03-05 11:20:39,150 basehttp 128 4476 "POST /demo/api/pay_order/5/ HTTP/1.1" 404 23
+WARNING 2024-03-05 11:20:40,399 log 128 4476 Not Found: /demo/api/pay_order/5/
+WARNING 2024-03-05 11:20:40,399 basehttp 128 4476 "POST /demo/api/pay_order/5/ HTTP/1.1" 404 23
+INFO 2024-03-05 11:22:01,189 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:22:01,206 views 128 4476 Failed to process payment. Account not found for account number 291847.
+WARNING 2024-03-05 11:22:01,206 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:22:01,206 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 73
+WARNING 2024-03-05 11:22:05,135 log 128 4476 Not Found: /demo/api/pay_order/8/
+WARNING 2024-03-05 11:22:05,136 basehttp 128 4476 "POST /demo/api/pay_order/8/ HTTP/1.1" 404 23
+INFO 2024-03-05 11:22:08,503 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:22:08,512 views 128 4476 Failed to process payment. Account not found for account number 291847.
+WARNING 2024-03-05 11:22:08,514 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:22:08,514 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 73
+INFO 2024-03-05 11:23:08,683 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:23:08,691 views 128 4476 Failed to process payment. Account not found for account number 291847.
+WARNING 2024-03-05 11:23:08,692 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:23:08,692 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 73
+INFO 2024-03-05 11:23:09,392 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:23:09,400 views 128 4476 Failed to process payment. Account not found for account number 291847.
+WARNING 2024-03-05 11:23:09,401 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:23:09,401 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 73
+INFO 2024-03-05 11:23:10,020 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:23:10,028 views 128 4476 Failed to process payment. Account not found for account number 291847.
+WARNING 2024-03-05 11:23:10,029 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:23:10,029 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 73
+INFO 2024-03-05 11:23:10,713 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:23:10,719 views 128 4476 Failed to process payment. Account not found for account number 291847.
+WARNING 2024-03-05 11:23:10,720 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:23:10,720 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 73
+INFO 2024-03-05 11:23:14,904 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:23:14,914 views 128 4476 Failed to process payment. Account not found for account number 12.
+WARNING 2024-03-05 11:23:14,914 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:23:14,914 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 69
+INFO 2024-03-05 11:23:16,005 views 128 4476 Attempting to process payment for order with ID 7.
+WARNING 2024-03-05 11:23:16,014 views 128 4476 Failed to process payment. Account not found for account number 12.
+WARNING 2024-03-05 11:23:16,015 log 128 4476 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:23:16,015 basehttp 128 4476 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 69
+INFO 2024-03-05 11:24:24,375 autoreload 128 7412 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 11:24:25,401 autoreload 6740 11684 Watching for file changes with StatReloader
+INFO 2024-03-05 11:24:35,666 views 6740 10764 User with ID 24 retrieved their accounts.
+INFO 2024-03-05 11:24:35,679 basehttp 6740 10764 "GET /demo/api/account/ HTTP/1.1" 200 2
+INFO 2024-03-05 11:24:52,709 views 6740 10764 New account created with ID 12 for user 24.
+INFO 2024-03-05 11:24:52,709 basehttp 6740 10764 "POST /demo/api/account/ HTTP/1.1" 200 4
+INFO 2024-03-05 11:24:56,067 views 6740 10764 User with ID 24 retrieved their accounts.
+INFO 2024-03-05 11:24:56,072 basehttp 6740 10764 "GET /demo/api/account/ HTTP/1.1" 200 81
+ERROR 2024-03-05 11:25:12,343 log 6740 10764 Internal Server Error: /demo/api/pay_order/7/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 450, in post
+    order = self.get_order(_id)
+            ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 427, in get_order
+    user_id = get_user_id_from_token(request)
+                                     ^^^^^^^
+NameError: name 'request' is not defined. Did you mean: 'self.request'?
+ERROR 2024-03-05 11:25:12,346 basehttp 6740 10764 "POST /demo/api/pay_order/7/ HTTP/1.1" 500 105934
+INFO 2024-03-05 11:25:26,648 autoreload 6740 11684 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 11:25:28,077 autoreload 7656 12028 Watching for file changes with StatReloader
+ERROR 2024-03-05 11:25:30,039 log 7656 6668 Internal Server Error: /demo/api/pay_order/7/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 450, in post
+    order = self.get_order(_id)
+            ^^^^^^^^^^^^^^^^^^^
+TypeError: OrderPay.get_order() missing 1 required positional argument: 'request'
+ERROR 2024-03-05 11:25:30,042 basehttp 7656 6668 "POST /demo/api/pay_order/7/ HTTP/1.1" 500 102227
+INFO 2024-03-05 11:25:49,899 autoreload 7656 12028 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 11:25:50,955 autoreload 7788 13096 Watching for file changes with StatReloader
+INFO 2024-03-05 11:25:52,321 views 7788 10084 Attempting to process payment for order with ID 7.
+INFO 2024-03-05 11:25:52,364 views 7788 10084 Payment processed successfully for order with ID 7.
+INFO 2024-03-05 11:25:52,377 basehttp 7788 10084 "POST /demo/api/pay_order/7/ HTTP/1.1" 200 311
+INFO 2024-03-05 11:26:15,616 views 7788 10084 User with ID 24 retrieved their accounts.
+INFO 2024-03-05 11:26:15,620 basehttp 7788 10084 "GET /demo/api/account/ HTTP/1.1" 200 81
+WARNING 2024-03-05 11:29:02,275 log 7788 10084 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:29:02,275 basehttp 7788 10084 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 23
+INFO 2024-03-05 11:32:00,157 autoreload 7788 13096 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 11:32:01,215 autoreload 8196 8988 Watching for file changes with StatReloader
+WARNING 2024-03-05 11:32:03,241 log 8196 9512 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:32:03,242 basehttp 8196 9512 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 23
+WARNING 2024-03-05 11:32:05,332 log 8196 9512 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:32:05,333 basehttp 8196 9512 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 23
+INFO 2024-03-05 11:32:38,946 autoreload 8196 8988 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 11:32:40,176 autoreload 1168 1124 Watching for file changes with StatReloader
+WARNING 2024-03-05 11:32:41,525 views 1168 7684 Failed to process payment. Order with ID 7 not found.
+WARNING 2024-03-05 11:32:41,526 log 1168 7684 Not Found: /demo/api/pay_order/7/
+WARNING 2024-03-05 11:32:41,527 basehttp 1168 7684 "POST /demo/api/pay_order/7/ HTTP/1.1" 404 18
+WARNING 2024-03-05 11:32:51,904 views 1168 7684 Failed to process payment. Order with ID 8 not found.
+WARNING 2024-03-05 11:32:51,904 log 1168 7684 Not Found: /demo/api/pay_order/8/
+WARNING 2024-03-05 11:32:51,905 basehttp 1168 7684 "POST /demo/api/pay_order/8/ HTTP/1.1" 404 18
+WARNING 2024-03-05 11:32:57,421 views 1168 7684 Failed to process payment. Order with ID 9 not found.
+WARNING 2024-03-05 11:32:57,422 log 1168 7684 Not Found: /demo/api/pay_order/9/
+WARNING 2024-03-05 11:32:57,422 basehttp 1168 7684 "POST /demo/api/pay_order/9/ HTTP/1.1" 404 18
+WARNING 2024-03-05 11:32:59,780 views 1168 7684 Failed to process payment. Order with ID 10 not found.
+WARNING 2024-03-05 11:32:59,781 log 1168 7684 Not Found: /demo/api/pay_order/10/
+WARNING 2024-03-05 11:32:59,781 basehttp 1168 7684 "POST /demo/api/pay_order/10/ HTTP/1.1" 404 18
+WARNING 2024-03-05 11:33:01,837 views 1168 7684 Failed to process payment. Order with ID 11 not found.
+WARNING 2024-03-05 11:33:01,837 log 1168 7684 Not Found: /demo/api/pay_order/11/
+WARNING 2024-03-05 11:33:01,838 basehttp 1168 7684 "POST /demo/api/pay_order/11/ HTTP/1.1" 404 18

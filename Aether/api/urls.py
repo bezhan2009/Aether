@@ -8,6 +8,7 @@ urlpatterns = [
     path('ping/', ping, name='ping'),
     path('products/', ProductList.as_view(), name='products'),
     path('products/<int:_id>/', views.ProductDetail.as_view(), name='product_detail'),
+    path('products/<int:user_id>/user', views.ProductUser.as_view(), name='product_user'),
 
     path('orders/', views.OrderList.as_view(), name='orders'),
     path('orders/<int:_id>/', views.OrderDetail.as_view(), name='order_detail'),
