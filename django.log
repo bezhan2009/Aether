@@ -8213,3 +8213,1225 @@ WARNING 2024-03-05 11:32:59,781 basehttp 1168 7684 "POST /demo/api/pay_order/10/
 WARNING 2024-03-05 11:33:01,837 views 1168 7684 Failed to process payment. Order with ID 11 not found.
 WARNING 2024-03-05 11:33:01,837 log 1168 7684 Not Found: /demo/api/pay_order/11/
 WARNING 2024-03-05 11:33:01,838 basehttp 1168 7684 "POST /demo/api/pay_order/11/ HTTP/1.1" 404 18
+INFO 2024-03-05 11:54:59,259 autoreload 3648 12260 Watching for file changes with StatReloader
+WARNING 2024-03-05 11:55:00,976 views 3648 11064 Failed to get user profile. User profile not found.
+WARNING 2024-03-05 11:55:00,977 log 3648 11064 Not Found: /demo/api/products/1/user
+WARNING 2024-03-05 11:55:00,977 basehttp 3648 11064 "GET /demo/api/products/1/user HTTP/1.1" 404 24
+INFO 2024-03-05 11:55:50,747 basehttp 3648 11064 "GET /demo/api/products/1/ HTTP/1.1" 200 432
+WARNING 2024-03-05 11:57:02,752 log 3648 11064 Unauthorized: /demo/api/orders/1/
+WARNING 2024-03-05 11:57:02,752 basehttp 3648 11064 "GET /demo/api/orders/1/ HTTP/1.1" 401 58
+WARNING 2024-03-05 11:57:13,157 log 3648 11064 Method Not Allowed: /demo/api/orders/1/
+WARNING 2024-03-05 11:57:13,158 basehttp 3648 11064 "GET /demo/api/orders/1/ HTTP/1.1" 405 40
+WARNING 2024-03-05 13:16:17,283 log 3648 11064 Not Found: /demo/api/comment/
+WARNING 2024-03-05 13:16:17,283 basehttp 3648 11064 "GET /demo/api/comment/ HTTP/1.1" 404 8221
+INFO 2024-03-05 13:16:23,357 basehttp 3648 11064 "GET /demo/api/comment/4/ HTTP/1.1" 200 2
+INFO 2024-03-05 13:17:38,674 autoreload 3648 12260 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-03-05 13:17:39,525 autoreload 6212 5952 Watching for file changes with StatReloader
+WARNING 2024-03-05 13:17:49,252 log 6212 11420 Unauthorized: /demo/api/account/1/
+WARNING 2024-03-05 13:17:49,252 basehttp 6212 11420 "GET /demo/api/account/1/ HTTP/1.1" 401 58
+INFO 2024-03-05 13:19:06,729 autoreload 6212 5952 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-03-05 13:19:07,881 autoreload 3724 6224 Watching for file changes with StatReloader
+WARNING 2024-03-05 13:28:03,940 log 3724 12648 Not Found: /demo/api/address/1/
+WARNING 2024-03-05 13:28:03,940 basehttp 3724 12648 "GET /demo/api/address/1/ HTTP/1.1" 404 8227
+INFO 2024-03-05 13:28:37,556 autoreload 3724 6224 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-03-05 13:28:38,425 autoreload 13148 9380 Watching for file changes with StatReloader
+INFO 2024-03-05 13:28:42,432 autoreload 13148 9380 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-03-05 13:28:43,296 autoreload 7420 7880 Watching for file changes with StatReloader
+WARNING 2024-03-05 13:28:45,484 log 7420 920 Unauthorized: /demo/api/address/1/
+WARNING 2024-03-05 13:28:45,485 basehttp 7420 920 "GET /demo/api/address/1/ HTTP/1.1" 401 58
+WARNING 2024-03-05 13:36:52,175 log 7420 920 Unauthorized: /demo/api/review/4/detail/
+WARNING 2024-03-05 13:36:52,176 basehttp 7420 920 "GET /demo/api/review/4/detail/ HTTP/1.1" 401 58
+INFO 2024-03-05 13:37:13,043 autoreload 7420 7880 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 13:37:14,761 autoreload 9476 9044 Watching for file changes with StatReloader
+WARNING 2024-03-05 13:37:17,920 views 9476 5204 Failed to get review with ID 4. User profile not found.
+WARNING 2024-03-05 13:37:17,921 log 9476 5204 Not Found: /demo/api/review/4/detail/
+WARNING 2024-03-05 13:37:17,921 basehttp 9476 5204 "GET /demo/api/review/4/detail/ HTTP/1.1" 404 24
+INFO 2024-03-05 13:38:08,955 autoreload 9476 9044 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 13:38:09,956 autoreload 12072 4560 Watching for file changes with StatReloader
+INFO 2024-03-05 13:38:11,351 basehttp 12072 3540 "GET /demo/api/review/4/detail/ HTTP/1.1" 200 138
+INFO 2024-03-05 13:40:13,630 autoreload 12072 4560 C:\Users\Admin\Projects\AetherEShop\Aether\api\urls.py changed, reloading.
+INFO 2024-03-05 13:40:14,634 autoreload 9680 11220 Watching for file changes with StatReloader
+WARNING 2024-03-05 13:45:34,109 views 9680 7136 Failed to get user profile. User profile not found.
+WARNING 2024-03-05 13:45:34,109 log 9680 7136 Not Found: /demo/api/products/1/user/
+WARNING 2024-03-05 13:45:34,110 basehttp 9680 7136 "GET /demo/api/products/1/user/ HTTP/1.1" 404 24
+WARNING 2024-03-05 15:11:59,836 views 9680 7136 Failed to get user profile. User profile not found.
+WARNING 2024-03-05 15:11:59,837 log 9680 7136 Not Found: /demo/api/products/1/user/
+WARNING 2024-03-05 15:11:59,837 basehttp 9680 7136 "GET /demo/api/products/1/user/ HTTP/1.1" 404 24
+INFO 2024-03-05 16:18:17,962 autoreload 9680 11220 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 16:18:20,147 autoreload 8320 10792 Watching for file changes with StatReloader
+INFO 2024-03-05 16:30:13,764 basehttp 8320 7220 "GET /demo/api/products/ HTTP/1.1" 200 113536
+WARNING 2024-03-05 16:33:18,381 log 8320 7220 Unauthorized: /auth/sign-in/
+WARNING 2024-03-05 16:33:18,382 basehttp 8320 7220 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-03-05 16:33:38,215 log 8320 7220 Unauthorized: /auth/sign-in/
+WARNING 2024-03-05 16:33:38,216 basehttp 8320 7220 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-03-05 16:33:50,494 log 8320 7220 Unauthorized: /auth/sign-in/
+WARNING 2024-03-05 16:33:50,495 basehttp 8320 7220 "POST /auth/sign-in/ HTTP/1.1" 401 63
+INFO 2024-03-05 16:34:18,271 basehttp 8320 7220 "POST /auth/sign-in/ HTTP/1.1" 200 486
+ERROR 2024-03-05 16:34:52,705 log 8320 7220 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 139, in decode
+    return jwt.decode(
+           ^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 210, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 162, in decode_complete
+    self._validate_claims(
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 248, in _validate_claims
+    self._validate_exp(payload, now, leeway)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 306, in _validate_exp
+    raise ExpiredSignatureError("Signature has expired")
+jwt.exceptions.ExpiredSignatureError: Signature has expired
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 56, in __init__
+    self.payload = token_backend.decode(token, verify=verify)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 154, in decode
+    raise TokenBackendError(_("Token is invalid or expired")) from ex
+rest_framework_simplejwt.exceptions.TokenBackendError: Token is invalid or expired
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 161, in get
+    user_id = get_user_id_from_token(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 52, in get_user_id_from_token
+    access_token = AccessToken(authorization_header.split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 58, in __init__
+    raise TokenError(_("Token is invalid or expired"))
+rest_framework_simplejwt.exceptions.TokenError: Token is invalid or expired
+ERROR 2024-03-05 16:34:52,708 basehttp 8320 7220 "GET /demo/api/products/?search=PC HTTP/1.1" 500 142344
+INFO 2024-03-05 16:35:06,434 basehttp 8320 7220 "GET /demo/api/products/?search=PC HTTP/1.1" 200 1734
+INFO 2024-03-05 16:35:33,610 autoreload 8320 10792 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 16:35:34,545 autoreload 9000 13388 Watching for file changes with StatReloader
+ERROR 2024-03-05 16:35:40,725 log 9000 11556 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 139, in decode
+    return jwt.decode(
+           ^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 210, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 162, in decode_complete
+    self._validate_claims(
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 248, in _validate_claims
+    self._validate_exp(payload, now, leeway)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 306, in _validate_exp
+    raise ExpiredSignatureError("Signature has expired")
+jwt.exceptions.ExpiredSignatureError: Signature has expired
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 56, in __init__
+    self.payload = token_backend.decode(token, verify=verify)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 154, in decode
+    raise TokenBackendError(_("Token is invalid or expired")) from ex
+rest_framework_simplejwt.exceptions.TokenBackendError: Token is invalid or expired
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 160, in get
+    user_id = get_user_id_from_token(request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 52, in get_user_id_from_token
+    access_token = AccessToken(authorization_header.split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 58, in __init__
+    raise TokenError(_("Token is invalid or expired"))
+rest_framework_simplejwt.exceptions.TokenError: Token is invalid or expired
+ERROR 2024-03-05 16:35:40,729 basehttp 9000 11556 "GET /demo/api/products/?search=PC HTTP/1.1" 500 142355
+INFO 2024-03-05 16:37:07,586 basehttp 9000 11556 "GET /demo/api/products/?search=PC HTTP/1.1" 200 1734
+INFO 2024-03-05 16:37:16,728 basehttp 9000 11556 "GET /demo/api/products/?search=PCddd HTTP/1.1" 200 2
+INFO 2024-03-05 16:37:20,554 basehttp 9000 11556 "GET /demo/api/products/?search= HTTP/1.1" 200 113536
+INFO 2024-03-05 16:37:33,216 basehttp 9000 11556 "GET /demo/api/products/?search=Good%20PC%20for%20gamings%20with%20processor%20core%20i9 HTTP/1.1" 200 434
+INFO 2024-03-05 16:54:20,893 basehttp 9000 11556 "GET /demo/api/products/ HTTP/1.1" 200 113536
+INFO 2024-03-05 16:54:27,249 basehttp 9000 11556 "GET /demo/api/products/ HTTP/1.1" 200 113536
+INFO 2024-03-05 16:54:39,331 basehttp 9000 11556 "GET /demo/api/products/?search=Good%20PC%20for%20gamings%20with%20processor%20core%20i9 HTTP/1.1" 200 434
+INFO 2024-03-05 16:54:47,587 basehttp 9000 11556 "GET /demo/api/products/?search=Good%20PC HTTP/1.1" 200 1734
+INFO 2024-03-05 16:54:53,345 basehttp 9000 11556 "GET /demo/api/products/?search=%D0%97%D0%A1 HTTP/1.1" 200 2
+INFO 2024-03-05 16:54:56,680 basehttp 9000 11556 "GET /demo/api/products/?search=PC HTTP/1.1" 200 1734
+INFO 2024-03-05 16:54:58,973 basehttp 9000 11556 "GET /demo/api/products/?search=Pc HTTP/1.1" 200 1734
+INFO 2024-03-05 16:55:45,469 autoreload 9000 13388 C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py changed, reloading.
+INFO 2024-03-05 16:55:46,922 autoreload 1744 2960 Watching for file changes with StatReloader
+INFO 2024-03-05 16:55:52,732 basehttp 1744 13152 "GET /demo/api/products/?search=Pc HTTP/1.1" 200 1734
+ERROR 2024-03-05 16:58:48,232 log 1744 13152 Internal Server Error: /demo/api/products/7/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 139, in decode
+    return jwt.decode(
+           ^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 210, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 162, in decode_complete
+    self._validate_claims(
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 248, in _validate_claims
+    self._validate_exp(payload, now, leeway)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 306, in _validate_exp
+    raise ExpiredSignatureError("Signature has expired")
+jwt.exceptions.ExpiredSignatureError: Signature has expired
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 56, in __init__
+    self.payload = token_backend.decode(token, verify=verify)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 154, in decode
+    raise TokenBackendError(_("Token is invalid or expired")) from ex
+rest_framework_simplejwt.exceptions.TokenBackendError: Token is invalid or expired
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 76, in get
+    product = self.get_object(_id)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 67, in get_object
+    user_id = get_user_id_from_token(self.request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 52, in get_user_id_from_token
+    access_token = AccessToken(authorization_header.split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 58, in __init__
+    raise TokenError(_("Token is invalid or expired"))
+rest_framework_simplejwt.exceptions.TokenError: Token is invalid or expired
+ERROR 2024-03-05 16:58:48,236 basehttp 1744 13152 "GET /demo/api/products/7/ HTTP/1.1" 500 149238
+INFO 2024-03-05 16:58:53,096 basehttp 1744 13152 "GET /demo/api/products/7/ HTTP/1.1" 200 260
+INFO 2024-03-05 16:58:56,079 basehttp 1744 13152 "GET /demo/api/products/7/ HTTP/1.1" 200 260
+INFO 2024-03-05 16:58:57,857 basehttp 1744 13152 "GET /demo/api/products/7/ HTTP/1.1" 200 260
+INFO 2024-03-05 16:59:03,466 basehttp 1744 13152 "GET /demo/api/products/7/ HTTP/1.1" 200 260
+WARNING 2024-03-05 17:00:11,411 views 1744 13152 Failed to get user profile. User profile not found.
+WARNING 2024-03-05 17:00:11,411 log 1744 13152 Not Found: /demo/api/products/1/user/
+WARNING 2024-03-05 17:00:11,412 basehttp 1744 13152 "GET /demo/api/products/1/user/ HTTP/1.1" 404 24
+INFO 2024-03-05 17:00:22,112 basehttp 1744 13152 "GET /demo/api/products/11/user/ HTTP/1.1" 200 2512
+WARNING 2024-03-05 17:00:31,488 log 1744 13152 Not Found: /demo/api/products/12/user/
+WARNING 2024-03-05 17:00:31,488 basehttp 1744 13152 "GET /demo/api/products/12/user/ HTTP/1.1" 404 43
+WARNING 2024-03-05 17:00:33,604 log 1744 13152 Not Found: /demo/api/products/13/user/
+WARNING 2024-03-05 17:00:33,604 basehttp 1744 13152 "GET /demo/api/products/13/user/ HTTP/1.1" 404 43
+WARNING 2024-03-05 17:00:35,059 log 1744 13152 Not Found: /demo/api/products/14/user/
+WARNING 2024-03-05 17:00:35,059 basehttp 1744 13152 "GET /demo/api/products/14/user/ HTTP/1.1" 404 43
+WARNING 2024-03-05 17:00:38,106 views 1744 13152 Failed to get user profile. User profile not found.
+WARNING 2024-03-05 17:00:38,107 log 1744 13152 Not Found: /demo/api/products/8/user/
+WARNING 2024-03-05 17:00:38,107 basehttp 1744 13152 "GET /demo/api/products/8/user/ HTTP/1.1" 404 24
+WARNING 2024-03-05 17:00:48,276 views 1744 13152 Failed to get user profile. User profile not found.
+WARNING 2024-03-05 17:00:48,276 log 1744 13152 Not Found: /demo/api/products/2/user/
+WARNING 2024-03-05 17:00:48,277 basehttp 1744 13152 "GET /demo/api/products/2/user/ HTTP/1.1" 404 24
+INFO 2024-03-05 17:00:50,462 basehttp 1744 13152 "GET /demo/api/products/11/user/ HTTP/1.1" 200 2512
+INFO 2024-03-05 17:01:02,614 basehttp 1744 13152 "GET /demo/api/products/ HTTP/1.1" 200 113536
+INFO 2024-03-05 17:01:09,731 basehttp 1744 13152 "GET /demo/api/products/?search=Pc HTTP/1.1" 200 1734
+INFO 2024-03-05 17:12:29,800 basehttp 1744 13152 "GET /demo/api/products/ HTTP/1.1" 200 113536
+INFO 2024-03-05 17:13:17,231 basehttp 1744 13152 "GET /demo/api/products/?search=Pc HTTP/1.1" 200 1734
+INFO 2024-03-05 17:13:36,161 basehttp 1744 13152 "GET /demo/api/products/?search=Good%20PC%20for%20gamings%20with%20processor%20core%20i9 HTTP/1.1" 200 434
+INFO 2024-03-05 17:14:53,739 basehttp 1744 13152 "POST /auth/sign-in/ HTTP/1.1" 200 486
+INFO 2024-03-05 17:18:16,193 views 1744 1304 Request data - User: testing_admin, Data: {'user': <UserProfile: testing_admin (Admin: True)>, 'category': 3, 'title': 'Car', 'description': 'Good Car', 'price': 1390, 'amount': 10, 'default_account': 0}, Cover Images: []
+ERROR 2024-03-05 17:18:16,228 views 1744 1304 Invalid data provided: {'description': [ErrorDetail(string='product with this description already exists.', code='unique')], 'default_account': [ErrorDetail(string='Invalid pk "0" - object does not exist.', code='does_not_exist')]}
+WARNING 2024-03-05 17:18:16,228 log 1744 1304 Bad Request: /demo/api/products/
+WARNING 2024-03-05 17:18:16,229 basehttp 1744 1304 "POST /demo/api/products/ HTTP/1.1" 400 129
+INFO 2024-03-05 17:18:27,499 views 1744 1304 Request data - User: testing_admin, Data: {'user': <UserProfile: testing_admin (Admin: True)>, 'category': 3, 'title': 'Car', 'description': 'Good Car', 'price': 1390, 'amount': 10, 'default_account': 6060}, Cover Images: []
+ERROR 2024-03-05 17:18:27,515 views 1744 1304 Invalid data provided: {'description': [ErrorDetail(string='product with this description already exists.', code='unique')], 'default_account': [ErrorDetail(string='Invalid pk "6060" - object does not exist.', code='does_not_exist')]}
+WARNING 2024-03-05 17:18:27,516 log 1744 1304 Bad Request: /demo/api/products/
+WARNING 2024-03-05 17:18:27,516 basehttp 1744 1304 "POST /demo/api/products/ HTTP/1.1" 400 132
+ERROR 2024-03-05 17:18:52,443 views 1744 1304 Invalid data provided: {'default_account': [ErrorDetail(string='Invalid pk "6060" - object does not exist.', code='does_not_exist')]}
+WARNING 2024-03-05 17:18:52,443 log 1744 1304 Bad Request: /demo/api/products/
+WARNING 2024-03-05 17:18:52,444 basehttp 1744 1304 "POST /demo/api/products/ HTTP/1.1" 400 68
+INFO 2024-03-05 17:19:28,722 views 1744 1304 Product created successfully. User: testing_admin, Product ID: 11, Cover Images: []
+INFO 2024-03-05 17:19:28,736 basehttp 1744 1304 "POST /demo/api/products/ HTTP/1.1" 201 148
+INFO 2024-03-05 17:30:11,476 autoreload 1744 2960 C:\Users\Admin\Projects\AetherEShop\AetherEShop\settings.py changed, reloading.
+ERROR 2024-03-06 07:54:37,498 views 10220 13484 Invalid data provided: {'category': [ErrorDetail(string='This field may not be null.', code='null')], 'title': [ErrorDetail(string='This field may not be null.', code='null')], 'description': [ErrorDetail(string='product with this description already exists.', code='unique')]}
+WARNING 2024-03-06 07:54:37,500 log 10220 13484 Bad Request: /demo/api/products/
+WARNING 2024-03-06 07:54:37,501 basehttp 10220 13484 "POST /demo/api/products/ HTTP/1.1" 400 148
+ERROR 2024-03-06 07:55:01,908 views 10220 13936 Invalid data provided: {'category': [ErrorDetail(string='This field may not be null.', code='null')], 'title': [ErrorDetail(string='This field may not be null.', code='null')], 'description': [ErrorDetail(string='This field may not be null.', code='null')], 'price': [ErrorDetail(string='This field may not be null.', code='null')], 'amount': [ErrorDetail(string='This field may not be null.', code='null')]}
+WARNING 2024-03-06 07:55:01,908 log 10220 13936 Bad Request: /demo/api/products/
+WARNING 2024-03-06 07:55:01,909 basehttp 10220 13936 "POST /demo/api/products/ HTTP/1.1" 400 211
+ERROR 2024-03-06 12:48:27,459 log 12796 8068 Internal Server Error: /demo/api/products/710/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 139, in decode
+    return jwt.decode(
+           ^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 210, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 162, in decode_complete
+    self._validate_claims(
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 248, in _validate_claims
+    self._validate_exp(payload, now, leeway)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\jwt\api_jwt.py", line 306, in _validate_exp
+    raise ExpiredSignatureError("Signature has expired")
+jwt.exceptions.ExpiredSignatureError: Signature has expired
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 56, in __init__
+    self.payload = token_backend.decode(token, verify=verify)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\backends.py", line 154, in decode
+    raise TokenBackendError(_("Token is invalid or expired")) from ex
+rest_framework_simplejwt.exceptions.TokenBackendError: Token is invalid or expired
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 75, in get
+    product = self.get_object(_id)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 66, in get_object
+    user_id = get_user_id_from_token(self.request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 51, in get_user_id_from_token
+    access_token = AccessToken(authorization_header.split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework_simplejwt\tokens.py", line 58, in __init__
+    raise TokenError(_("Token is invalid or expired"))
+rest_framework_simplejwt.exceptions.TokenError: Token is invalid or expired
+ERROR 2024-03-06 12:48:27,465 basehttp 12796 8068 "GET /demo/api/products/710/ HTTP/1.1" 500 149303
+ERROR 2024-03-06 12:48:32,839 views 12796 8068 Product with ID 710 not found.
+ERROR 2024-03-06 12:48:32,923 log 12796 8068 Internal Server Error: /demo/api/products/710/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 67, in get_object
+    user_profile = UserProfile.objects.get(id=user_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 649, in get
+    raise self.model.DoesNotExist(
+Aether.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\shortcuts.py", line 86, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 649, in get
+    raise self.model.DoesNotExist(
+Aether.models.Product.DoesNotExist: Product matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 75, in get
+    product = self.get_object(_id)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 69, in get_object
+    return get_object_or_404(Product, id=_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\shortcuts.py", line 88, in get_object_or_404
+    raise Http404(
+django.http.response.Http404: No Product matches the given query.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 78, in get
+    return JsonResponse(f"Not Found", status=404)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\http\response.py", line 726, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2024-03-06 12:48:32,926 basehttp 12796 8068 "GET /demo/api/products/710/ HTTP/1.1" 500 141925
+ERROR 2024-03-06 12:52:13,139 views 14612 14952 Product with ID 710 not found.
+WARNING 2024-03-06 12:52:13,140 log 14612 14952 Not Found: /demo/api/products/710/
+WARNING 2024-03-06 12:52:13,141 basehttp 14612 14952 "GET /demo/api/products/710/ HTTP/1.1" 404 11
+ERROR 2024-03-06 12:52:51,454 views 14932 12172 Product with ID 710 not found.
+WARNING 2024-03-06 12:52:51,455 log 14932 12172 Not Found: /demo/api/products/710/
+WARNING 2024-03-06 12:52:51,455 basehttp 14932 12172 "GET /demo/api/products/710/ HTTP/1.1" 404 23
+ERROR 2024-03-06 12:53:07,088 views 9104 12176 Product with ID 710 not found.
+WARNING 2024-03-06 12:53:07,089 log 9104 12176 Not Found: /demo/api/products/710/
+WARNING 2024-03-06 12:53:07,089 basehttp 9104 12176 "GET /demo/api/products/710/ HTTP/1.1" 404 31
+ERROR 2024-03-06 12:53:23,280 views 9104 12176 Product with ID 710 not found.
+WARNING 2024-03-06 12:53:23,280 log 9104 12176 Not Found: /demo/api/products/710/
+WARNING 2024-03-06 12:53:23,281 basehttp 9104 12176 "GET /demo/api/products/710/ HTTP/1.1" 404 31
+ERROR 2024-03-06 13:00:41,123 log 10624 13372 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 190, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-06 13:00:41,126 basehttp 10624 13372 "GET /demo/api/products/?search= HTTP/1.1" 500 102906
+ERROR 2024-03-06 13:00:53,563 log 10624 13372 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 190, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-06 13:00:53,565 basehttp 10624 13372 "GET /demo/api/products/ HTTP/1.1" 500 102482
+ERROR 2024-03-06 13:01:42,021 log 13872 4968 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 190, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-06 13:01:42,024 basehttp 13872 4968 "GET /demo/api/products/ HTTP/1.1" 500 102482
+WARNING 2024-03-06 13:10:44,599 log 3316 4284 Bad Request: /demo/api/products/
+WARNING 2024-03-06 13:10:44,600 basehttp 3316 4284 "GET /demo/api/products/?min_price=300?max_price=400 HTTP/1.1" 400 45
+ERROR 2024-03-06 13:14:52,111 log 2772 10020 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 164, in get
+    user_profile = UserProfile.objects.get(id=user_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 649, in get
+    raise self.model.DoesNotExist(
+Aether.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 206, in get
+    products = products.filter(category__icontains=categories)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1383, in build_lookup
+    lhs = self.try_transform(lhs, lookup_name)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1427, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'icontains' for ForeignKey or join on the field not permitted.
+ERROR 2024-03-06 13:14:52,115 basehttp 2772 10020 "GET /demo/api/products/?min_price=300&max_price=500&category=1 HTTP/1.1" 500 157654
+ERROR 2024-03-06 13:54:48,357 log 8036 11996 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 212, in get
+    return JsonResponse(serializer.data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\http\response.py", line 726, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2024-03-06 13:54:48,361 basehttp 8036 11996 "GET /demo/api/products/?min_price=300&max_price=500 HTTP/1.1" 500 106080
+WARNING 2024-03-06 14:10:25,122 log 10728 9648 Not Found: /demo/api/products/
+WARNING 2024-03-06 14:10:25,123 basehttp 10728 9648 "GET /demo/api/products/?category=120 HTTP/1.1" 404 32
+WARNING 2024-03-06 16:39:56,045 log 6108 1380 Not Found: /
+WARNING 2024-03-06 16:39:56,046 basehttp 6108 1380 "GET / HTTP/1.1" 404 2989
+WARNING 2024-03-06 16:39:56,402 log 6108 1380 Not Found: /favicon.ico
+WARNING 2024-03-06 16:39:56,403 basehttp 6108 1380 "GET /favicon.ico HTTP/1.1" 404 3040
+ERROR 2024-03-06 16:43:24,566 views 6108 2956 Invalid data provided: {'category': [ErrorDetail(string='Invalid pk "0" - object does not exist.', code='does_not_exist')], 'description': [ErrorDetail(string='product with this description already exists.', code='unique')]}
+WARNING 2024-03-06 16:43:24,566 log 6108 2956 Bad Request: /demo/api/products/
+WARNING 2024-03-06 16:43:24,567 basehttp 6108 2956 "POST /demo/api/products/ HTTP/1.1" 400 122
+ERROR 2024-03-06 16:49:15,740 views 13080 10364 Invalid data provided: {'description': [ErrorDetail(string='product with this description already exists.', code='unique')]}
+WARNING 2024-03-06 16:49:15,742 log 13080 10364 Bad Request: /demo/api/products/
+WARNING 2024-03-06 16:49:15,743 basehttp 13080 10364 "POST /demo/api/products/ HTTP/1.1" 400 65
+ERROR 2024-03-06 16:53:02,736 views 9336 13880 Invalid data provided: {'description': [ErrorDetail(string='product with this description already exists.', code='unique')]}
+WARNING 2024-03-06 16:53:02,738 log 9336 13880 Bad Request: /demo/api/products/
+WARNING 2024-03-06 16:53:02,738 basehttp 9336 13880 "POST /demo/api/products/ HTTP/1.1" 400 65
+WARNING 2024-03-06 16:55:31,222 views 10068 12116 Permission Denied: You are have not account please create account and replay.
+WARNING 2024-03-06 16:55:31,223 log 10068 12116 Forbidden: /demo/api/products/
+WARNING 2024-03-06 16:55:31,224 basehttp 10068 12116 "POST /demo/api/products/ HTTP/1.1" 403 82
+ERROR 2024-03-06 16:56:20,221 views 10068 11964 Failed to create a new account: {'account_number': [ErrorDetail(string='account with this account number already exists.', code='unique')]}
+WARNING 2024-03-06 16:56:20,221 log 10068 11964 Unauthorized: /demo/api/account/
+WARNING 2024-03-06 16:56:20,221 basehttp 10068 11964 "POST /demo/api/account/ HTTP/1.1" 401 71
+ERROR 2024-03-06 16:58:28,846 views 1436 3520 Invalid data provided: {'description': [ErrorDetail(string='product with this description already exists.', code='unique')]}
+WARNING 2024-03-06 16:58:28,846 log 1436 3520 Bad Request: /demo/api/products/
+WARNING 2024-03-06 16:58:28,847 basehttp 1436 3520 "POST /demo/api/products/ HTTP/1.1" 400 65
+WARNING 2024-03-06 16:59:33,925 log 1436 10584 Unauthorized: /demo/api/account/
+WARNING 2024-03-06 16:59:33,927 basehttp 1436 10584 "GET /demo/api/account/ HTTP/1.1" 401 58
+WARNING 2024-03-06 17:01:19,282 log 1436 13636 Not Found: /demo/api/orders/
+WARNING 2024-03-06 17:01:19,283 basehttp 1436 13636 "GET /demo/api/orders/ HTTP/1.1" 404 37
+WARNING 2024-03-06 17:15:02,911 views 6416 1208 Permission Denied: Admins are not allowed to create orders.
+WARNING 2024-03-06 17:15:02,913 log 6416 1208 Forbidden: /demo/api/orders/
+WARNING 2024-03-06 17:15:02,913 basehttp 6416 1208 "POST /demo/api/orders/ HTTP/1.1" 403 52
+ERROR 2024-03-06 17:15:31,547 views 6416 14920 Invalid data received while creating a new order: {'address': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-03-06 17:15:31,548 log 6416 14920 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 17:15:31,548 basehttp 6416 14920 "POST /demo/api/orders/ HTTP/1.1" 401 39
+ERROR 2024-03-06 17:15:49,192 views 6848 14952 Invalid data received while creating a new order: {'address': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-03-06 17:15:49,193 log 6848 14952 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 17:15:49,194 basehttp 6848 14952 "POST /demo/api/orders/ HTTP/1.1" 401 39
+ERROR 2024-03-06 17:18:15,966 log 10236 972 Internal Server Error: /demo/api/orders/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 636, in post
+    address_instance = serializer.validated_data['address']
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'address'
+ERROR 2024-03-06 17:18:15,970 basehttp 10236 972 "POST /demo/api/orders/ HTTP/1.1" 500 22247
+ERROR 2024-03-06 17:20:47,184 views 13560 9444 Address with ID 5 not found. Choosing another address...
+ERROR 2024-03-06 17:20:47,190 views 13560 9444 AFailed to find address for user with id 27
+WARNING 2024-03-06 17:20:47,192 log 13560 9444 Not Found: /demo/api/orders/
+WARNING 2024-03-06 17:20:47,192 basehttp 13560 9444 "POST /demo/api/orders/ HTTP/1.1" 404 113
+WARNING 2024-03-06 17:25:01,900 log 2952 13556 Unauthorized: /demo/api/address/
+WARNING 2024-03-06 17:25:01,900 basehttp 2952 13556 "POST /demo/api/address/ HTTP/1.1" 401 58
+ERROR 2024-03-06 17:25:26,635 views 2952 8620 Address with ID 5 not found. Choosing another address...
+WARNING 2024-03-06 17:25:26,637 views 2952 8620 The choice of another address was successfully
+ERROR 2024-03-06 17:25:26,637 views 2952 8620 Failed to find address for user with id 27
+WARNING 2024-03-06 17:25:26,637 log 2952 8620 Not Found: /demo/api/orders/
+WARNING 2024-03-06 17:25:26,638 basehttp 2952 8620 "POST /demo/api/orders/ HTTP/1.1" 404 113
+ERROR 2024-03-06 17:25:40,155 views 2952 11684 Address with ID 5 not found. Choosing another address...
+WARNING 2024-03-06 17:25:40,156 views 2952 11684 The choice of another address was successfully
+ERROR 2024-03-06 17:25:40,156 views 2952 11684 Failed to find address for user with id 27
+WARNING 2024-03-06 17:25:40,157 log 2952 11684 Not Found: /demo/api/orders/
+WARNING 2024-03-06 17:25:40,157 basehttp 2952 11684 "POST /demo/api/orders/ HTTP/1.1" 404 113
+WARNING 2024-03-06 17:30:48,559 log 724 3752 Unauthorized: /auth/sign-in/
+WARNING 2024-03-06 17:30:48,559 basehttp 724 3752 "POST /auth/sign-in/ HTTP/1.1" 401 63
+ERROR 2024-03-06 17:31:31,865 views 724 3752 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 17:31:31,869 views 724 3752 The choice of another address was successfully
+WARNING 2024-03-06 17:31:31,869 views 724 3752 Insufficient stock for product with ID 16.
+WARNING 2024-03-06 17:31:31,870 log 724 3752 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 17:31:31,871 basehttp 724 3752 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 17:31:44,739 views 724 3752 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 17:31:44,741 views 724 3752 The choice of another address was successfully
+ERROR 2024-03-06 18:13:39,646 views 724 11540 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:13:39,647 views 724 11540 The choice of another address was successfully
+ERROR 2024-03-06 18:14:35,360 views 2008 11892 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:14:35,362 views 2008 11892 The choice of another address was successfully
+WARNING 2024-03-06 18:16:48,471 log 2008 11892 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 18:16:48,471 basehttp 2008 11892 "POST /demo/api/orders/ HTTP/1.1" 401 183
+ERROR 2024-03-06 18:17:16,542 views 2008 11892 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:17:16,544 views 2008 11892 The choice of another address was successfully
+ERROR 2024-03-06 18:24:19,391 views 3368 11208 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:24:19,393 views 3368 11208 The choice of another address was successfully
+ERROR 2024-03-06 18:24:40,266 views 10280 9240 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:24:40,268 views 10280 9240 The choice of another address was successfully
+ERROR 2024-03-06 18:24:58,706 views 2852 1644 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:24:58,708 views 2852 1644 The choice of another address was successfully
+WARNING 2024-03-06 18:24:58,708 views 2852 1644 Insufficient stock for product with ID 16.
+WARNING 2024-03-06 18:24:58,708 log 2852 1644 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 18:24:58,709 basehttp 2852 1644 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 18:25:08,501 views 2852 1644 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:25:08,502 views 2852 1644 The choice of another address was successfully
+WARNING 2024-03-06 18:29:09,603 views 2852 5624 Failed to retrieve products for user with ID 28. Account Not Found.
+ERROR 2024-03-06 18:29:09,625 views 2852 5624 Invalid data provided: {'category': [ErrorDetail(string='Invalid pk "0" - object does not exist.', code='does_not_exist')], 'description': [ErrorDetail(string='product with this description already exists.', code='unique')]}
+WARNING 2024-03-06 18:29:09,626 log 2852 5624 Bad Request: /demo/api/products/
+WARNING 2024-03-06 18:29:09,627 basehttp 2852 5624 "POST /demo/api/products/ HTTP/1.1" 400 122
+ERROR 2024-03-06 18:30:35,727 views 2852 5624 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:30:35,729 views 2852 5624 The choice of another address was successfully
+WARNING 2024-03-06 18:30:35,729 views 2852 5624 Insufficient stock for product with ID 18.
+WARNING 2024-03-06 18:30:35,729 log 2852 5624 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 18:30:35,730 basehttp 2852 5624 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 18:30:54,260 views 2852 5624 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:30:54,262 views 2852 5624 The choice of another address was successfully
+WARNING 2024-03-06 18:30:54,262 views 2852 5624 Insufficient stock for product with ID 18.
+WARNING 2024-03-06 18:30:54,263 log 2852 5624 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 18:30:54,263 basehttp 2852 5624 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 18:31:55,280 views 2852 5624 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:31:55,282 views 2852 5624 The choice of another address was successfully
+WARNING 2024-03-06 18:31:55,282 views 2852 5624 Insufficient stock for product with ID 18.
+WARNING 2024-03-06 18:31:55,283 log 2852 5624 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 18:31:55,283 basehttp 2852 5624 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 18:32:02,741 views 2852 5624 Invalid data provided: {'description': [ErrorDetail(string='product with this description already exists.', code='unique')]}
+WARNING 2024-03-06 18:32:02,742 log 2852 5624 Bad Request: /demo/api/products/
+WARNING 2024-03-06 18:32:02,742 basehttp 2852 5624 "POST /demo/api/products/ HTTP/1.1" 400 65
+ERROR 2024-03-06 18:32:20,797 views 2852 5624 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:32:20,798 views 2852 5624 The choice of another address was successfully
+WARNING 2024-03-06 18:32:20,798 views 2852 5624 Insufficient stock for product with ID 19.
+WARNING 2024-03-06 18:32:20,799 log 2852 5624 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 18:32:20,799 basehttp 2852 5624 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 18:32:28,854 views 2852 5624 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 18:32:28,856 views 2852 5624 The choice of another address was successfully
+WARNING 2024-03-06 19:27:40,705 log 5416 13224 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 19:27:40,706 basehttp 5416 13224 "POST /demo/api/orders/ HTTP/1.1" 401 183
+ERROR 2024-03-06 19:28:22,214 views 5416 5616 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:28:22,215 views 5416 5616 The choice of another address was successfully
+ERROR 2024-03-06 19:29:02,076 log 9860 12876 Internal Server Error: /demo/api/orders/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 636, in post
+    address_instance = serializer.validated_data['address']
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'address'
+ERROR 2024-03-06 19:29:02,080 basehttp 9860 12876 "POST /demo/api/orders/ HTTP/1.1" 500 22247
+ERROR 2024-03-06 19:29:10,642 views 9600 11744 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:29:10,644 views 9600 11744 The choice of another address was successfully
+ERROR 2024-03-06 19:39:14,311 views 4492 8368 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:39:14,313 views 4492 8368 The choice of another address was successfully
+ERROR 2024-03-06 19:54:05,490 views 10944 12980 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:54:05,492 views 10944 12980 The choice of another address was successfully
+ERROR 2024-03-06 19:54:20,643 views 11672 13080 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:54:20,645 views 11672 13080 The choice of another address was successfully
+WARNING 2024-03-06 19:54:20,645 views 11672 13080 Insufficient stock for product with ID 19.
+WARNING 2024-03-06 19:54:20,645 log 11672 13080 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 19:54:20,646 basehttp 11672 13080 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 19:54:28,619 views 11672 8336 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:54:28,621 views 11672 8336 The choice of another address was successfully
+WARNING 2024-03-06 19:54:28,621 views 11672 8336 Insufficient stock for product with ID 19.
+WARNING 2024-03-06 19:54:28,621 log 11672 8336 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 19:54:28,622 basehttp 11672 8336 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 19:54:37,185 views 11672 2288 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:54:37,186 views 11672 2288 The choice of another address was successfully
+WARNING 2024-03-06 19:54:37,186 views 11672 2288 Insufficient stock for product with ID 18.
+WARNING 2024-03-06 19:54:37,187 log 11672 2288 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 19:54:37,187 basehttp 11672 2288 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 19:54:44,934 views 11672 12348 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:54:44,936 views 11672 12348 The choice of another address was successfully
+WARNING 2024-03-06 19:54:44,936 views 11672 12348 Insufficient stock for product with ID 17.
+WARNING 2024-03-06 19:54:44,937 log 11672 12348 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 19:54:44,937 basehttp 11672 12348 "POST /demo/api/orders/ HTTP/1.1" 401 56
+ERROR 2024-03-06 19:54:52,738 views 11672 12660 Address with ID 4 not found. Choosing another address...
+WARNING 2024-03-06 19:54:52,739 views 11672 12660 The choice of another address was successfully
+WARNING 2024-03-06 20:19:02,843 log 4656 7960 Unauthorized: /demo/api/orders/
+WARNING 2024-03-06 20:19:02,844 basehttp 4656 7960 "GET /demo/api/orders/ HTTP/1.1" 401 183
+WARNING 2024-03-06 20:19:42,747 views 4656 12832 Failed to process payment. Account not found for account number 1.
+WARNING 2024-03-06 20:19:42,748 log 4656 12832 Not Found: /demo/api/pay_order/9/
+WARNING 2024-03-06 20:19:42,749 basehttp 4656 12832 "POST /demo/api/pay_order/9/ HTTP/1.1" 404 53
+WARNING 2024-03-06 20:20:21,683 views 10284 2804 Failed to process payment. Insufficient funds for order with ID 9.
+WARNING 2024-03-06 20:20:21,684 log 10284 2804 Unauthorized: /demo/api/pay_order/9/
+WARNING 2024-03-06 20:20:21,684 basehttp 10284 2804 "POST /demo/api/pay_order/9/ HTTP/1.1" 401 63
+WARNING 2024-03-06 20:21:52,824 views 1364 12616 Failed to process payment. Insufficient funds for order with ID 9.
+WARNING 2024-03-06 20:21:52,825 log 1364 12616 Unauthorized: /demo/api/pay_order/9/
+WARNING 2024-03-06 20:21:52,826 basehttp 1364 12616 "POST /demo/api/pay_order/9/ HTTP/1.1" 401 63
+WARNING 2024-03-06 20:22:13,467 views 5004 11180 Failed to process payment. Insufficient funds for order with ID 9.
+WARNING 2024-03-06 20:22:13,468 log 5004 11180 Unauthorized: /demo/api/pay_order/9/
+WARNING 2024-03-06 20:22:13,468 basehttp 5004 11180 "POST /demo/api/pay_order/9/ HTTP/1.1" 401 63
+ERROR 2024-03-06 20:23:24,104 log 5004 10284 Internal Server Error: /demo/api/pay_order/9/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 528, in post
+    payment = Payment.objects.create(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 543, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 284, in __set__
+    raise ValueError(
+ValueError: Cannot assign "<QuerySet []>": "Payment.account" must be a "Account" instance.
+ERROR 2024-03-06 20:23:24,110 basehttp 5004 10284 "POST /demo/api/pay_order/9/ HTTP/1.1" 500 23128
+ERROR 2024-03-06 20:24:25,112 log 5188 3780 Internal Server Error: /demo/api/pay_order/9/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 527, in post
+    payment = Payment.objects.create(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 543, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 284, in __set__
+    raise ValueError(
+ValueError: Cannot assign "<QuerySet []>": "Payment.account" must be a "Account" instance.
+ERROR 2024-03-06 20:24:25,117 basehttp 5188 3780 "POST /demo/api/pay_order/9/ HTTP/1.1" 500 23128
+ERROR 2024-03-06 20:26:43,027 log 11672 6404 Internal Server Error: /demo/api/pay_order/9/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 528, in post
+    payment = Payment.objects.create(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 543, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 284, in __set__
+    raise ValueError(
+ValueError: Cannot assign "<QuerySet []>": "Payment.account" must be a "Account" instance.
+ERROR 2024-03-06 20:26:43,033 basehttp 11672 6404 "POST /demo/api/pay_order/9/ HTTP/1.1" 500 23128
+ERROR 2024-03-06 20:26:45,479 log 11672 6404 Internal Server Error: /demo/api/pay_order/9/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 528, in post
+    payment = Payment.objects.create(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 543, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 284, in __set__
+    raise ValueError(
+ValueError: Cannot assign "<QuerySet []>": "Payment.account" must be a "Account" instance.
+ERROR 2024-03-06 20:26:45,481 basehttp 11672 6404 "POST /demo/api/pay_order/9/ HTTP/1.1" 500 23128
+ERROR 2024-03-06 20:42:46,339 log 11296 6516 Internal Server Error: /demo/api/pay_order/9/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 81, in inner
+    return func(*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 528, in post
+    payment = Payment.objects.create(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 543, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 284, in __set__
+    raise ValueError(
+ValueError: Cannot assign "<QuerySet []>": "Payment.account" must be a "Account" instance.
+ERROR 2024-03-06 20:42:46,345 basehttp 11296 6516 "POST /demo/api/pay_order/9/ HTTP/1.1" 500 23128
+WARNING 2024-03-07 08:51:10,138 log 5760 7548 Unauthorized: /auth/sign-in/
+WARNING 2024-03-07 08:51:10,139 basehttp 5760 7548 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-03-07 08:52:06,193 views 5760 7548 Failed to retrieve user with ID 8. User profile not found.
+WARNING 2024-03-07 08:52:06,195 log 5760 7548 Not Found: /demo/api/orders/
+WARNING 2024-03-07 08:52:06,196 basehttp 5760 7548 "POST /demo/api/orders/ HTTP/1.1" 404 36
+WARNING 2024-03-07 08:52:15,162 views 5760 7548 Failed to retrieve user with ID 8. User profile not found.
+WARNING 2024-03-07 08:52:15,163 log 5760 7548 Not Found: /demo/api/orders/
+WARNING 2024-03-07 08:52:15,164 basehttp 5760 7548 "POST /demo/api/orders/ HTTP/1.1" 404 36
+ERROR 2024-03-07 08:53:01,540 views 5760 7548 Failed to create a new user: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')]}
+WARNING 2024-03-07 08:53:01,540 log 5760 7548 Bad Request: /auth/sign-up/
+WARNING 2024-03-07 08:53:01,541 basehttp 5760 7548 "POST /auth/sign-up/ HTTP/1.1" 400 58
+ERROR 2024-03-07 08:53:10,910 views 5760 7548 Failed to create a new user: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')]}
+WARNING 2024-03-07 08:53:10,911 log 5760 7548 Bad Request: /auth/sign-up/
+WARNING 2024-03-07 08:53:10,911 basehttp 5760 7548 "POST /auth/sign-up/ HTTP/1.1" 400 58
+ERROR 2024-03-07 08:53:40,328 views 5760 7548 Invalid data received while creating a new order: {'address': [ErrorDetail(string='Invalid pk "8" - object does not exist.', code='does_not_exist')]}
+WARNING 2024-03-07 08:53:40,329 log 5760 7548 Unauthorized: /demo/api/orders/
+WARNING 2024-03-07 08:53:40,329 basehttp 5760 7548 "POST /demo/api/orders/ HTTP/1.1" 401 57
+ERROR 2024-03-07 08:54:00,130 views 5760 7548 Invalid data received while creating a new order: {'address': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-03-07 08:54:00,131 log 5760 7548 Unauthorized: /demo/api/orders/
+WARNING 2024-03-07 08:54:00,131 basehttp 5760 7548 "POST /demo/api/orders/ HTTP/1.1" 401 39
+ERROR 2024-03-07 08:54:59,894 views 5760 7548 Address with ID 1 not found. Choosing another address...
+WARNING 2024-03-07 08:54:59,900 views 5760 7548 The choice of another address was successfully
+ERROR 2024-03-07 08:59:31,636 views 12696 2248 Address with ID 1 not found. Choosing another address...
+WARNING 2024-03-07 08:59:31,638 views 12696 2248 The choice of another address was successfully
+WARNING 2024-03-07 08:59:57,763 log 12696 2248 Unauthorized: /demo/api/address/
+WARNING 2024-03-07 08:59:57,764 basehttp 12696 2248 "GET /demo/api/address/ HTTP/1.1" 401 107
+ERROR 2024-03-07 09:00:45,060 views 12696 2248 Address with ID 1 not found. Choosing another address...
+ERROR 2024-03-07 09:00:45,062 views 12696 2248 Failed to find address for user with id 27
+WARNING 2024-03-07 09:00:45,063 log 12696 2248 Not Found: /demo/api/orders/
+WARNING 2024-03-07 09:00:45,063 basehttp 12696 2248 "POST /demo/api/orders/ HTTP/1.1" 404 43
+WARNING 2024-03-07 09:04:27,237 views 7232 11692 Failed to retrieve orders for user with ID 27. Cannot resolve keyword 'is_deleted' into field. Choices are: id, is_in_the_card, is_paid, order_details, order_details_id, status, status_id, user, user_id
+ERROR 2024-03-07 09:04:27,238 log 7232 11692 Internal Server Error: /demo/api/orders/
+ERROR 2024-03-07 09:04:27,239 basehttp 7232 11692 "GET /demo/api/orders/ HTTP/1.1" 500 167
+WARNING 2024-03-07 09:11:52,789 views 11480 8672 Failed to retrieve products for user with ID 27. order not found.
+WARNING 2024-03-07 09:11:52,789 log 11480 8672 Not Found: /demo/api/orders/1/
+WARNING 2024-03-07 09:11:52,790 basehttp 11480 8672 "DELETE /demo/api/orders/1/ HTTP/1.1" 404 53
+WARNING 2024-03-07 09:14:12,142 views 11480 8672 Permission Denied: Admins are not allowed to create orders.
+WARNING 2024-03-07 09:14:12,142 log 11480 8672 Forbidden: /demo/api/orders/
+WARNING 2024-03-07 09:14:12,143 basehttp 11480 8672 "POST /demo/api/orders/ HTTP/1.1" 403 52
+WARNING 2024-03-07 09:24:36,369 views 12252 9080 Failed to delete Comment. Comment with ID 83 not found.
+WARNING 2024-03-07 09:24:36,369 log 12252 9080 Not Found: /demo/api/comment/83/detail/
+WARNING 2024-03-07 09:24:36,370 basehttp 12252 9080 "DELETE /demo/api/comment/83/detail/ HTTP/1.1" 404 31
+WARNING 2024-03-07 11:13:34,813 log 7620 13116 Unauthorized: /demo/api/orders/
+WARNING 2024-03-07 11:13:34,814 basehttp 7620 13116 "GET /demo/api/orders/ HTTP/1.1" 401 183
+WARNING 2024-03-07 11:14:22,372 views 7620 13116 Failed to retrieve orders for user with ID 28. ОШИБКА:  столбец Aether_address.phone_number не существует
+LINE 1: ...ddress"."user_id", "Aether_address"."is_deleted", "Aether_ad...
+                                                             ^
+
+ERROR 2024-03-07 11:14:22,373 log 7620 13116 Internal Server Error: /demo/api/orders/
+ERROR 2024-03-07 11:14:22,374 basehttp 7620 13116 "GET /demo/api/orders/ HTTP/1.1" 500 245
+WARNING 2024-03-07 11:15:06,867 views 128 1676 Permission Denied: Admins are not allowed to create orders.
+WARNING 2024-03-07 11:15:06,868 log 128 1676 Forbidden: /demo/api/orders/
+WARNING 2024-03-07 11:15:06,868 basehttp 128 1676 "POST /demo/api/orders/ HTTP/1.1" 403 52
+WARNING 2024-03-07 11:17:02,327 views 128 1676 Failed to process payment. Insufficient funds for order with ID 16.
+WARNING 2024-03-07 11:17:02,329 log 128 1676 Unauthorized: /demo/api/pay_order/16/
+WARNING 2024-03-07 11:17:02,330 basehttp 128 1676 "POST /demo/api/pay_order/16/ HTTP/1.1" 401 63
+WARNING 2024-03-07 11:19:05,419 views 11640 2332 Failed to process payment. Insufficient funds for order with ID 16.
+WARNING 2024-03-07 11:19:05,420 log 11640 2332 Unauthorized: /demo/api/pay_order/16/
+WARNING 2024-03-07 11:19:05,421 basehttp 11640 2332 "POST /demo/api/pay_order/16/ HTTP/1.1" 401 63
+WARNING 2024-03-07 11:20:49,001 views 10200 8716 Failed to process payment. Insufficient funds for order with ID 16.
+WARNING 2024-03-07 11:20:49,001 log 10200 8716 Unauthorized: /demo/api/pay_order/16/
+WARNING 2024-03-07 11:20:49,002 basehttp 10200 8716 "POST /demo/api/pay_order/16/ HTTP/1.1" 401 63
+WARNING 2024-03-07 11:20:51,516 views 10200 8716 Failed to process payment. Insufficient funds for order with ID 16.
+WARNING 2024-03-07 11:20:51,517 log 10200 8716 Unauthorized: /demo/api/pay_order/16/
+WARNING 2024-03-07 11:20:51,518 basehttp 10200 8716 "POST /demo/api/pay_order/16/ HTTP/1.1" 401 63
+ERROR 2024-03-07 11:26:30,696 views 11128 2840 Failed to create a new account: {'account_number': [ErrorDetail(string='account with this account number already exists.', code='unique')]}
+WARNING 2024-03-07 11:26:30,697 log 11128 2840 Unauthorized: /demo/api/account/
+WARNING 2024-03-07 11:26:30,697 basehttp 11128 2840 "POST /demo/api/account/ HTTP/1.1" 401 71
+ERROR 2024-03-07 11:27:18,484 views 9584 7732 Failed to create a new account: {'account_number': [ErrorDetail(string='account with this account number already exists.', code='unique')]}
+WARNING 2024-03-07 11:27:18,487 log 9584 7732 Unauthorized: /demo/api/account/
+WARNING 2024-03-07 11:27:18,488 basehttp 9584 7732 "POST /demo/api/account/ HTTP/1.1" 401 71
+ERROR 2024-03-07 11:29:06,157 log 9584 7732 Internal Server Error: /demo/api/payment/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\fields.py", line 446, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\fields.py", line 96, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Payment' object has no attribute 'status'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 404, in get
+    return Response(serializer.data, status=200)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 687, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 509, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\fields.py", line 479, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `status` on serializer `OrderSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Payment` instance.
+Original exception text was: 'Payment' object has no attribute 'status'.
+ERROR 2024-03-07 11:29:06,163 basehttp 9584 7732 "GET /demo/api/payment/ HTTP/1.1" 500 24061
+WARNING 2024-03-07 11:30:04,692 views 6420 5180 Failed to process payment. Order with ID 16 not found.
+WARNING 2024-03-07 11:30:04,693 log 6420 5180 Not Found: /demo/api/pay_order/16/
+WARNING 2024-03-07 11:30:04,694 basehttp 6420 5180 "POST /demo/api/pay_order/16/ HTTP/1.1" 404 30
+WARNING 2024-03-07 11:32:49,045 views 868 13196 Failed to delete payment. Payment with ID 7 not found.
+WARNING 2024-03-07 11:32:49,046 log 868 13196 Not Found: /demo/api/payment/7/
+WARNING 2024-03-07 11:32:49,046 basehttp 868 13196 "DELETE /demo/api/payment/7/ HTTP/1.1" 404 42
+WARNING 2024-03-07 13:50:10,847 log 8320 9260 Not Found: /demo/api/products/
+WARNING 2024-03-07 13:50:10,849 basehttp 8320 9260 "GET /demo/api/products/?category=120 HTTP/1.1" 404 32
+WARNING 2024-03-07 13:59:52,083 log 8320 6828 Unauthorized: /auth/sign-in/
+WARNING 2024-03-07 13:59:52,084 basehttp 8320 6828 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-03-07 14:00:05,375 log 8320 6828 Unauthorized: /auth/sign-in/
+WARNING 2024-03-07 14:00:05,375 basehttp 8320 6828 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-03-07 14:00:19,646 log 8320 11196 Unauthorized: /auth/sign-in/
+WARNING 2024-03-07 14:00:19,647 basehttp 8320 11196 "POST /auth/sign-in/ HTTP/1.1" 401 63
+ERROR 2024-03-07 14:01:52,175 views 8320 11196 Failed to create a new category: {'category_name': [ErrorDetail(string='This field is required.', code='required')], 'description': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2024-03-07 14:01:52,175 log 8320 11196 Unauthorized: /demo/api/category/
+WARNING 2024-03-07 14:01:52,176 basehttp 8320 11196 "POST /demo/api/category/ HTTP/1.1" 401 87
+WARNING 2024-03-07 14:06:02,220 log 9692 3112 Unauthorized: /auth/sign-in/
+WARNING 2024-03-07 14:06:02,221 basehttp 9692 3112 "POST /auth/sign-in/ HTTP/1.1" 401 63

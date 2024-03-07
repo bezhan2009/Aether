@@ -6,15 +6,15 @@ from rest_framework.permissions import AllowAny
 from rest_framework.decorators import api_view
 from django.db import transaction
 from .serializers import *
-from rest_framework.exceptions import PermissionDenied, APIException
+from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import AccessToken
 import logging
 from django.db.models import Q
 from django.http import Http404
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from .serializers import ProductUpdateSerializer, ProductSerializer
@@ -76,7 +76,7 @@ class ProductDetail(APIView):
             product = self.get_object(_id)
         except Http404:
             logger.error(f"Product with ID {_id} not found.")
-            return Response(f"Not Found", status=404)
+            return Response({"message": f"Product Not Found"}, status=404)
 
         serializer = ProductSerializer(product)
         product.views += 1
@@ -121,7 +121,7 @@ class ProductDetail(APIView):
             logger.info(f"Attempting to delete product with ID {_id}.")
         except Http404:
             logger.warning(f"Failed to delete product. Product with ID {_id} not found.")
-            return Response(False, status=404)
+            return Response({"message": "Product Not Found"}, status=404)
 
         user_id = get_user_id_from_token(request)
         user_profile = UserProfile.objects.get(id=user_id)
@@ -130,11 +130,11 @@ class ProductDetail(APIView):
             product.is_deleted = True
             product.save()
             logger.info(f"Product with ID {_id} marked as deleted.")
-            return Response(True, status=200)
+            return Response({"message": "The product has been successfully removed"}, status=200)
         else:
             logger.warning(
                 f"Failed to delete product. Product with ID {_id} has already been deleted or user is not an admin.")
-            return Response("Product has already been deleted or unauthorized access.", status=404)
+            return Response({"message": "Product has already been deleted or unauthorized access."}, status=404)
 
 
 class ProductList(APIView):
@@ -146,17 +146,19 @@ class ProductList(APIView):
             openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
                               type=openapi.TYPE_STRING),
         ],
-        query_serializer=YourQuerySerializer,
+        query_serializer=ProductQuerySerializer,
     )
     def get(self, request):
-        query_serializer = YourQuerySerializer(data=request.query_params)
+        query_serializer = ProductQuerySerializer(data=request.query_params)
         query_serializer.is_valid(raise_exception=True)
 
         show_own_products = query_serializer.validated_data.get('show_own_products', False)
         search_query = query_serializer.validated_data.get('search', None)
+        min_price = query_serializer.validated_data.get('min_price')
+        max_price = query_serializer.validated_data.get('max_price')
+        categories = query_serializer.validated_data.get('category')
 
         # If the user is authenticated, consider user-specific filters
-        print(request.user.is_authenticated)
         try:
             user_id = get_user_id_from_token(request)
             user_profile = UserProfile.objects.get(id=user_id)
@@ -173,7 +175,18 @@ class ProductList(APIView):
             if search_query:
                 products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
+            # Apply additional filters
+            if min_price is not None:
+                products = products.filter(price__gte=min_price)
+            if max_price is not None:
+                products = products.filter(price__lte=max_price)
+            if categories:
+                products = products.filter(category__icontains=categories)
+
+            products = products[:30]
+            products = products.order_by('-views')
             serializer = ProductSerializer(products, many=True)
+
             return Response(serializer.data, status=200)
 
         # If the user is not authenticated or there is no user-specific filter, consider public data
@@ -184,9 +197,20 @@ class ProductList(APIView):
             if search_query:
                 products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
-        products = products[:30]  # Apply slicing after filtering
+            # Apply additional filters
+            if min_price is not None:
+                products = products.filter(price__gte=min_price)
+            if max_price is not None:
+                products = products.filter(price__lte=max_price)
+            if categories:
+                try:
+                    category = Category.objects.get(id=categories)
+                except Category.DoesNotExist:
+                    return Response({"message": "Category not found"}, status=404)
+                products = products.filter(category=category)
 
-        # Serialize products along with related ProductImage instances
+        products = products.order_by('-views')
+        products = products[:30]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
@@ -225,6 +249,8 @@ class ProductList(APIView):
             # Check if the user is an admin
             if not user_profile.is_admin:
                 raise PermissionDenied("You don't have permission to create a product.")
+            if not Account.objects.filter(user=user_profile).first():
+                raise PermissionDenied("You are have not account please create account and replay.")
 
             data = {
                 'user': user_profile,
@@ -240,7 +266,6 @@ class ProductList(APIView):
             logger.info(f"Request data - User: {user_profile.username}, Data: {data}, Cover Images: {cover_imgs}")
 
             # Create a ProductSerializer instance with the data and cover_imgs
-            serializer = ProductSerializer(data=data)
             try:
                 account = Account.objects.filter(user=user_profile).first()
                 if account:
@@ -256,9 +281,9 @@ class ProductList(APIView):
                             data["default_account"] = account.id
             except Account.DoesNotExist:
                 user_id = get_user_id_from_token(request)
-                logger.warning(f"Failed to retrieve products for user with ID {user_id}. Account Not Found.")
-                return Response("You are have not account please create account and replay.", status=status.HTTP_404_NOT_FOUND)
-
+                logger.warning(f"Failed to create product for user with ID {user_id}. Account Not Found.")
+                return Response({"warning": "You are have not account please create account and replay."}, status=status.HTTP_404_NOT_FOUND)
+            serializer = ProductSerializer(data=data)
             if serializer.is_valid():
                 # Save the product instance
                 product = serializer.save()
@@ -277,11 +302,11 @@ class ProductList(APIView):
                 logger.error(f"Invalid data provided: {serializer.errors}")
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except PermissionDenied as pd:
-            logger.warning(f"Permission Denied: {str(pd)}")
-            return Response(str(pd), status=status.HTTP_403_FORBIDDEN)
+            logger.warning("Permission Denied: "+str(pd)+"")
+            return Response({"Permission Denied": str(pd)}, status=status.HTTP_403_FORBIDDEN)
         except Exception as e:
             logger.error(f"An error occurred: {str(e)}")
-            return Response("An error occurred", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class OrderDetail(APIView):
@@ -314,10 +339,10 @@ class OrderDetail(APIView):
         except UserProfile.DoesNotExist:
             user_id = get_user_id_from_token(request)
             logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
-        except Product.DoesNotExist:
+            return Response({"message": "You have not registered"}, status=status.HTTP_404_NOT_FOUND)
+        except Http404:
             logger.warning(f"Failed to update order detail. Order detail with ID {_id} not found.")
-            return Response("Order Not Found.", status=404)
+            return Response({"message": "Order Not Found."}, status=404)
 
         serializer = OrderNewSerializer(order, data=request.data)
         if serializer.is_valid():
@@ -326,7 +351,7 @@ class OrderDetail(APIView):
             order.order_details.save()
             serializer.save()
             logger.info(f"Order detail with ID {_id} updated successfully.")
-            return Response(True, status=200)
+            return Response({"message": "Order updated successfully"}, status=200)
         logger.error(f"Failed to update order detail with ID {_id}: {serializer.errors}")
         return Response(serializer.errors, status=401)
 
@@ -343,20 +368,20 @@ class OrderDetail(APIView):
         except Http404:
             user_id = get_user_id_from_token(request)
             logger.warning(f"Failed to retrieve products for user with ID {user_id}. order not found.")
-            return Response("This order has payed.", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "Order Not Found or this order has payed"}, status=status.HTTP_404_NOT_FOUND)
         except UserProfile.DoesNotExist:
             user_id = get_user_id_from_token(request)
             logger.warning(f"Failed to retrieve products for user with ID {user_id}. User profile not found.")
-            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "You have not registered"}, status=status.HTTP_404_NOT_FOUND)
         except OrderDetails.DoesNotExist:
             logger.warning(f"Failed to delete order detail. Order detail with ID {_id} not found.")
-            return Response(False, status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "Order Not Found"}, status=status.HTTP_404_NOT_FOUND)
 
-        order.is_deleted = True
-        order.save()
+        order.order_details.is_deleted = True
+        order.order_details.save()
 
         logger.info(f"Order detail with ID {_id} marked as deleted.")
-        return Response(True, status=status.HTTP_200_OK)
+        return Response({"message": "Order has been successfully removed"}, status=status.HTTP_200_OK)
 
 
 class OrderPaid(APIView):
@@ -375,10 +400,10 @@ class OrderPaid(APIView):
         user_profile = UserProfile.objects.get(id=user_id, is_admin=False)
         payments = Payment.objects.filter(user=user_profile, is_deleted=False)
         if payments:
-            serializer = OrderSerializer(payments, many=True)
+            serializer = PaymentSerializer(payments, many=True)
             return Response(serializer.data, status=200)
         else:
-            return Response("Вы пока не оплатили не один из заказов!!!", status=404)
+            return Response({"message": "You don't have any payment"}, status=404)
 
 
 class PayMentDetail(APIView):
@@ -399,7 +424,7 @@ class PayMentDetail(APIView):
             payment = Payment.objects.get(id=_id, user=user_profile, is_deleted=False)
         except Payment.DoesNotExist:
             logger.warning(f"Failed to delete payment. Payment with ID {_id} not found.")
-            return Response(f"Payment with ID {_id} not found.", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": f"Payment with ID {_id} not found."}, status=status.HTTP_404_NOT_FOUND)
 
         if not payment.is_deleted:
             payment.is_deleted = True
@@ -408,7 +433,7 @@ class PayMentDetail(APIView):
         else:
             logger.warning(f"Failed to delete payment. Payment with ID {_id} has already been deleted.")
 
-        serializer = PaymentSerializer(payment, many=False)
+        serializer = PaymentSerializer({"message": "Payment has been successfully removed"}, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -436,9 +461,8 @@ class OrderPay(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'account_number': openapi.Schema(type=openapi.TYPE_STRING, description="Amount of the item", default=1)
+                'account_number': openapi.Schema(type=openapi.TYPE_STRING, description="Amount of the item", default="1")
             },
-            required=['account_number']
         ),
         security=[],
     )
@@ -452,39 +476,44 @@ class OrderPay(APIView):
             logger.info(f"Attempting to process payment for order with ID {_id}.")
         except Http404:
             logger.warning(f"Failed to process payment. Order with ID {_id} not found.")
-            return Response("Order not found.", status=404)
+            return Response({"message": "Order not found."}, status=404)
 
         try:
             order_details = OrderDetails.objects.get(id=order.order_details.id)
         except OrderDetails.DoesNotExist:
             logger.warning(f"Failed to process payment. Order details not found for order with ID {_id}.")
-            return Response("Order details not found.", status=404)
+            return Response({"message": "Order details not found."}, status=404)
 
         _account_number = request.data.get('account_number')
         if not _account_number:
-            logger.warning(f"Failed to process payment. Account number not provided.")
-            return Response("Account number not provided.", status=400)
-
+            logger.warning(f"Failed to process payment. Account number not found.")
+            return Response({"message": "Account number not provided."}, status=404)
         try:
             account = Account.objects.get(account_number=_account_number, user=user_profile)
         except Account.DoesNotExist:
-            logger.warning(f"Failed to process payment. Account not found for account number {_account_number}.")
-            return Response(f"Account not found for account number {_account_number}.", status=404)
-
+            accounts = Account.objects.filter(user=user_profile)
+            if accounts.exists():
+                for _account in accounts:
+                    if _account.balance >= order_details.price:
+                        _account.balance -= order_details.price
+                        account = _account
+                        break
+            else:
+                user_id = get_user_id_from_token(request)
+                logger.warning(f"Failed to retrieve products for user with ID {user_id}. Account Not Found.")
+                return Response({"warning": "You are have not account please create account and replay."}, status=status.HTTP_404_NOT_FOUND)
         try:
             user_profile = UserProfile.objects.get(id=order.user.id)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to process payment. User profile not found for user with ID {order.user.id}.")
-            return Response(f"User profile not found for user with ID {order.user.id}.", status=404)
-
+            return Response({"message": f"User profile not found for user with ID {order.user.id}."}, status=404)
         if account and hasattr(account, 'balance') and account.balance >= order_details.price:
             account.balance -= order_details.price
-
             try:
                 product = Product.objects.get(id=order_details.product.id)
             except Product.DoesNotExist:
                 logger.warning(f"Failed to process payment. Product not found.")
-                return Response("Product not found.", status=404)
+                return Response({"message": "Product not found."}, status=404)
 
             if product.default_account:
                 account_user_product = Account.objects.get(id=product.default_account.id)
@@ -494,13 +523,12 @@ class OrderPay(APIView):
                     account_user_product = Account.objects.filter(user=user_product).first()
                 except Account.DoesNotExist:
                     logger.warning(f"Failed to process payment. Account not found.")
-                    return Response("Account not found.", status=404)
+                    return Response({"message": "Account not found."}, status=404)
 
             account_user_product.balance += order_details.price
             order.is_paid = True
             order.is_in_the_card = False
             order.status = OrderStatus.objects.get(id=3)
-
             payment = Payment.objects.create(
                 order=order_details,
                 account=account,
@@ -517,7 +545,7 @@ class OrderPay(APIView):
             return Response(serializer.data, status=200)
         else:
             logger.warning(f"Failed to process payment. Insufficient funds for order with ID {_id}.")
-            return Response("You do not have enough funds to make the purchase", status=401)
+            return Response({"message": "You do not have enough funds to make the purchase"}, status=401)
 
 
 class OrderList(APIView):
@@ -540,7 +568,7 @@ class OrderList(APIView):
                     'status',
                     'order_details__product',
                     'order_details__address',
-                ).filter(order_details__product__user=user_profile, is_paid=True).distinct()
+                ).filter(order_details__product__user=user_profile, order_details__is_deleted=False).distinct()
                 serializer = OrderSerializer(product_orders, many=True)
                 if not product_orders.exists():
                     return Response("No one has purchased your products yet.", status=status.HTTP_404_NOT_FOUND)
@@ -551,21 +579,21 @@ class OrderList(APIView):
                 'status',
                 'order_details__product',
                 'order_details__address',
-            ).filter(user=user_profile)
+            ).filter(user=user_profile, order_details__is_deleted=False)
             serializer = OrderSerializer(orders, many=True)
             if not orders.exists():
-                return Response("You have no orders yet.", status=status.HTTP_404_NOT_FOUND)
+                return Response({"message": "You have no orders yet."}, status=status.HTTP_404_NOT_FOUND)
             logger.info(f"User with ID {user_id} retrieved their orders.")
             return Response(serializer.data, status=status.HTTP_200_OK)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to retrieve orders for user with ID {user_id}. User profile not found.")
-            return Response("User profile not found", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "User profile not found"}, status=status.HTTP_404_NOT_FOUND)
         except Order.DoesNotExist:
             logger.warning(f"Failed to retrieve orders for user with ID {user_id}. Order not found.")
-            return Response("Order not found", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "Order not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             logger.warning(f"Failed to retrieve orders for user with ID {user_id}. {str(e)}")
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": f"{str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @swagger_auto_schema(
         request_body=openapi.Schema(
@@ -592,13 +620,13 @@ class OrderList(APIView):
                 raise PermissionDenied("Admins are not allowed to create orders.")
         except PermissionDenied as pd:
             logger.warning(f"Permission Denied: {str(pd)}")
-            return Response(str(pd), status=status.HTTP_403_FORBIDDEN)
+            return Response({"error": str(pd)}, status=status.HTTP_403_FORBIDDEN)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to retrieve user with ID {user_id}. User profile not found.")
-            return Response("User profile not found", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "User profile not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            logger.warning(f"Failed to retrieve user with ID {user_id}. {str(e)}")
-            return Response(str(e), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.error(f"Internal Server Error: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         serializer = OrderDetailsNewSerializer(data=request.data)
         if serializer.is_valid():
@@ -607,32 +635,47 @@ class OrderList(APIView):
                 product = Product.objects.get(id=product_id)
             except Product.DoesNotExist:
                 logger.error(f"Product with ID {product_id} not found.")
-                return Response(f"Product with ID {product_id} not found.", status=404)
+                return Response({"message": f"Product with ID {product_id} not found."}, status=404)
             address_instance = serializer.validated_data['address']
             address = address_instance
             try:
                 address = Address.objects.get(id=address.id, user=user_profile)
             except Address.DoesNotExist:
-                logger.error(f"Address with ID {address.id} not found.")
-                return Response(f"Address with ID {address.id} not found.", status=404)
+                logger.error(f"Address with ID {address.id} not found. Choosing another address...")
+
+                addresses = Address.objects.filter(user=user_profile)
+                if addresses.exists() and len(addresses) == 1:
+                    address_instance = addresses[0]
+                    logger.warning(f"The choice of another address was successfully")
+                else:
+                    addresses = Address.objects.filter(user=user_profile)
+                    logger.error(f"Failed to find address for user with id {user_id}")
+                    if addresses.exists():
+                        return Response({
+                                            "message": f"Please choose another address"},
+                                        status=404)
+                    else:
+                        return Response({
+                            "message": f"You do not have any Addresses. Please create an address then you can to order this product {product}"},
+                            status=404)
 
             amount = serializer.validated_data['quantity']
 
             if amount > product.amount or amount <= 0:
                 logger.warning(f"Insufficient stock for product with ID {product_id}.")
-                return Response(f"Insufficient stock for product with ID {product_id}.", status=401)
+                return Response({"message": f"Insufficient stock for product with ID {product_id}."}, status=401)
             else:
+                price = product.price * amount
                 product.amount -= amount
                 if product.amount == 0:
                     product.is_deleted = True
             order_details = OrderDetails.objects.create(
                 product=product,
-                price=product.price * amount,
+                price=price,
                 quantity=amount,
                 address=address_instance
             )
 
-            # Получаем объект OrderStatus по его id или любым другим способом
             order_status = OrderStatus.objects.get(id=1)
 
             order = Order.objects.create(
@@ -640,11 +683,12 @@ class OrderList(APIView):
                 status=order_status,
                 order_details=order_details
             )
-            order.save()
             order_details.save()
+            order.save()
             product.save()
+
             logger.info(f"User with ID {user_id} placed a new order with ID {order.id}.")
-            return Response(True, status=200)
+            return Response({"message": "Order created successfully"}, status=200)
 
         logger.error(f"Invalid data received while creating a new order: {serializer.errors}")
         return Response(serializer.errors, status=401)
@@ -675,7 +719,7 @@ class UserProfileDetails(APIView):
             logger.info(f"User with ID {_id} retrieved successfully.")
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to retrieve user. User with ID {_id} not found.")
-            return Response(False, status=404)
+            return Response({"message": "User Not Found"}, status=404)
 
         serializer = UserProfileSerializer(user, many=False)
         return Response(serializer.data, status=200)
@@ -701,7 +745,7 @@ class UserProfileDetails(APIView):
             logger.info(f"Attempting to update user with ID {_id}.")
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to update user. User with ID {_id} not found.")
-            return Response(status=404)
+            return Response({"message": "User Not Found."}, status=404)
 
         serializer = UserProfileSerializer(user, data=request.data)
         if serializer.is_valid():
@@ -717,9 +761,9 @@ def get_user_all(request):
     try:
         users = UserProfile.objects.all()
         logger.info("All users retrieved successfully.")
-    except Product.DoesNotExist:
+    except UserProfile.DoesNotExist:
         logger.warning("Failed to retrieve all users.")
-        return Response("You have not registered yet")
+        return Response({"message": "You have not registered yet"})
 
     serializer = UserProfileSerializer(users, many=True)
     return Response(serializer.data, status=200)
@@ -731,6 +775,16 @@ class CategoryList(APIView):
         serializer = CategorySerializer(category, many=True)
         return Response(serializer.data, status=200)
 
+    @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'category_name': openapi.Schema(type=openapi.TYPE_STRING),
+                'description': openapi.Schema(type=openapi.TYPE_STRING)
+            },
+            required=['category_name', 'description']
+        ),
+    )
     def post(self, request):
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
@@ -738,7 +792,7 @@ class CategoryList(APIView):
             logger.info(f"New category created with ID {serializer.data.get('id')}.")
             return Response(serializer.data, status=200)
         logger.error(f"Failed to create a new category: {serializer.errors}")
-        return Response(False, status=401)
+        return Response(serializer.errors, status=401)
 
 
 class CategoryDetails(APIView):
@@ -748,20 +802,17 @@ class CategoryDetails(APIView):
     def get(self, request, _id):
         try:
             category = self.get_object(_id)
+            serializer = CategorySerializer(category)
         except Http404:
-            return Response(False, status=404)
-        if category:
-            serializer = CategorySerializer(category, many=False)
-            return Response(serializer.data, status=200)
-        else:
-            return get_object_or_404(Category, id=_id)
+            return Response({"message": "Category Not Found"}, status=404)
+        return Response(serializer.data, status=200)
 
     def put(self, request, _id):
         try:
             category = self.get_object(_id)
         except Category.DoesNotExist:
             logger.warning(f"Failed to update category. Category with ID {_id} not found.")
-            return Response(status=404)
+            return Response({"message": "Category Not Found"}, status=404)
 
         serializer = CategorySerializer(category, data=request.data)
         if serializer.is_valid():
@@ -776,11 +827,11 @@ class CategoryDetails(APIView):
             category = self.get_object(_id)
         except Category.DoesNotExist:
             logger.warning(f"Failed to delete category. Category with ID {_id} not found.")
-            return Response(False, status=404)
+            return Response({"message": "Category Not Found"}, status=404)
 
         category.is_deleted = True
         logger.info(f"Category with ID {_id} marked as deleted.")
-        return Response(True, status=200)
+        return Response({"message": "Category has been successfully removed."}, status=200)
 
 
 class AddressList(APIView):
@@ -802,7 +853,7 @@ class AddressList(APIView):
             serializer = AddressSerializer(address, many=True)
         except Address.DoesNotExist:
             logger.error(f"Address not found.")
-            return Response(f"You don't have any addresses.", status=404)
+            return Response({"message": f"You don't have any addresses."}, status=404)
         return Response(serializer.data, status=200)
 
     @swagger_auto_schema(
@@ -855,7 +906,7 @@ class AddressDetails(APIView):
             return Response(serializer.data, status=200)
         except Http404:
             logger.warning(f"Failed to retrieve address. Address with ID {_id} not found.")
-            return Response("Address not found", status=404)
+            return Response({"message": "Address not found"}, status=404)
 
     @swagger_auto_schema(
         request_body=openapi.Schema(
@@ -876,7 +927,7 @@ class AddressDetails(APIView):
             address = self.get_object(request, _id)
         except Http404:
             logger.warning(f"Failed to update address. Address with ID {_id} not found.")
-            return Response("Address not found", status=404)
+            return Response({"message": "Address not found"}, status=404)
 
         serializer = AddressSerializer(address, data=request.data)
         if serializer.is_valid():
@@ -896,14 +947,14 @@ class AddressDetails(APIView):
     def delete(self, request, _id):
         try:
             address = self.get_object(request, _id)
-        except Address.DoesNotExist:
+        except Http404:
             logger.warning(f"Failed to delete address. Address with ID {_id} not found.")
-            return Response(False, status=404)
+            return Response({"message": "Address not found"}, status=404)
 
         address.is_deleted = True
         address.save()
         logger.info(f"Address with ID {_id} marked as deleted.")
-        return Response(True, status=200)
+        return Response({"message": "Address has been successfully removed"}, status=200)
 
 
 class OrderStatusDetail(APIView):
@@ -936,19 +987,21 @@ class OrderStatusDetail(APIView):
         security=[],
     )
     def put(self, request, _id):
-        try:
-            order_status = self.get_object(request, _id)
-        except OrderStatus.DoesNotExist:
-            logger.warning(f"Failed to update order status. Order status with ID {_id} not found.")
-            return Response("Order status not found", status=404)
+        if UserProfile.objects.get(id=get_user_id_from_token(request)).username == "bezhan" and request.data.get('password') == "bezhan2009":
+            try:
+                order_status = self.get_object(request, _id)
+            except Http404:
+                logger.warning(f"Failed to update order status. Order status with ID {_id} not found.")
+                return Response({"message": "Order status not found"}, status=404)
 
-        serializer = OrderStatusSerializer(order_status, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            logger.info(f"Order status with ID {_id} updated successfully.")
-            return Response(serializer.data, status=200)
-        logger.error(f"Failed to update order status with ID {_id}: {serializer.errors}")
-        return Response(serializer.errors, status=401)
+            serializer = OrderStatusSerializer(order_status, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                logger.info(f"Order status with ID {_id} updated successfully.")
+                return Response(serializer.data, status=200)
+            logger.error(f"Failed to update order status with ID {_id}: {serializer.errors}")
+            return Response(serializer.errors, status=401)
+        return Response({"message": "You don't have permission."})
 
 
 class OrderStatusList(APIView):
@@ -970,7 +1023,7 @@ class OrderStatusList(APIView):
             return Response(serializer.data, status=200)
         except Exception as e:
             logger.error(f"An error occurred while retrieving order statuses: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"error": str(e)}, status=500)
 
     @swagger_auto_schema(
         request_body=openapi.Schema(
@@ -996,10 +1049,10 @@ class OrderStatusList(APIView):
                 return Response(serializer.data, status=200)
             else:
                 logger.error(f"Failed to create a new order status: {serializer.errors}")
-                return Response("Failed to create a new order status", status=401)
+                return Response(serializer.errors, status=401)
         except Exception as e:
             logger.error(f"An error occurred while creating a new order status: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"error": str(e)}, status=500)
 
 
 class AccountList(APIView):
@@ -1019,8 +1072,8 @@ class AccountList(APIView):
             user_profile = UserProfile.objects.get(id=user_id)
             accounts = Account.objects.filter(user=user_profile, is_deleted=False)
         except Account.DoesNotExist:
-            logger.warning(f"Failed to retrieve accounts for user {user_id}. User not registered.")
-            return Response("You have not registered yet", status=404)
+            logger.warning(f"Failed to retrieve accounts for user {user_id}. Account Not Found.")
+            return Response({"message": "Account Not Found."}, status=404)
         serializer = AccountSerializer(accounts, many=True)
         logger.info(f"User with ID {user_id} retrieved their accounts.")
         return Response(serializer.data, status=200)
@@ -1046,9 +1099,9 @@ class AccountList(APIView):
             user_profile = UserProfile.objects.get(id=user_id)
             serializer.save(user=user_profile)
             logger.info(f"New account created with ID {serializer.data.get('id')} for user {user_id}.")
-            return Response(True, status=200)
+            return Response({"message": "Account created successfully"}, status=200)
         logger.error(f"Failed to create a new account: {serializer.errors}")
-        return Response("Failed to create a new account", status=401)
+        return Response(serializer.errors, status=401)
 
 
 class AccountDetails(APIView):
@@ -1070,13 +1123,13 @@ class AccountDetails(APIView):
             return account
         except UserProfile.DoesNotExist:
             logger.warning(f"User profile not found for user with ID {user_id}.")
-            raise Http404("User profile not found")
+            raise Http404({"message": "User profile not found"})
         except Account.DoesNotExist:
             logger.warning(f"Account not found with ID {_id} for user with ID {user_id}.")
-            raise Http404("Account not found")
+            raise Http404({"message": "Account not found"})
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            raise Http404("Account not found")
+            raise Response({"error": str(e)}, status=500)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1092,10 +1145,10 @@ class AccountDetails(APIView):
             return Response(serializer.data, status=200)
         except Http404:
             logger.warning(f"Failed to retrieve account with ID {_id}. Account not found.")
-            return Response("Account not found", status=404)
+            return Response({"message": "Account not found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"message": str(e)}, status=500)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1118,14 +1171,14 @@ class AccountDetails(APIView):
             serializer = AccountSerializer(account, data=request.data, partial=True)  # Use data=request.data
         except Http404:
             logger.warning(f"Failed to retrieve account with ID {_id}. Account not found.")
-            return Response("Account not found", status=404)
+            return Response({"message": "Account Not Found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"error": str(e)}, status=500)
 
         fill = request.data.get('fill')
         if not isinstance(fill, (int, float)):
-            return Response("Invalid fill value. It should be a number.", status=401)
+            return Response({"warning": "Invalid fill value. It should be a number."}, status=401)
         elif fill < 10000:
             serializer.is_valid(raise_exception=True)  # Validate the serializer
             account.balance += fill
@@ -1134,7 +1187,7 @@ class AccountDetails(APIView):
             return Response(serializer.data, status=200)
         else:
             logger.warning(f"Failed to update account with ID {_id}. Fill value is too high.")
-            return Response("Fill value is too high. Maximum allowed is 10000.", status=401)
+            return Response({"warning": "Fill value is too high. Maximum allowed is 10000."}, status=401)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1148,20 +1201,20 @@ class AccountDetails(APIView):
             account = self.get_object(request, _id)
         except Account.DoesNotExist:
             logger.warning(f"Failed to delete account. Account with ID {_id} not found.")
-            return Response(False, status=404)
+            return Response({"message": "Account Not Found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"message": str(e)}, status=500)
 
         account.is_deleted = True
         account.save()
         logger.info(f"Account with ID {_id} marked as deleted.")
-        return Response(True, status=200)
+        return Response({"message": "Account has been successfully removed"}, status=200)
 
 
 class ReviewDetail(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [AllowAny]
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1184,18 +1237,18 @@ class ReviewDetail(APIView):
     )
     def get(self, request, _id):
         try:
-            review = self.get_object(request, _id)
+            review = Review.objects.get(id=_id)
             serializer = ReviewSerializer(review, many=False)
             return Response(serializer.data, status=200)
-        except Http404:
+        except Review.DoesNotExist:
             logger.warning(f"Failed to get review with ID {_id}. Review not found.")
-            return Response("Review not found", status=404)
+            return Response({"message": "Review not found"}, status=404)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to get review with ID {_id}. User profile not found.")
-            return Response("User profile not found", status=404)
+            return Response({"message": "User profile not found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"error": str(e)}, status=500)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1227,13 +1280,13 @@ class ReviewDetail(APIView):
 
         except Http404:
             logger.warning(f"Failed to update review with ID {_id}. Review not found.")
-            return Response("Review not found", status=404)
+            return Response({"message": "Review not found"}, status=404)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to update review with ID {_id}. User profile not found.")
-            return Response("User profile not found", status=404)
+            return Response({"message": "User profile not found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"error": str(e)}, status=500)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1248,17 +1301,16 @@ class ReviewDetail(APIView):
             review.is_deleted = True
             review.save()
             logger.info(f"Review with ID {_id} marked as deleted.")
-            return Response(True, status=200)
-
         except Http404:
             logger.warning(f"Failed to delete review with ID {_id}. Review not found.")
-            return Response(False, status=404)
+            return Response({"message": "Review Not Found"}, status=404)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to delete review with ID {_id}. User profile not found.")
-            return Response(False, status=404)
+            return Response({"message": "User Not Found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"error": str(e)}, status=500)
+        return Response({"message": "Review has been successfully deleted"}, status=200)
 
 
 class ReviewList(APIView):
@@ -1268,13 +1320,13 @@ class ReviewList(APIView):
             serializer = ReviewSerializer(review)
         except Review.DoesNotExist:
             logger.warning(f"Failed to get reviews. Review not found.")
-            return Response("Review not found", status=404)
+            return Response({"message": "Review not found"}, status=404)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to get reviews. User profile not found.")
-            return Response("User profile not found", status=404)
+            return Response({"message": "User profile not found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=500)
+            return Response({"error": str(e)}, status=500)
         return Response(serializer.data, status=200)
 
     @swagger_auto_schema(
@@ -1303,7 +1355,7 @@ class ReviewList(APIView):
             existing_review = Review.objects.filter(product=product, user=user_profile).first()
 
             if existing_review:
-                return Response("Отзыв от этого пользователя для данного продукта уже существует", status=status.HTTP_400_BAD_REQUEST)
+                return Response({"message": "Review from you already exists"}, status=status.HTTP_400_BAD_REQUEST)
 
             serializer = ReviewSerializer(data=request.data)
 
@@ -1316,19 +1368,19 @@ class ReviewList(APIView):
                         return Response(serializer.data, status=status.HTTP_201_CREATED)
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
                 else:
-                    return Response("Buy the item before passing judgment on it.", status=status.HTTP_401_UNAUTHORIZED)
+                    return Response({"message": "Buy the item before passing judgment on it."}, status=status.HTTP_401_UNAUTHORIZED)
             except OrderDetails.DoesNotExist:
-                return Response("Buy the item before passing judgment on it.", status=status.HTTP_401_UNAUTHORIZED)
+                return Response({"message": "Buy the item before passing judgment on it."}, status=status.HTTP_401_UNAUTHORIZED)
             except Order.DoesNotExist:
-                return Response("Buy the item before passing judgment on it.", status=status.HTTP_401_UNAUTHORIZED)
+                return Response({"message": "Buy the item before passing judgment on it."}, status=status.HTTP_401_UNAUTHORIZED)
         except UserProfile.DoesNotExist:
-            return Response("User profile not found.", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "User profile not found."}, status=status.HTTP_404_NOT_FOUND)
         except Product.DoesNotExist:
             logger.warning(f"Failed to create a new comment. Product not found.")
-            return Response("Product not found", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error.", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 def build_comment_tree(comment, comments_dict):
@@ -1360,10 +1412,10 @@ class CommentList(APIView):
             return main_comments, comments_dict
         except Product.DoesNotExist:
             logger.warning(f"Failed to get comments. Product not found.")
-            raise Http404("Product not found")
+            raise Response({"message": "Product not found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            raise APIException("Internal server error")
+            raise Response({"error": str(e)}, status=500)
 
     def get(self, request, product_id):
         try:
@@ -1372,7 +1424,7 @@ class CommentList(APIView):
             return Response(main_comments_tree, status=status.HTTP_200_OK)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1411,10 +1463,10 @@ class CommentList(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to create a new comment. User profile not found.")
-            return Response("You have not registered yet", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "You have not registered yet"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class CommentDetail(APIView):
@@ -1426,10 +1478,10 @@ class CommentDetail(APIView):
             return Comment.objects.get(id=_comment_id)
         except Comment.DoesNotExist:
             logger.warning(f"Failed to get comments. Comment not found.")
-            raise Http404("Comment not found")
+            raise Http404({"message": "Comment not found"})
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            raise APIException("Internal server error")
+            raise Response({"error": str(e)}, status=500)
 
     @transaction.atomic
     def delete_comment_chain(self, comment):
@@ -1448,14 +1500,16 @@ class CommentDetail(APIView):
     )
     def delete(self, request, comment_id):
         try:
-            comment = Comment.objects.get(id=comment_id)
+            user_id = get_user_id_from_token(request)
+            user_profile = UserProfile.objects.get(id=user_id)
+            comment = Comment.objects.get(id=comment_id, user=user_profile)
             logger.info(f"Attempting to delete comment with ID {comment_id}.")
         except Comment.DoesNotExist:
             logger.warning(f"Failed to delete Comment. Comment with ID {comment_id} not found.")
-            return Response(status=404)
+            return Response({"message": "Comment Not Found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         # Delete the entire comment chain
         self.delete_comment_chain(comment)
@@ -1473,13 +1527,13 @@ class ProductUser(APIView):
             products = Product.objects.filter(user=user_profile)
 
             if not products.exists():
-                return Response("No products found for the user", status=status.HTTP_404_NOT_FOUND)
+                return Response({"message": f"No products found for the user with id {user_id}"}, status=status.HTTP_404_NOT_FOUND)
 
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except UserProfile.DoesNotExist:
             logger.warning(f"Failed to get user profile. User profile not found.")
-            return Response("User profile not found", status=status.HTTP_404_NOT_FOUND)
+            return Response({"message": "User profile not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response("Internal server error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

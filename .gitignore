@@ -1,9 +1,3 @@
 .idea
 __pycache__
-eAssets/__pycache__
-eAssets/eAssets/__pycache__
-eAssets/assets/__pycache__
-eAssets/assets/api/__pycache__
-eAssets/assets/migrations/__pycache__
-EBook_collection.postman_collection.json
 security.py

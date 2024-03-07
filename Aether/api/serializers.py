@@ -112,6 +112,14 @@ class OrderDetailsNewSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class OrderDetailsFCSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
+
+    class Meta:
+        model = OrderDetails
+        fields = '__all__'
+
+
 class OrderDetailsAloneSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(),
                                               required=False)  # Делаем поле user необязательным
@@ -203,6 +211,9 @@ class ProductUpdateSerializer(serializers.Serializer):
         return data
 
 
-class YourQuerySerializer(serializers.Serializer):
+class ProductQuerySerializer(serializers.Serializer):
     show_own_products = serializers.BooleanField(default=False, help_text="Show own products or not")
     search = serializers.CharField(allow_blank=True, required=False, help_text="Search query")
+    min_price = serializers.DecimalField(required=False, min_value=0, max_digits=10, decimal_places=2)
+    max_price = serializers.DecimalField(required=False, min_value=0, max_digits=10, decimal_places=2)
+    category = serializers.CharField(required=False)

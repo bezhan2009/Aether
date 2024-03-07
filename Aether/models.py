@@ -47,7 +47,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     price = models.FloatField()
     amount = models.IntegerField()
-    default_account = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+    default_account = models.ForeignKey(Account, on_delete=models.CASCADE)
     is_deleted = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
 

@@ -1,14 +1,14 @@
 
 from django.urls import path
 from . import views
-from .views import ProductList
+from .views import *
 from Aether.views import *
 
 urlpatterns = [
     path('ping/', ping, name='ping'),
-    path('products/', ProductList.as_view(), name='products'),
+    path('products/', views.ProductList.as_view(), name='products'),
     path('products/<int:_id>/', views.ProductDetail.as_view(), name='product_detail'),
-    path('products/<int:user_id>/user', views.ProductUser.as_view(), name='product_user'),
+    path('products/<int:user_id>/user/', views.ProductUser.as_view(), name='product_user'),
 
     path('orders/', views.OrderList.as_view(), name='orders'),
     path('orders/<int:_id>/', views.OrderDetail.as_view(), name='order_detail'),
@@ -18,7 +18,7 @@ urlpatterns = [
     path('payment/<int:_id>/', views.PayMentDetail.as_view(), name='payment'),
 
     path('address/', views.AddressList.as_view(), name='address'),
-    path('address/<int:_id>', views.AddressDetails.as_view(), name='address_details'),
+    path('address/<int:_id>/', views.AddressDetails.as_view(), name='address_details'),
 
     path('comment/<int:product_id>/', views.CommentList.as_view(), name='comment'),
     path('comment/<int:comment_id>/detail/', views.CommentDetail.as_view(), name='comment_detail'),
@@ -28,6 +28,7 @@ urlpatterns = [
 
     path('account/', views.AccountList.as_view(), name='Account_list'),
     path('account/<int:_id>/', views.AccountDetails.as_view(), name='Account_detail'),
+
     path('review/<int:product_id>/', views.ReviewList.as_view(), name='review_list'),
     path('review/<int:_id>/detail/', views.ReviewDetail.as_view(), name='review_detail'),
 
