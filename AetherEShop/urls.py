@@ -23,6 +23,8 @@ from rest_framework import permissions
 from drf_yasg import openapi
 from drf_yasg.renderers import SwaggerUIRenderer
 
+from Aether.views import ping
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Your API",
@@ -37,6 +39,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path('', ping, name='ping'),
+
     path('admin/', admin.site.urls),
     path('demo/', include('Aether.urls')),
     path('auth/sign-up/', create_user, name='sign_up'),

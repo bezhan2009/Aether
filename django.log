@@ -9435,3 +9435,429 @@ WARNING 2024-03-07 14:01:52,175 log 8320 11196 Unauthorized: /demo/api/category/
 WARNING 2024-03-07 14:01:52,176 basehttp 8320 11196 "POST /demo/api/category/ HTTP/1.1" 401 87
 WARNING 2024-03-07 14:06:02,220 log 9692 3112 Unauthorized: /auth/sign-in/
 WARNING 2024-03-07 14:06:02,221 basehttp 9692 3112 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-03-07 14:17:26,276 log 6920 6648 Not Found: /demo/api/products/
+WARNING 2024-03-07 14:17:26,276 basehttp 6920 6648 "GET /demo/api/products/?category=2 HTTP/1.1" 404 31
+WARNING 2024-03-07 14:43:27,546 log 10000 228 Forbidden: /demo/api/user/
+WARNING 2024-03-07 14:43:27,547 basehttp 10000 228 "PUT /demo/api/user/ HTTP/1.1" 403 73
+WARNING 2024-03-07 14:43:48,602 log 5360 8288 Forbidden: /demo/api/user/
+WARNING 2024-03-07 14:43:48,602 basehttp 5360 8288 "PUT /demo/api/user/ HTTP/1.1" 403 61
+ERROR 2024-03-07 14:50:28,553 views 12720 3192 An error occurred while processing the request: get() returned more than one OrderDetails -- it returned 8!
+ERROR 2024-03-07 14:50:28,553 log 12720 3192 Internal Server Error: /demo/api/review/7/
+ERROR 2024-03-07 14:50:28,554 basehttp 12720 3192 "POST /demo/api/review/7/ HTTP/1.1" 500 71
+WARNING 2024-03-07 14:52:41,781 log 7072 10256 Bad Request: /demo/api/review/7/
+WARNING 2024-03-07 14:52:41,781 basehttp 7072 10256 "POST /demo/api/review/7/ HTTP/1.1" 400 44
+WARNING 2024-03-07 14:55:12,891 views 5716 5384 Failed to update review with ID 7. Review not found.
+WARNING 2024-03-07 14:55:12,892 log 5716 5384 Not Found: /demo/api/review/7/detail/
+WARNING 2024-03-07 14:55:12,892 basehttp 5716 5384 "PUT /demo/api/review/7/detail/ HTTP/1.1" 404 30
+WARNING 2024-03-07 14:56:02,703 views 5716 5384 Failed to delete review with ID 5. Review not found.
+WARNING 2024-03-07 14:56:02,704 log 5716 5384 Not Found: /demo/api/review/5/detail/
+WARNING 2024-03-07 14:56:02,704 basehttp 5716 5384 "DELETE /demo/api/review/5/detail/ HTTP/1.1" 404 30
+WARNING 2024-03-07 14:56:06,080 views 5716 5384 Failed to get reviews. Review not found.
+WARNING 2024-03-07 14:56:06,081 log 5716 5384 Not Found: /demo/api/review/7/
+WARNING 2024-03-07 14:56:06,081 basehttp 5716 5384 "GET /demo/api/review/7/ HTTP/1.1" 404 30
+WARNING 2024-03-07 15:54:52,783 log 6416 5984 Unauthorized: /demo/api/orders/
+WARNING 2024-03-07 15:54:52,784 basehttp 6416 5984 "POST /demo/api/orders/ HTTP/1.1" 401 183
+ERROR 2024-03-07 15:57:30,836 views 6416 5984 Address with ID 2 not found. Choosing another address...
+ERROR 2024-03-07 15:57:30,837 views 6416 5984 Failed to find address for user with id 29
+WARNING 2024-03-07 15:57:30,839 log 6416 5984 Not Found: /demo/api/orders/
+WARNING 2024-03-07 15:57:30,839 basehttp 6416 5984 "POST /demo/api/orders/ HTTP/1.1" 404 112
+WARNING 2024-03-07 15:58:37,341 log 6416 5984 Unauthorized: /demo/api/address/
+WARNING 2024-03-07 15:58:37,341 basehttp 6416 5984 "POST /demo/api/address/ HTTP/1.1" 401 58
+ERROR 2024-03-07 15:58:53,772 views 6416 5984 Address with ID 2 not found. Choosing another address...
+WARNING 2024-03-07 15:58:53,774 views 6416 5984 The choice of another address was successfully
+WARNING 2024-03-07 15:58:58,465 log 6416 5984 Unauthorized: /demo/api/orders/
+WARNING 2024-03-07 15:58:58,466 basehttp 6416 5984 "GET /demo/api/orders/ HTTP/1.1" 401 58
+WARNING 2024-03-07 16:02:32,618 log 11704 772 Not Found: /demo/api/review/7/
+WARNING 2024-03-07 16:02:32,618 basehttp 11704 772 "POST /demo/api/review/7/ HTTP/1.1" 404 37
+WARNING 2024-03-07 16:06:36,012 views 11704 772 Permission Denied: You are have not account please create account and replay.
+WARNING 2024-03-07 16:06:36,012 log 11704 772 Forbidden: /demo/api/products/
+WARNING 2024-03-07 16:06:36,013 basehttp 11704 772 "POST /demo/api/products/ HTTP/1.1" 403 82
+ERROR 2024-03-07 16:08:15,671 log 11704 772 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 187, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-07 16:08:15,674 basehttp 11704 772 "GET /demo/api/products/ HTTP/1.1" 500 104036
+ERROR 2024-03-07 16:13:43,921 log 11704 10212 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 187, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-07 16:13:43,923 basehttp 11704 10212 "GET /demo/api/products/?show_own_products=true HTTP/1.1" 500 22374
+WARNING 2024-03-07 16:14:20,739 log 11704 10212 Not Found: /demo/api/products/29/user/
+WARNING 2024-03-07 16:14:20,739 basehttp 11704 10212 "GET /demo/api/products/29/user/ HTTP/1.1" 404 55
+WARNING 2024-03-07 16:57:15,330 log 11704 1176 Unauthorized: /auth/sign-in/
+WARNING 2024-03-07 16:57:15,330 basehttp 11704 1176 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-03-07 16:57:21,408 log 11704 1176 Unauthorized: /auth/sign-in/
+WARNING 2024-03-07 16:57:21,408 basehttp 11704 1176 "POST /auth/sign-in/ HTTP/1.1" 401 63
+ERROR 2024-03-07 16:59:11,433 log 11704 1176 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 187, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-07 16:59:11,434 basehttp 11704 1176 "GET /demo/api/products/?show_own_products=true&search=PC&min_price=200&max_price=300 HTTP/1.1" 500 22500
+ERROR 2024-03-07 16:59:30,206 log 11704 1176 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 184, in get
+    products = products.filter(category__icontains=categories)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1476, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1494, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1501, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1613, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1645, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1559, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1383, in build_lookup
+    lhs = self.try_transform(lhs, lookup_name)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\query.py", line 1427, in try_transform
+    raise FieldError(
+django.core.exceptions.FieldError: Unsupported lookup 'icontains' for ForeignKey or join on the field not permitted.
+ERROR 2024-03-07 16:59:30,208 basehttp 11704 1176 "GET /demo/api/products/?show_own_products=true&search=PC&min_price=200&max_price=300&category=1 HTTP/1.1" 500 24115
+ERROR 2024-03-07 17:00:40,104 log 9368 4384 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 191, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-07 17:00:40,107 basehttp 9368 4384 "GET /demo/api/products/?show_own_products=true&search=PC&min_price=200&max_price=300&category=1 HTTP/1.1" 500 22537
+ERROR 2024-03-07 17:00:54,069 log 9368 4384 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 191, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-07 17:00:54,071 basehttp 9368 4384 "GET /demo/api/products/?show_own_products=true HTTP/1.1" 500 22374
+ERROR 2024-03-07 17:01:20,147 log 9368 9772 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 191, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-07 17:01:20,149 basehttp 9368 9772 "GET /demo/api/products/?show_own_products=true HTTP/1.1" 500 22374
+ERROR 2024-03-07 17:10:26,500 log 9368 4680 Internal Server Error: /demo/api/products/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\Aether\api\views.py", line 191, in get
+    products = products.order_by('-views')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1698, in order_by
+    raise TypeError("Cannot reorder a query once a slice has been taken.")
+TypeError: Cannot reorder a query once a slice has been taken.
+ERROR 2024-03-07 17:10:26,502 basehttp 9368 4680 "GET /demo/api/products/?show_own_products=true HTTP/1.1" 500 22374
+WARNING 2024-03-13 20:02:49,099 log 3224 10060 Not Found: /
+WARNING 2024-03-13 20:02:49,104 basehttp 3224 10060 "GET / HTTP/1.1" 404 2989
+WARNING 2024-03-13 20:02:49,818 log 3224 10060 Not Found: /favicon.ico
+WARNING 2024-03-13 20:02:49,818 basehttp 3224 10060 "GET /favicon.ico HTTP/1.1" 404 3040
+ERROR 2024-03-13 20:03:07,836 log 3224 9220 Internal Server Error: /demo/api/about_us/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AboutUs.get() takes 1 positional argument but 2 were given
+ERROR 2024-03-13 20:03:07,838 basehttp 3224 9220 "GET /demo/api/about_us/ HTTP/1.1" 500 95189
+ERROR 2024-03-13 20:04:30,525 log 4836 4488 Internal Server Error: /demo/api/about_us/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AboutUs.get() takes 1 positional argument but 2 were given
+ERROR 2024-03-13 20:04:30,528 basehttp 4836 4488 "GET /demo/api/about_us/ HTTP/1.1" 500 95326
+ERROR 2024-03-13 20:06:15,504 log 5824 3392 Internal Server Error: /demo/api/about_us/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AboutUs.get() takes 1 positional argument but 2 were given
+ERROR 2024-03-13 20:06:15,506 basehttp 5824 3392 "GET /demo/api/about_us/ HTTP/1.1" 500 145
+ERROR 2024-03-13 20:06:34,983 log 6492 9792 Internal Server Error: /demo/api/about_us/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AboutUs.get() takes 1 positional argument but 2 were given
+ERROR 2024-03-13 20:06:34,986 basehttp 6492 9792 "GET /demo/api/about_us/ HTTP/1.1" 500 95347
+WARNING 2024-03-15 19:49:44,583 log 12176 1400 Not Found: /
+WARNING 2024-03-15 19:49:44,584 basehttp 12176 1400 "GET / HTTP/1.1" 404 2989
+WARNING 2024-03-15 19:49:44,978 log 12176 1400 Not Found: /favicon.ico
+WARNING 2024-03-15 19:49:44,978 basehttp 12176 1400 "GET /favicon.ico HTTP/1.1" 404 3040
+WARNING 2024-03-15 19:49:50,733 log 5692 9548 Not Found: /accounts/1
+WARNING 2024-03-15 19:49:50,733 basehttp 5692 9548 "GET /accounts/1 HTTP/1.1" 404 3151
+WARNING 2024-03-15 19:50:01,685 log 5692 9548 Not Found: /
+WARNING 2024-03-15 19:50:01,685 basehttp 5692 9548 "GET / HTTP/1.1" 404 3103
