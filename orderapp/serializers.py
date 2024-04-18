@@ -8,14 +8,7 @@ from orderapp.models import (Address,
                              Payment
                              )
 from accountapp.serializers import AccountSerializer
-
-class AddressSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(),
-                                              required=False)  # Делаем поле user необязательным
-
-    class Meta:
-        model = Address
-        fields = '__all__'
+from addressapp.serializers import AddressSerializer
 
 
 class OrderStatusSerializer(serializers.ModelSerializer):

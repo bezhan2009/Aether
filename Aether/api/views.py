@@ -24,6 +24,7 @@ from productapp.serializers import (ProductSerializer,
                                     ProductUpDateNewSerializer
                                     )
 
+
 logger = logging.getLogger('django')
 
 
