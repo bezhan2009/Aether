@@ -2,8 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import path, include
 
+from Aether import views
+
 urlpatterns = [
-    path('api/', include('Aether.api.urls'))
+    path('ping/', views.ping, name='ping'),
+    path('api/', include('OrdDo.api.urls'))
 ]
 
 

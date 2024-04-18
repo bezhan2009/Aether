@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 
 
 def ping(request):
-    data = {'message': 'Server is up and running'}
+    data = {'message': 'Servers is up and running'}
     return JsonResponse(data)
     # return HttpResponse("Server is up and running")
 

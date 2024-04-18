@@ -19,30 +19,8 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from .serializers import ProductUpdateSerializer, ProductSerializer
 
+
 logger = logging.getLogger('django')
-deposit = 15
-
-
-@swagger_auto_schema(method='post', request_body=openapi.Schema(
-    type=openapi.TYPE_OBJECT,
-    properties={
-        'username': openapi.Schema(type=openapi.TYPE_STRING),
-        'password': openapi.Schema(type=openapi.TYPE_STRING),
-        'email': openapi.Schema(type=openapi.TYPE_STRING),
-        'age': openapi.Schema(type=openapi.TYPE_INTEGER),
-        'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
-    }
-))
-@api_view(["POST"])
-def create_user(request):
-    serializer = UserProfileSerializer(data=request.data)
-    if serializer.is_valid():
-        user = serializer.save()
-        serializer = UserProfileSerializer(user)
-        logger.info(f"New user created with ID {user.id}.")
-        return Response(serializer.data)
-    logger.error(f"Failed to create a new user: {serializer.errors}")
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def get_user_id_from_token(request):
@@ -92,7 +70,7 @@ class ProductDetail(APIView):
     )
     def put(self, request, _id):
         product = self.get_object(_id)
-        serializer = ProductUpDateNewSerializer(product, data=request.data)
+        serializer = ProductUpDateNewSerializer(product, data=request.data, partial=True)
 
         if serializer.is_valid():
             cover_imgs = request.data.get('cover_img')
@@ -114,7 +92,7 @@ class ProductDetail(APIView):
         manual_parameters=[
             openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
                               type=openapi.TYPE_STRING),
-        ],)
+        ], )
     def delete(self, request, _id):
         try:
             product = self.get_object(_id)
@@ -146,7 +124,7 @@ class ProductList(APIView):
             openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
                               type=openapi.TYPE_STRING),
         ],
-        query_serializer=ProductQuerySerializer,
+        query_serializer=ProductQuerySerializer(),
     )
     def get(self, request):
         query_serializer = ProductQuerySerializer(data=request.query_params)
@@ -158,46 +136,19 @@ class ProductList(APIView):
         max_price = query_serializer.validated_data.get('max_price')
         categories = query_serializer.validated_data.get('category')
 
-        # If the user is authenticated, consider user-specific filters
         try:
             user_id = get_user_id_from_token(request)
             user_profile = UserProfile.objects.get(id=user_id)
-            if user_profile.is_admin:
-                products = Product.objects.filter(user=user_profile, is_deleted=False)
-            else:
-                products = Product.objects.filter(is_deleted=False)
+            if 2 + 2 == 4:
+                products = Product.objects.filter(is_deleted=False, amount__gt=0)
             if user_profile.is_admin and not show_own_products:
-                products = Product.objects.filter(is_deleted=False)
+                products = products.filter(is_deleted=False, amount__gt=0)
             elif user_profile.is_admin and show_own_products:
-                products = Product.objects.filter(user=user_profile, is_deleted=False)
+                products = products.filter(user=user_profile, is_deleted=False, amount__gt=0)
 
-            # Apply user-specific filters based on search query
             if search_query:
                 products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
-            # Apply additional filters
-            if min_price is not None:
-                products = products.filter(price__gte=min_price)
-            if max_price is not None:
-                products = products.filter(price__lte=max_price)
-            if categories:
-                products = products.filter(category__icontains=categories)
-
-            products = products[:30]
-            products = products.order_by('-views')
-            serializer = ProductSerializer(products, many=True)
-
-            return Response(serializer.data, status=200)
-
-        # If the user is not authenticated or there is no user-specific filter, consider public data
-        except UserProfile.DoesNotExist:
-            products = Product.objects.filter(is_deleted=False)
-
-            # Apply public filters based on search query
-            if search_query:
-                products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
-
-            # Apply additional filters
             if min_price is not None:
                 products = products.filter(price__gte=min_price)
             if max_price is not None:
@@ -205,14 +156,35 @@ class ProductList(APIView):
             if categories:
                 try:
                     category = Category.objects.get(id=categories)
+                    products = products.filter(category=category)
                 except Category.DoesNotExist:
                     return Response({"message": "Category not found"}, status=404)
-                products = products.filter(category=category)
 
-        products = products.order_by('-views')
-        products = products[:30]
-        serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data)
+            products = products.order_by('-views')[:30]
+            serializer = ProductSerializer(products, many=True)
+
+            return Response(serializer.data, status=200)
+
+        except UserProfile.DoesNotExist:
+            products = Product.objects.filter(is_deleted=False)
+
+            if search_query:
+                products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
+
+            if min_price is not None:
+                products = products.filter(price__gte=min_price)
+            if max_price is not None:
+                products = products.filter(price__lte=max_price)
+            if categories:
+                try:
+                    category = Category.objects.get(id=categories)
+                    products = products.filter(category=category)
+                except Category.DoesNotExist:
+                    return Response({"message": "Category not found"}, status=404)
+
+            products = products.order_by('-views')[:30]
+            serializer = ProductSerializer(products, many=True)
+            return Response(serializer.data, status=200)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -282,7 +254,8 @@ class ProductList(APIView):
             except Account.DoesNotExist:
                 user_id = get_user_id_from_token(request)
                 logger.warning(f"Failed to create product for user with ID {user_id}. Account Not Found.")
-                return Response({"warning": "You are have not account please create account and replay."}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"warning": "You are have not account please create account and replay."},
+                                status=status.HTTP_404_NOT_FOUND)
             serializer = ProductSerializer(data=data)
             if serializer.is_valid():
                 # Save the product instance
@@ -302,7 +275,7 @@ class ProductList(APIView):
                 logger.error(f"Invalid data provided: {serializer.errors}")
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except PermissionDenied as pd:
-            logger.warning("Permission Denied: "+str(pd)+"")
+            logger.warning("Permission Denied: " + str(pd) + "")
             return Response({"Permission Denied": str(pd)}, status=status.HTTP_403_FORBIDDEN)
         except Exception as e:
             logger.error(f"An error occurred: {str(e)}")
@@ -332,6 +305,7 @@ class OrderDetail(APIView):
         ),
         security=[],
     )
+    @transaction.atomic
     def put(self, request, _id):
         try:
             order = self.get_object(request, _id)
@@ -344,7 +318,7 @@ class OrderDetail(APIView):
             logger.warning(f"Failed to update order detail. Order detail with ID {_id} not found.")
             return Response({"message": "Order Not Found."}, status=404)
 
-        serializer = OrderNewSerializer(order, data=request.data)
+        serializer = OrderNewSerializer(order, data=request.data, partial=True)
         if serializer.is_valid():
             order.order_details.quantity += serializer.validated_data["quantity"]
             order.order_details.price = order.order_details.quantity * order.order_details.product.price
@@ -461,7 +435,8 @@ class OrderPay(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'account_number': openapi.Schema(type=openapi.TYPE_STRING, description="Amount of the item", default="1")
+                'account_number': openapi.Schema(type=openapi.TYPE_STRING, description="Amount of the item",
+                                                 default="1")
             },
         ),
         security=[],
@@ -501,7 +476,8 @@ class OrderPay(APIView):
             else:
                 user_id = get_user_id_from_token(request)
                 logger.warning(f"Failed to retrieve products for user with ID {user_id}. Account Not Found.")
-                return Response({"warning": "You are have not account please create account and replay."}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"warning": "You are have not account please create account and replay."},
+                                status=status.HTTP_404_NOT_FOUND)
         try:
             user_profile = UserProfile.objects.get(id=order.user.id)
         except UserProfile.DoesNotExist:
@@ -579,7 +555,7 @@ class OrderList(APIView):
                 'status',
                 'order_details__product',
                 'order_details__address',
-            ).filter(user=user_profile, order_details__is_deleted=False)
+            ).filter(user=user_profile, order_details__is_deleted=False, is_in_the_card=True)
             serializer = OrderSerializer(orders, many=True)
             if not orders.exists():
                 return Response({"message": "You have no orders yet."}, status=status.HTTP_404_NOT_FOUND)
@@ -652,8 +628,8 @@ class OrderList(APIView):
                     logger.error(f"Failed to find address for user with id {user_id}")
                     if addresses.exists():
                         return Response({
-                                            "message": f"Please choose another address"},
-                                        status=404)
+                            "message": f"Please choose another address"},
+                            status=404)
                     else:
                         return Response({
                             "message": f"You do not have any Addresses. Please create an address then you can to order this product {product}"},
@@ -695,14 +671,9 @@ class OrderList(APIView):
 
 
 class UserProfileDetails(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
 
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
-                              type=openapi.TYPE_STRING),
-        ],
-        security=[],
-    )
     def get_user(self, _id):
         return get_object_or_404(UserProfile, id=_id)
 
@@ -713,12 +684,13 @@ class UserProfileDetails(APIView):
         ],
         security=[],
     )
-    def get(self, request, _id):
+    def get(self, request):
+        user_id = get_user_id_from_token(request)
         try:
-            user = self.get_user(_id)
-            logger.info(f"User with ID {_id} retrieved successfully.")
+            user = self.get_user(user_id)
+            logger.info(f"User with ID {user_id} retrieved successfully.")
         except UserProfile.DoesNotExist:
-            logger.warning(f"Failed to retrieve user. User with ID {_id} not found.")
+            logger.warning(f"Failed to retrieve user. User with ID {user_id} not found.")
             return Response({"message": "User Not Found"}, status=404)
 
         serializer = UserProfileSerializer(user, many=False)
@@ -739,34 +711,24 @@ class UserProfileDetails(APIView):
         ],
         security=[],
     )
-    def put(self, request, _id):
+    def put(self, request):
+        user_id = get_user_id_from_token(request)
         try:
-            user = self.get_user(_id)
-            logger.info(f"Attempting to update user with ID {_id}.")
+            user = self.get_user(user_id)
+            logger.info(f"Attempting to update user with ID {user_id}.")
         except UserProfile.DoesNotExist:
-            logger.warning(f"Failed to update user. User with ID {_id} not found.")
+            logger.warning(f"Failed to update user. User with ID {user_id} not found.")
             return Response({"message": "User Not Found."}, status=404)
 
-        serializer = UserProfileSerializer(user, data=request.data)
+        serializer = UserProfileSerializer(user, data=request.data, partial=True)
+        if 'password' in request.data or 'is_deleted' in request.data or 'is_superuser' in request.data:
+            return Response({"message": "Changing password, is_superuser is not allowed."}, status=403)
         if serializer.is_valid():
             serializer.save()
-            logger.info(f"User with ID {_id} updated successfully.")
+            logger.info(f"User with ID {user_id} updated successfully.")
             return Response(serializer.data, status=200)
-        logger.error(f"Failed to update user with ID {_id}: {serializer.errors}")
+        logger.error(f"Failed to update user with ID {user_id}: {serializer.errors}")
         return Response(serializer.errors, status=401)
-
-
-@api_view(['GET'])
-def get_user_all(request):
-    try:
-        users = UserProfile.objects.all()
-        logger.info("All users retrieved successfully.")
-    except UserProfile.DoesNotExist:
-        logger.warning("Failed to retrieve all users.")
-        return Response({"message": "You have not registered yet"})
-
-    serializer = UserProfileSerializer(users, many=True)
-    return Response(serializer.data, status=200)
 
 
 class CategoryList(APIView):
@@ -987,7 +949,8 @@ class OrderStatusDetail(APIView):
         security=[],
     )
     def put(self, request, _id):
-        if UserProfile.objects.get(id=get_user_id_from_token(request)).username == "bezhan" and request.data.get('password') == "bezhan2009":
+        if UserProfile.objects.get(id=get_user_id_from_token(request)).username == "bezhan" and request.data.get(
+                'password') == "bezhan2009":
             try:
                 order_status = self.get_object(request, _id)
             except Http404:
@@ -1074,6 +1037,9 @@ class AccountList(APIView):
         except Account.DoesNotExist:
             logger.warning(f"Failed to retrieve accounts for user {user_id}. Account Not Found.")
             return Response({"message": "Account Not Found."}, status=404)
+        if not accounts.exists():
+            logger.warning(f"Failed to retrieve accounts for user {user_id}. Account Not Found.")
+            return Response({"message": "You have any accounts."}, status=404)
         serializer = AccountSerializer(accounts, many=True)
         logger.info(f"User with ID {user_id} retrieved their accounts.")
         return Response(serializer.data, status=200)
@@ -1086,7 +1052,8 @@ class AccountList(APIView):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'account_number': openapi.Schema(type=openapi.TYPE_STRING, description="Account number for new account"),
+                'account_number': openapi.Schema(type=openapi.TYPE_STRING,
+                                                 description="Account number for new account"),
             },
             required=['account_number']
         ),
@@ -1268,7 +1235,7 @@ class ReviewDetail(APIView):
     def put(self, request, _id):
         try:
             review = self.get_object(request, _id)
-            serializer = ReviewSerializer(review, data=request.data)
+            serializer = ReviewSerializer(review, data=request.data, partial=True)
 
             if serializer.is_valid():
                 serializer.save()
@@ -1298,7 +1265,7 @@ class ReviewDetail(APIView):
     def delete(self, request, _id):
         try:
             review = self.get_object(request, _id)
-            review.is_deleted = True
+            review.delete()
             review.save()
             logger.info(f"Review with ID {_id} marked as deleted.")
         except Http404:
@@ -1360,19 +1327,22 @@ class ReviewList(APIView):
             serializer = ReviewSerializer(data=request.data)
 
             try:
-                order_details = OrderDetails.objects.get(product=product)
-                order = Order.objects.get(order_details=order_details, is_paid=True)
+                order_details = OrderDetails.objects.filter(product=product).first()
+                order = Order.objects.filter(order_details=order_details, is_paid=True).first()
                 if order:
                     if serializer.is_valid():
                         serializer.save(product=product, user=user_profile)
                         return Response(serializer.data, status=status.HTTP_201_CREATED)
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
                 else:
-                    return Response({"message": "Buy the item before passing judgment on it."}, status=status.HTTP_401_UNAUTHORIZED)
+                    return Response({"message": "Buy the item before passing judgment on it."},
+                                    status=status.HTTP_401_UNAUTHORIZED)
             except OrderDetails.DoesNotExist:
-                return Response({"message": "Buy the item before passing judgment on it."}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response({"message": "Buy the item before passing judgment on it."},
+                                status=status.HTTP_401_UNAUTHORIZED)
             except Order.DoesNotExist:
-                return Response({"message": "Buy the item before passing judgment on it."}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response({"message": "Buy the item before passing judgment on it."},
+                                status=status.HTTP_401_UNAUTHORIZED)
         except UserProfile.DoesNotExist:
             return Response({"message": "User profile not found."}, status=status.HTTP_404_NOT_FOUND)
         except Product.DoesNotExist:
@@ -1517,7 +1487,7 @@ class CommentDetail(APIView):
         # Delete the parent comment
         comment.delete()
 
-        return Response(True, status=204)
+        return Response(True, status=200)
 
 
 class ProductUser(APIView):
@@ -1527,7 +1497,8 @@ class ProductUser(APIView):
             products = Product.objects.filter(user=user_profile)
 
             if not products.exists():
-                return Response({"message": f"No products found for the user with id {user_id}"}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"message": f"No products found for the user with id {user_id}"},
+                                status=status.HTTP_404_NOT_FOUND)
 
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -1537,3 +1508,41 @@ class ProductUser(APIView):
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class AboutUs(APIView):
+    def get(self, reqeust):
+        return Response({"message": f"Hello we are Aether"}, status=200)
+
+
+class DetailProduct(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter('Authorization', openapi.IN_HEADER, description="Bearer <token>",
+                              type=openapi.TYPE_STRING),
+        ],
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'category': openapi.Schema(type=openapi.TYPE_INTEGER, description="ID of the category"),
+                'title': openapi.Schema(type=openapi.TYPE_STRING, description="Title of the item"),
+                'description': openapi.Schema(type=openapi.TYPE_STRING, description="Description of the item"),
+                'price': openapi.Schema(type=openapi.TYPE_INTEGER, description="Price of the item"),
+                'amount': openapi.Schema(type=openapi.TYPE_INTEGER, description="Amount of the item"),
+                'default_account': openapi.Schema(type=openapi.TYPE_INTEGER, description="Default account for money")
+            },
+            required=['category', 'title', 'description', 'price', 'amount']
+        ),
+        security=[],
+    )
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=UserProfile.objects.get(id=get_user_id_from_token(request)))
+            return Response(True, status=201)
+        return Response(serializer.errors, status=401)

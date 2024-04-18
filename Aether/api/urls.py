@@ -5,7 +5,6 @@ from .views import *
 from Aether.views import *
 
 urlpatterns = [
-    path('ping/', ping, name='ping'),
     path('products/', views.ProductList.as_view(), name='products'),
     path('products/<int:_id>/', views.ProductDetail.as_view(), name='product_detail'),
     path('products/<int:user_id>/user/', views.ProductUser.as_view(), name='product_user'),
@@ -32,7 +31,11 @@ urlpatterns = [
     path('review/<int:product_id>/', views.ReviewList.as_view(), name='review_list'),
     path('review/<int:_id>/detail/', views.ReviewDetail.as_view(), name='review_detail'),
 
-    path('user/<int:_id>/', views.UserProfileDetails.as_view(), name='user_profile_details'),
+    path('user/', views.UserProfileDetails.as_view(), name='user_profile_details'),
+
+    path('about_us/', views.AboutUs.as_view(), name="About us"),
+
+    path('testing', views.DetailProduct.as_view(), name="detail_product")
 ]
 
 '''{
