@@ -18,22 +18,11 @@ from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from .serializers import ProductUpdateSerializer, ProductSerializer
+from utils.tokens import get_user_id_from_token
+from userapp.serializers import UserProfileSerializer
 
 
 logger = logging.getLogger('django')
-
-
-def get_user_id_from_token(request):
-    try:
-        authorization_header = request.headers.get('Authorization')
-        if authorization_header:
-            access_token = AccessToken(authorization_header.split()[1])
-            user_id = access_token['user_id']
-            return user_id
-        else:
-            return None
-    except (AuthenticationFailed, IndexError):
-        return None
 
 
 class ProductDetail(APIView):

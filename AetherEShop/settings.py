@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django.contrib.staticfiles',
     'Aether',
+    'productapp',
     'OrdDo',
     'userapp',
     'rest_framework',
