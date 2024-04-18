@@ -1,12 +1,8 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from Aether.models import *
-from productapp.serializers import (ProductSerializer,
-                                    ProductQuerySerializer,
-                                    ProductImage,
-                                    ProductUpDateNewSerializer,
-                                    AccountSerializer
-                                    )
+from productapp.serializers import ProductSerializer
+from accountapp.serializers import AccountSerializer
 from orderapp.models import (Address,
                              Order,
                              OrderDetails,
@@ -133,21 +129,6 @@ class CommentMainSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'comment_text', 'parent_id', 'children']
-
-
-class ProductUpdateSerializer(serializers.Serializer):
-    title = serializers.CharField(required=False)
-    description = serializers.CharField(required=False)
-    price = serializers.IntegerField(required=False)
-    amount = serializers.IntegerField(required=False)
-
-    def validate(self, data):
-        # Ensure that only specified fields are allowed
-        allowed_fields = {'title', 'description', 'price', 'amount'}
-        for key in data.keys():
-            if key not in allowed_fields:
-                raise serializers.ValidationError(f"Field '{key}' is not allowed for update.")
-        return data
 
 
 class ProductQuerySerializer(serializers.Serializer):

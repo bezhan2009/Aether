@@ -1,15 +1,13 @@
 from rest_framework import serializers
 from Aether.models import *
-from productapp.serializers import (ProductSerializer,
-                                    AccountSerializer
-                                    )
+from productapp.serializers import ProductSerializer
 from orderapp.models import (Address,
                              Order,
                              OrderDetails,
                              OrderStatus,
                              Payment
                              )
-
+from accountapp.serializers import AccountSerializer
 
 class AddressSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(),
