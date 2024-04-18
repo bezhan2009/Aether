@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Aether',
     'productapp',
-    'OrdDo',
+    'orderapp',
     'userapp',
     'rest_framework',
     'rest_framework_simplejwt',

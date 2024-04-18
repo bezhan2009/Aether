@@ -3,13 +3,10 @@ from rest_framework import permissions
 from drf_yasg import openapi
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view
 from django.db import transaction
 from .serializers import *
 from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.exceptions import AuthenticationFailed
-from rest_framework_simplejwt.tokens import AccessToken
 import logging
 from django.db.models import Q
 from django.http import Http404
@@ -20,6 +17,7 @@ from rest_framework import status
 from .serializers import ProductUpdateSerializer, ProductSerializer
 from utils.tokens import get_user_id_from_token
 from userapp.serializers import UserProfileSerializer
+from productapp.serializers import CategorySerializer
 
 
 logger = logging.getLogger('django')

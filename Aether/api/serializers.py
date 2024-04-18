@@ -6,7 +6,13 @@ from productapp.serializers import (ProductSerializer,
                                     ProductImage,
                                     ProductUpDateNewSerializer,
                                     AccountSerializer
-                                )
+                                    )
+from orderapp.models import (Address,
+                             Order,
+                             OrderDetails,
+                             OrderStatus,
+                             Payment
+                             )
 
 
 class AddressSerializer(serializers.ModelSerializer):
@@ -34,7 +40,8 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
 
 class OrderDetailsNewSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
-    product_write_only = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), write_only=True, required=False, source='product')  # Переименовано поле
+    product_write_only = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), write_only=True,
+                                                            required=False, source='product')  # Переименовано поле
     address_s = serializers.CharField(source='address.address', read_only=True)
     product_s = serializers.CharField(source='product.name', read_only=True)
     product_detail = ProductSerializer(source='product', read_only=True)  # Изменено имя поля для ProductSerializer
@@ -55,6 +62,7 @@ class OrderDetailsFCSerializer(serializers.ModelSerializer):
 class OrderDetailsAloneSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(),
                                               required=False)  # Делаем поле user необязательным
+
     # product_s = serializers.CharField(source='product.name', read_only=True)
     # address_s = serializers.CharField(source='address.address', read_only=True)
 
@@ -73,7 +81,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderNewSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = OrderDetails
         fields = ('quantity',)
