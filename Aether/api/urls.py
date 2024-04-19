@@ -37,11 +37,3 @@ urlpatterns = [
 
     path('testing', views.DetailProduct.as_view(), name="detail_product")
 ]
-
-'''{
-    "user": 1,
-    "title": "test",
-    "description": "test_description",
-    "price": 10.00,
-    "amount": 3
-}'''

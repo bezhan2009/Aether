@@ -3,13 +3,10 @@ from rest_framework import permissions
 from drf_yasg import openapi
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view
 from django.db import transaction
 from .serializers import *
 from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.exceptions import AuthenticationFailed
-from rest_framework_simplejwt.tokens import AccessToken
 import logging
 from django.db.models import Q
 from django.http import Http404
@@ -17,23 +14,19 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
-from .serializers import ProductUpdateSerializer, ProductSerializer
+from utils.tokens import get_user_id_from_token
+from userapp.serializers import UserProfileSerializer
+from productapp.serializers import CategorySerializer
+from productapp.serializers import (ProductSerializer,
+                                    ProductUpdateSerializer,
+                                    ProductQuerySerializer,
+                                    ProductImage,
+                                    ProductUpDateNewSerializer
+                                    )
 
+from utils.commentTree import build_comment_tree
 
 logger = logging.getLogger('django')
-
-
-def get_user_id_from_token(request):
-    try:
-        authorization_header = request.headers.get('Authorization')
-        if authorization_header:
-            access_token = AccessToken(authorization_header.split()[1])
-            user_id = access_token['user_id']
-            return user_id
-        else:
-            return None
-    except (AuthenticationFailed, IndexError):
-        return None
 
 
 class ProductDetail(APIView):
@@ -1351,16 +1344,6 @@ class ReviewList(APIView):
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-def build_comment_tree(comment, comments_dict):
-    comment_data = CommentSerializer(instance=comment).data
-    children_comments = comments_dict.get(comment.id, [])
-
-    if children_comments:
-        comment_data['children'] = [build_comment_tree(child, comments_dict) for child in children_comments]
-
-    return comment_data
 
 
 class CommentList(APIView):

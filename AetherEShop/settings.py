@@ -41,8 +41,15 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django.contrib.staticfiles',
     'Aether',
-    'OrdDo',
+    'productapp',
+    'orderapp',
     'userapp',
+    'accountapp',
+    'addressapp',
+    'categoryapp',
+    'reviewapp',
+    'commentapp',
+    'payapp',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
@@ -86,7 +93,7 @@ WSGI_APPLICATION = 'AetherEShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'main_db',
+        'NAME': 'aether_new_main_db',
         'USER': 'postgres',
         'PASSWORD': 'bezhan2009',
         'HOST': 'localhost',

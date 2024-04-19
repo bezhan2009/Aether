@@ -1,14 +1,15 @@
+from utils.tokens import get_user_id_from_token
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from drf_yasg import openapi
-from .serializers import *
 from rest_framework_simplejwt.authentication import JWTAuthentication
 import logging
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
-from utils.tokens import get_user_id_from_token
+from .serializers import *
+from rest_framework_simplejwt.tokens import RefreshToken
 
 logger = logging.getLogger('django')
 
@@ -24,14 +25,24 @@ class UserProfileList(APIView):
             'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
         }
     ))
-    def post(request):
-        serializer = UserProfileSerializer(data=request.data)
+    def post(self, request):
+        data = {
+            'username': request.data['username'],
+            'password': request.data['password'],
+            'email': request.data['email'],
+            'age': request.data['age'],
+            'is_admin': request.data['is_admin'],
+        }
+        serializer = UserProfileSerializer(data=data)
         if serializer.is_valid():
-            user = serializer.save()
-            serializer = UserProfileSerializer(user)
+            user = UserProfile.objects.create_user(**data)
+            refresh = RefreshToken.for_user(user)
             logger.info(f"New user created with ID {user.id}.")
-            return Response(serializer.data)
-        logger.error(f"Failed to create a new user: {serializer.errors}")
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'user_id': user.id
+            })
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
