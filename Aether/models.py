@@ -15,6 +15,7 @@ from orderapp.models import (OrderStatus,
                              Payment,
                              Address
                              )
+from categoryapp.models import Category
 
 
 class Review(models.Model):

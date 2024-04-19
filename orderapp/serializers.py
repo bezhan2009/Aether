@@ -71,13 +71,3 @@ class OrderNewSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderDetails
         fields = ('quantity',)
-
-
-class PaymentSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
-    order = OrderDetailsSerializer()
-    account = AccountSerializer()
-
-    class Meta:
-        model = Payment
-        fields = '__all__'

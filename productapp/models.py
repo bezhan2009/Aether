@@ -1,14 +1,7 @@
 from django.db import models
 from userapp.models import UserProfile
 from accountapp.models import Account
-
-
-class Category(models.Model):
-    category_name = models.CharField(max_length=100)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.category_name
+from categoryapp.models import Category
 
 
 class Product(models.Model):
