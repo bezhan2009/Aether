@@ -38,7 +38,7 @@ class AccountList(APIView):
             return Response({"message": "Account Not Found."}, status=404)
         if not accounts.exists():
             logger.warning(f"Failed to retrieve accounts for user {user_id}. Account Not Found.")
-            return Response({"message": "You have any accounts."}, status=404)
+            return Response({"message": "You have not any accounts."}, status=404)
         serializer = AccountSerializer(accounts, many=True)
         logger.info(f"User with ID {user_id} retrieved their accounts.")
         return Response(serializer.data, status=200)

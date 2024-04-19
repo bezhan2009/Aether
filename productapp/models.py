@@ -12,14 +12,14 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories')
     title = models.CharField(max_length=100)
     description = models.TextField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     price = models.FloatField()
     amount = models.IntegerField()
-    default_account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    default_account = models.ForeignKey(Account, on_delete=models.CASCADE, null=True, default=None)
     is_deleted = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
 
@@ -28,7 +28,7 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name='images')
     image = models.ImageField(upload_to="product_images/")
 
     def __str__(self):

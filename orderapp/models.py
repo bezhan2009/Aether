@@ -29,7 +29,6 @@ class OrderDetails(models.Model):
         return f"{self.product.title} - {self.quantity} units"
 
 
-
 class Order(models.Model):
     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     status = models.ForeignKey(OrderStatus, on_delete=models.CASCADE)

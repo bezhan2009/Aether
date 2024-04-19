@@ -48,9 +48,9 @@ urlpatterns = [
     path('auth/sign-in/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 
-    path('user', include('userapp.urls')),
-    path('products', include('productapp.urls')),
-    path('orders', include('orderapp.urls')),
-    path('account', include('accountapp.urls')),
-    path('address', include('addressapp.urls')),
+    path('user/', include('userapp.urls')),
+    path('products/', include('productapp.urls')),
+    path('orders/', include('orderapp.urls')),
+    path('account/', include('accountapp.urls')),
+    path('address/', include('addressapp.urls')),
 ]
