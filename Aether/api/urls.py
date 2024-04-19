@@ -32,6 +32,12 @@ urlpatterns = [
     path('review/<int:_id>/detail/', views.ReviewDetail.as_view(), name='review_detail'),
 
     path('user/', views.UserProfileDetails.as_view(), name='user_profile_details'),
+<<<<<<< HEAD
+=======
+
+    path('about_us/', views.AboutUs.as_view(), name="About us")
+]
+>>>>>>> 6f7d5f7275efe42e88c039cc5872c4dbc9310221
 
     path('about_us/', views.AboutUs.as_view(), name="About us"),
 

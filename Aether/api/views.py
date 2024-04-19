@@ -27,6 +27,44 @@ from productapp.serializers import (ProductSerializer,
 from utils.commentTree import build_comment_tree
 
 logger = logging.getLogger('django')
+<<<<<<< HEAD
+=======
+
+
+@swagger_auto_schema(method='post', request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+    properties={
+        'username': openapi.Schema(type=openapi.TYPE_STRING),
+        'password': openapi.Schema(type=openapi.TYPE_STRING),
+        'email': openapi.Schema(type=openapi.TYPE_STRING),
+        'age': openapi.Schema(type=openapi.TYPE_INTEGER),
+        'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+    }
+))
+@api_view(["POST"])
+def create_user(request):
+    serializer = UserProfileSerializer(data=request.data)
+    if serializer.is_valid():
+        user = serializer.save()
+        serializer = UserProfileSerializer(user)
+        logger.info(f"New user created with ID {user.id}.")
+        return Response(serializer.data)
+    logger.error(f"Failed to create a new user: {serializer.errors}")
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def get_user_id_from_token(request):
+    try:
+        authorization_header = request.headers.get('Authorization')
+        if authorization_header:
+            access_token = AccessToken(authorization_header.split()[1])
+            user_id = access_token['user_id']
+            return user_id
+        else:
+            return None
+    except (AuthenticationFailed, IndexError):
+        return None
+>>>>>>> 6f7d5f7275efe42e88c039cc5872c4dbc9310221
 
 
 class ProductDetail(APIView):
@@ -132,16 +170,57 @@ class ProductList(APIView):
         try:
             user_id = get_user_id_from_token(request)
             user_profile = UserProfile.objects.get(id=user_id)
+<<<<<<< HEAD
             if 2 + 2 == 4:
                 products = Product.objects.filter(is_deleted=False, amount__gt=0)
             if user_profile.is_admin and not show_own_products:
                 products = products.filter(is_deleted=False, amount__gt=0)
             elif user_profile.is_admin and show_own_products:
                 products = products.filter(user=user_profile, is_deleted=False, amount__gt=0)
+=======
+            if user_profile.is_admin:
+                products = Product.objects.filter(user=user_profile, is_deleted=False, amount__gt=0)
+            else:
+                products = Product.objects.filter(is_deleted=False, amount__gt=0)
+            if user_profile.is_admin and not show_own_products:
+                products = Product.objects.filter(is_deleted=False, amount__gt=0)
+            elif user_profile.is_admin and show_own_products:
+                products = Product.objects.filter(user=user_profile, is_deleted=False, amount__gt=0)
+>>>>>>> 6f7d5f7275efe42e88c039cc5872c4dbc9310221
 
             if search_query:
                 products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
 
+<<<<<<< HEAD
+=======
+            # Apply additional filters
+            if min_price is not None:
+                products = products.filter(price__gte=min_price)
+            if max_price is not None:
+                products = products.filter(price__lte=max_price)
+            if categories:
+                try:
+                    category = Category.objects.get(id=categories)
+                except Category.DoesNotExist:
+                    return Response({"message": "Category not found"}, status=404)
+                products = products.filter(category=category)
+
+            products = products[:30]
+            products = products.order_by('-views')
+            serializer = ProductSerializer(products, many=True)
+
+            return Response(serializer.data, status=200)
+
+        # If the user is not authenticated or there is no user-specific filter, consider public data
+        except UserProfile.DoesNotExist:
+            products = Product.objects.filter(is_deleted=False)
+
+            # Apply public filters based on search query
+            if search_query:
+                products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
+
+            # Apply additional filters
+>>>>>>> 6f7d5f7275efe42e88c039cc5872c4dbc9310221
             if min_price is not None:
                 products = products.filter(price__gte=min_price)
             if max_price is not None:
@@ -153,6 +232,7 @@ class ProductList(APIView):
                 except Category.DoesNotExist:
                     return Response({"message": "Category not found"}, status=404)
 
+<<<<<<< HEAD
             products = products.order_by('-views')[:30]
             serializer = ProductSerializer(products, many=True)
 
@@ -178,6 +258,14 @@ class ProductList(APIView):
             products = products.order_by('-views')[:30]
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data, status=200)
+=======
+        products = products.order_by('-views')
+        products = products[:30]
+        if not products.exists():
+            return Response({"message": "No products found"}, status=404)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+>>>>>>> 6f7d5f7275efe42e88c039cc5872c4dbc9310221
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -1496,6 +1584,7 @@ class ProductUser(APIView):
 class AboutUs(APIView):
     def get(self, reqeust):
         return Response({"message": f"Hello we are Aether"}, status=200)
+<<<<<<< HEAD
 
 
 class DetailProduct(APIView):
@@ -1529,3 +1618,5 @@ class DetailProduct(APIView):
             serializer.save(user=UserProfile.objects.get(id=get_user_id_from_token(request)))
             return Response(True, status=201)
         return Response(serializer.errors, status=401)
+=======
+>>>>>>> 6f7d5f7275efe42e88c039cc5872c4dbc9310221
