@@ -9,6 +9,8 @@ from orderapp.models import (Address,
                              OrderStatus,
                              Payment
                              )
+from reviewapp.models import Review
+from commentapp.models import Comment
 
 
 class AddressSerializer(serializers.ModelSerializer):

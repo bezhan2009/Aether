@@ -55,4 +55,6 @@ urlpatterns = [
     path('address/', include('addressapp.urls')),
     path('payment/', include('payapp.urls')),
     path('category/', include('categoryapp.urls')),
+    path('review/', include('reviewapp.urls')),
+    path('comment/', include('commentapp.urls')),
 ]

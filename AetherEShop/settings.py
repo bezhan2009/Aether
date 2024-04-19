@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'accountapp',
     'addressapp',
     'categoryapp',
+    'reviewapp',
+    'commentapp',
     'payapp',
     'rest_framework',
     'rest_framework_simplejwt',

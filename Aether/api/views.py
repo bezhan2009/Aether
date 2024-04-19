@@ -24,6 +24,7 @@ from productapp.serializers import (ProductSerializer,
                                     ProductUpDateNewSerializer
                                     )
 
+from utils.commentTree import build_comment_tree
 
 logger = logging.getLogger('django')
 
@@ -1343,16 +1344,6 @@ class ReviewList(APIView):
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-def build_comment_tree(comment, comments_dict):
-    comment_data = CommentSerializer(instance=comment).data
-    children_comments = comments_dict.get(comment.id, [])
-
-    if children_comments:
-        comment_data['children'] = [build_comment_tree(child, comments_dict) for child in children_comments]
-
-    return comment_data
 
 
 class CommentList(APIView):
