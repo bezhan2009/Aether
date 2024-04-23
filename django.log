@@ -1,0 +1,35 @@
+WARNING 2024-04-23 18:13:11,997 log 7792 6416 Not Found: /favicon.ico
+WARNING 2024-04-23 18:13:11,997 basehttp 7792 6416 "GET /favicon.ico HTTP/1.1" 404 4029
+ERROR 2024-04-23 18:13:27,369 log 7792 14040 Internal Server Error: /swagger/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 415, in initial
+    self.check_permissions(request)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 331, in check_permissions
+    for permission in self.get_permissions():
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 278, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+ERROR 2024-04-23 18:13:27,371 basehttp 7792 14040 "GET /swagger/ HTTP/1.1" 500 109221
