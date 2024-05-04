@@ -7,5 +7,3 @@ from .views import ping
 urlpatterns = [
     path('ping/', path, name='ping'),
 ]
-
-

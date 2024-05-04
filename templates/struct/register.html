@@ -132,10 +132,13 @@ label {
             <input type="password" name="password" placeholder="Password">
             <input type="email" name="email" placeholder="Email">
             <input type="number" name="age" placeholder="Age">
-                <div>
+            <!--    
+            <div>
                     <input type="checkbox" id="isAdminCheckbox" name="is_admin">
                     <label for="isAdminCheckbox">Вы продавец?</label>
                 </div>
+                !-->
+            <input type="text" name="is_admin" placeholder="Вы продавец ?">
             <input type="submit" value="Register">
         </form>
         <div class="login-link">
@@ -148,6 +151,7 @@ label {
             event.preventDefault(); // Предотвращаем стандартное поведение браузера
             // Далее можно добавить логику для отправки данных на сервер через AJAX или другие обработки
         });
+        
     </script>
 </body>
 </html>
