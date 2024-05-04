@@ -11,7 +11,7 @@ from drf_yasg.utils import swagger_auto_schema
 from utils.tokens import get_user_id_from_token
 
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('addressapp.views')
 
 
 class AddressList(APIView):

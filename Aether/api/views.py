@@ -26,7 +26,8 @@ from productapp.serializers import (ProductSerializer,
 
 from utils.commentTree import build_comment_tree
 
-logger = logging.getLogger('django')
+
+logger = logging.getLogger('Aether.api.views')
 
 
 class ProductDetail(APIView):

@@ -15,7 +15,7 @@ from orderapp.models import (Order,
                              OrderDetails
                              )
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('reviewapp.views')
 
 
 class ReviewDetail(APIView):

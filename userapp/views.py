@@ -11,7 +11,7 @@ from rest_framework import status
 from .serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('userapp.views')
 
 
 class UserProfileList(APIView):

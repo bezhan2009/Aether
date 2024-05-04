@@ -14,7 +14,7 @@ from .models import (UserProfile,
 from .serializers import AccountSerializer
 
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('accountapp.views')
 
 
 class AccountList(APIView):
