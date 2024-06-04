@@ -174,3 +174,4 @@ WARNING 2024-05-04 23:37:11,137 log 7756 1700 Unauthorized: /auth/sign-in/
 WARNING 2024-05-04 23:37:11,137 basehttp 7756 1700 "POST /auth/sign-in/ HTTP/1.1" 401 63
 WARNING 2024-05-04 23:38:12,320 log 7756 9108 Unauthorized: /auth/sign-in/
 WARNING 2024-05-04 23:38:12,320 basehttp 7756 9108 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-05-04 23:38:12,320 basehttp 7756 9108 "POST /auth/sign-in/ HTTP/1.1" 401 63
