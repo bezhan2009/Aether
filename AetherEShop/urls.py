@@ -22,7 +22,6 @@ from rest_framework import permissions
 from drf_yasg import openapi
 from drf_yasg.renderers import SwaggerUIRenderer
 
-from Aether.views import ping
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -38,23 +37,20 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', ping, name='ping'),
-
+    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('admin/', admin.site.urls),
-    path('demo/', include('Aether.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auth/token/verify/', TokenVerifyView.as_view(), name='verify_refresh'),
     path('auth/sign-in/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 
-    path('user/', include('userapp.urls')),
-    path('products/', include('productapp.urls')),
-    path('orders/', include('orderapp.urls')),
-    path('account/', include('accountapp.urls')),
-    path('address/', include('addressapp.urls')),
-    path('payment/', include('payapp.urls')),
-    path('category/', include('categoryapp.urls')),
-    path('review/', include('reviewapp.urls')),
-    path('comment/', include('commentapp.urls')),
+    path('auth/', include('userapp.urls')),
+    path('api/products/', include('productapp.urls')),
+    path('api/orders/', include('orderapp.urls')),
+    path('api/account/', include('accountapp.urls')),
+    path('api/address/', include('addressapp.urls')),
+    path('api/payment/', include('payapp.urls')),
+    path('api/category/', include('categoryapp.urls')),
+    path('api/review/', include('reviewapp.urls')),
+    path('api/comment/', include('commentapp.urls')),
 ]

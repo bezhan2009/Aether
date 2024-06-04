@@ -9,7 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 from productapp.serializers import CategorySerializer
 
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('categoryapp.views')
 
 
 class CategoryList(APIView):

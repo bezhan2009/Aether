@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'drf_yasg',
     'django.contrib.staticfiles',
-    'Aether',
     'productapp',
     'orderapp',
     'userapp',

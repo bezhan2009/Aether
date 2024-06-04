@@ -14,7 +14,7 @@ from .models import (UserProfile,
 from .serializers import AccountSerializer
 
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('accountapp.views')
 
 
 class AccountList(APIView):
@@ -114,7 +114,7 @@ class AccountDetails(APIView):
             return Response({"message": "Account not found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response({"message": str(e)}, status=500)
+            return Response({"error": str(e)}, status=500)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -170,9 +170,9 @@ class AccountDetails(APIView):
             return Response({"message": "Account Not Found"}, status=404)
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
-            return Response({"message": str(e)}, status=500)
+            return Response({"error": str(e)}, status=500)
 
         account.is_deleted = True
         account.save()
         logger.info(f"Account with ID {_id} marked as deleted.")
-        return Response({"message": "Account has been successfully removed"}, status=200)
+        return Response({"message": "Account has been successfully removed."}, status=200)

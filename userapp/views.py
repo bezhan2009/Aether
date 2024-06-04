@@ -11,7 +11,7 @@ from rest_framework import status
 from .serializers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('userapp.views')
 
 
 class UserProfileList(APIView):
@@ -104,6 +104,3 @@ class UserProfileDetails(APIView):
             return Response(serializer.data, status=200)
         logger.error(f"Failed to update user with ID {user_id}: {serializer.errors}")
         return Response(serializer.errors, status=401)
-
-# Checking
-

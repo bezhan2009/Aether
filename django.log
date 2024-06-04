@@ -1,0 +1,177 @@
+WARNING 2024-04-23 18:13:11,997 log 7792 6416 Not Found: /favicon.ico
+WARNING 2024-04-23 18:13:11,997 basehttp 7792 6416 "GET /favicon.ico HTTP/1.1" 404 4029
+ERROR 2024-04-23 18:13:27,369 log 7792 14040 Internal Server Error: /swagger/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 415, in initial
+    self.check_permissions(request)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 331, in check_permissions
+    for permission in self.get_permissions():
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 278, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+ERROR 2024-04-23 18:13:27,371 basehttp 7792 14040 "GET /swagger/ HTTP/1.1" 500 109221
+WARNING 2024-05-04 23:14:29,913 log 8232 4404 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:14:29,915 basehttp 8232 4404 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-05-04 23:14:41,383 log 8232 12280 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:14:41,384 basehttp 8232 12280 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-05-04 23:14:56,169 log 8232 1208 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:14:56,169 basehttp 8232 1208 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-05-04 23:15:13,076 log 8232 9044 Bad Request: /api/user/
+WARNING 2024-05-04 23:15:13,076 basehttp 8232 9044 "POST /api/user/ HTTP/1.1" 400 42
+ERROR 2024-05-04 23:16:27,849 log 8232 11048 Internal Server Error: /api/account/2/
+ERROR 2024-05-04 23:16:27,849 basehttp 8232 11048 "GET /api/account/2/ HTTP/1.1" 500 62
+ERROR 2024-05-04 23:18:39,157 log 8232 11684 Internal Server Error: /api/account/2/
+ERROR 2024-05-04 23:18:39,158 basehttp 8232 11684 "PUT /api/account/2/ HTTP/1.1" 500 60
+ERROR 2024-05-04 23:19:06,741 log 2616 8500 Internal Server Error: /api/account/2/
+ERROR 2024-05-04 23:19:06,741 basehttp 2616 8500 "DELETE /api/account/2/ HTTP/1.1" 500 62
+ERROR 2024-05-04 23:19:11,556 log 2616 8500 Internal Server Error: /api/account/1/
+ERROR 2024-05-04 23:19:11,557 basehttp 2616 8500 "DELETE /api/account/1/ HTTP/1.1" 500 62
+WARNING 2024-05-04 23:20:23,471 log 11084 6140 Unauthorized: /api/account/
+WARNING 2024-05-04 23:20:23,472 basehttp 11084 6140 "POST /api/account/ HTTP/1.1" 401 71
+WARNING 2024-05-04 23:28:59,129 log 7756 1880 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:28:59,130 basehttp 7756 1880 "POST /auth/sign-in/ HTTP/1.1" 401 63
+ERROR 2024-05-04 23:30:56,255 log 7756 11936 Internal Server Error: /auth/sign-up/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\PycharmProjects\AetherEShop\userapp\views.py", line 38, in post
+    user = UserProfile.objects.create_user(**data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\contrib\auth\models.py", line 161, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\contrib\auth\models.py", line 155, in _create_user
+    user.save(using=self._db)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\contrib\auth\base_user.py", line 78, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 822, in save
+    self.save_base(
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 909, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 1067, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\base.py", line 1108, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1847, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    for sql, params in self.as_sql():
+                       ^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1747, in as_sql
+    self.prepare_value(field, self.pre_save_val(field, obj))
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1686, in prepare_value
+    return field.get_db_prep_save(value, connection=self.connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 1013, in get_db_prep_save
+    return self.get_db_prep_value(value, connection=connection, prepared=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 1006, in get_db_prep_value
+    value = self.get_prep_value(value)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 1183, in get_prep_value
+    return self.to_python(value)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\fields\__init__.py", line 1173, in to_python
+    raise exceptions.ValidationError(
+django.core.exceptions.ValidationError: ['“on” value must be either True or False.']
+ERROR 2024-05-04 23:30:56,262 basehttp 7756 11936 "POST /auth/sign-up/ HTTP/1.1" 500 179076
+WARNING 2024-05-04 23:30:56,696 log 7756 11936 Not Found: /favicon.ico
+WARNING 2024-05-04 23:30:56,697 basehttp 7756 11936 "GET /favicon.ico HTTP/1.1" 404 3906
+WARNING 2024-05-04 23:32:38,648 log 7756 11308 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:32:38,649 basehttp 7756 11308 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-05-04 23:33:09,593 log 7756 13016 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:33:09,593 basehttp 7756 13016 "POST /auth/sign-in/ HTTP/1.1" 401 63
+ERROR 2024-05-04 23:33:49,435 log 7756 12824 Internal Server Error: /auth/sign-up/
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\utils\datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'is_admin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\PycharmProjects\AetherEShop\userapp\views.py", line 34, in post
+    'is_admin': request.data['is_admin'],
+                ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\utils\datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'is_admin'
+ERROR 2024-05-04 23:33:49,437 basehttp 7756 12824 "POST /auth/sign-up/ HTTP/1.1" 500 110714
+WARNING 2024-05-04 23:37:11,137 log 7756 1700 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:37:11,137 basehttp 7756 1700 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-05-04 23:38:12,320 log 7756 9108 Unauthorized: /auth/sign-in/
+WARNING 2024-05-04 23:38:12,320 basehttp 7756 9108 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-05-04 23:38:12,320 basehttp 7756 9108 "POST /auth/sign-in/ HTTP/1.1" 401 63

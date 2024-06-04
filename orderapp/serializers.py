@@ -1,14 +1,11 @@
 from rest_framework import serializers
-from Aether.models import *
 from productapp.serializers import ProductSerializer
-from orderapp.models import (Address,
-                             Order,
+from orderapp.models import (Order,
                              OrderDetails,
                              OrderStatus,
-                             Payment
                              )
-from accountapp.serializers import AccountSerializer
-from addressapp.serializers import AddressSerializer
+from productapp.models import Product
+from userapp.models import UserProfile
 
 
 class OrderStatusSerializer(serializers.ModelSerializer):

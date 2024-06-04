@@ -15,7 +15,7 @@ from rest_framework import status
 from .serializers import ProductUpdateSerializer, ProductSerializer
 from utils.tokens import get_user_id_from_token
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('productapp.views')
 
 
 class ProductDetail(APIView):

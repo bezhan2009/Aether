@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-from .views import *
-from Aether.views import *
 
 urlpatterns = [
     path('', views.ProductList.as_view(), name='products'),
