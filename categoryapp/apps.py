@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class MyAppConfig(AppConfig):
+class CategoryApp(AppConfig):
     name = 'categoryapp'

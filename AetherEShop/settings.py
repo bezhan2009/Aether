@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'drf_yasg',
     'django.contrib.staticfiles',
+    "featured_productapp",
     'productapp',
     'orderapp',
     'userapp',

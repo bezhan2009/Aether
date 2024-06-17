@@ -125,7 +125,6 @@ class AccountDetails(APIView):
             type=openapi.TYPE_OBJECT,
             properties={
                 'fill': openapi.Schema(type=openapi.TYPE_NUMBER, description="Amount to fill the account balance"),
-                # Add other properties as needed
             },
             required=['fill']
         ),
