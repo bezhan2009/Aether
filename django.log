@@ -175,3 +175,160 @@ WARNING 2024-05-04 23:37:11,137 basehttp 7756 1700 "POST /auth/sign-in/ HTTP/1.1
 WARNING 2024-05-04 23:38:12,320 log 7756 9108 Unauthorized: /auth/sign-in/
 WARNING 2024-05-04 23:38:12,320 basehttp 7756 9108 "POST /auth/sign-in/ HTTP/1.1" 401 63
 WARNING 2024-05-04 23:38:12,320 basehttp 7756 9108 "POST /auth/sign-in/ HTTP/1.1" 401 63
+ERROR 2024-06-17 15:11:53,909 log 13300 13664 Internal Server Error: /featured_products
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UndefinedTable: ОШИБКА:  отношение "featured_productapp_featuredproduct" не существует
+LINE 1: ...atured_productapp_featuredproduct"."user_id" FROM "featured_...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\PycharmProjects\AetherEShop\featured_productapp\views.py", line 19, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+           ^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 400, in __iter__
+    self._fetch_all()
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 1928, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: ОШИБКА:  отношение "featured_productapp_featuredproduct" не существует
+LINE 1: ...atured_productapp_featuredproduct"."user_id" FROM "featured_...
+                                                             ^
+
+ERROR 2024-06-17 15:11:53,918 basehttp 13300 13664 "GET /featured_products HTTP/1.1" 500 29045
+ERROR 2024-06-17 15:16:17,330 basehttp 3620 2540 "GET /products/?show_own_products=false HTTP/1.1" 500 59
+WARNING 2024-06-17 15:22:05,612 log 2520 6400 Unauthorized: /auth/sign-in/
+WARNING 2024-06-17 15:22:05,613 basehttp 2520 6400 "POST /auth/sign-in/ HTTP/1.1" 401 63
+WARNING 2024-06-17 15:22:14,668 log 2520 5208 Bad Request: /auth/sign-up/
+WARNING 2024-06-17 15:22:14,669 basehttp 2520 5208 "POST /auth/sign-up/ HTTP/1.1" 400 99
+WARNING 2024-06-17 15:22:51,890 log 2520 1504 Not Found: /featured_products
+WARNING 2024-06-17 15:22:51,891 basehttp 2520 1504 "POST /featured_products HTTP/1.1" 404 37
+WARNING 2024-06-17 15:24:02,894 log 2520 13884 Forbidden: /products/
+WARNING 2024-06-17 15:24:02,894 basehttp 2520 13884 "POST /products/ HTTP/1.1" 403 82
+WARNING 2024-06-17 15:24:44,393 log 2520 10884 Bad Request: /products/
+WARNING 2024-06-17 15:24:44,393 basehttp 2520 10884 "POST /products/ HTTP/1.1" 400 58
+WARNING 2024-06-17 15:25:24,420 log 2520 5540 Not Found: /featured_products
+WARNING 2024-06-17 15:25:24,420 basehttp 2520 5540 "POST /featured_products HTTP/1.1" 404 37
+WARNING 2024-06-17 15:27:12,913 log 9524 12508 Not Found: /featured_products
+WARNING 2024-06-17 15:27:12,914 basehttp 9524 12508 "POST /featured_products HTTP/1.1" 404 37
+WARNING 2024-06-17 15:27:38,242 log 9524 13316 Bad Request: /products/
+WARNING 2024-06-17 15:27:38,242 basehttp 9524 13316 "POST /products/ HTTP/1.1" 400 65
+WARNING 2024-06-17 15:27:55,282 log 9524 13616 Not Found: /featured_products
+WARNING 2024-06-17 15:27:55,283 basehttp 9524 13616 "POST /featured_products HTTP/1.1" 404 37
+WARNING 2024-06-17 15:29:35,795 log 11576 1964 Not Found: /featured_products
+WARNING 2024-06-17 15:29:35,796 basehttp 11576 1964 "POST /featured_products HTTP/1.1" 404 37
+WARNING 2024-06-17 15:29:43,117 log 11632 11780 Not Found: /featured_products
+WARNING 2024-06-17 15:29:43,118 basehttp 11632 11780 "POST /featured_products HTTP/1.1" 404 36
+ERROR 2024-06-17 15:31:14,555 log 12216 10144 Internal Server Error: /featured_products
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\fields.py", line 446, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\fields.py", line 96, in get_attribute
+    instance = getattr(instance, attr)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'FeaturedProduct' object has no attribute 'title'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\PycharmProjects\AetherEShop\featured_productapp\views.py", line 30, in get
+    return Response(serializer.data, status=status.HTTP_200_OK)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 687, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\serializers.py", line 509, in to_representation
+    attribute = field.get_attribute(instance)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\Projects\AetherEShop\venv\Lib\site-packages\rest_framework\fields.py", line 479, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `title` on serializer `FeaturesProductSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `FeaturedProduct` instance.
+Original exception text was: 'FeaturedProduct' object has no attribute 'title'.
+ERROR 2024-06-17 15:31:14,559 basehttp 12216 10144 "GET /featured_products HTTP/1.1" 500 27961
