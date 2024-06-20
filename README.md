@@ -1,8 +1,4 @@
 
-![Python](https://img.shields.io/badge/python-3.12-blue)
-![Django](https://img.shields.io/badge/django-latest-brightgreen)
-<br>
-<br>
 ![GitHub top language](https://img.shields.io/github/languages/top/bezhan2009/Aether)
 ![GitHub language count](https://img.shields.io/github/languages/count/bezhan2009/Aether)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bezhan2009/Aether)
@@ -10,6 +6,10 @@
 ![GitHub](https://img.shields.io/github/license/bezhan2009/Aether)
 ![GitHub last commit](https://img.shields.io/github/last-commit/bezhan2009/Aether)
 ![GitHub User's stars](https://img.shields.io/github/stars/bezhan2009?style=social)
+<br>
+<br>
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![Django](https://img.shields.io/badge/django-latest-brightgreen)
 
 # Aether
 
