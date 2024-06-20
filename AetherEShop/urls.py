@@ -25,9 +25,9 @@ from drf_yasg.renderers import SwaggerUIRenderer
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Your API",
-        default_version='v1',
-        description="API description",
+        title="Aether API",
+        default_version='v2',
+        description="Aether - An online store training project developed as part of coursework. Not intended for commercial use, it was created to learn the basic principles of web application development.",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@yourdomain.com"),
         license=openapi.License(name="BSD License"),
