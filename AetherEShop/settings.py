@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
 
 from pathlib import Path
 from datetime import timedelta
@@ -89,6 +90,18 @@ WSGI_APPLICATION = 'AetherEShop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'dquknpfd'),  # Имя базы данных
+        'USER': os.environ.get('DB_USER', 'dquknpfd'),  # Имя пользователя базы данных
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'cfiKLKfKPER590K83YNo_GBCS8mNC5ba'),  # Пароль пользователя базы данных
+        'HOST': os.environ.get('DB_HOST', 'tiny.db.elephantsql.com'),  # Хост базы данных
+        'PORT': os.environ.get('DB_PORT', '5432'),  # Порт базы данных (обычно 5432)
+    }
+}
+
+'''
 
 DATABASES = {
     'default': {
@@ -101,7 +114,16 @@ DATABASES = {
     }
 }
 
-'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aether_main_db',
+        'USER': 'postgres',
+        'PASSWORD': 'bezhan2009',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 DATABASES = {
     'default': {
@@ -145,6 +167,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
