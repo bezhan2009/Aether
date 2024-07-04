@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import django_heroku
 
 from pathlib import Path
 from datetime import timedelta
@@ -100,6 +101,8 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT', '5432'),  # Порт базы данных (обычно 5432)
     }
 }
+
+django_heroku.settings(locals())
 
 '''
 
