@@ -93,13 +93,14 @@ WSGI_APPLICATION = 'AetherEShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'aether_new_main_db',
-        'USER': 'postgres',
-        'PASSWORD': 'bezhan2009',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': 'plfvzltv',
+        'USER': 'plfvzltv',
+        'PASSWORD': 'si2Yzx2w5iAQed0Iw9-0I5kT1rGhE6uD',
+        'HOST': 'john.db.elephantsql.com',
+        'PORT': '5432',
     }
 }
+
 '''
 
 DATABASES = {
