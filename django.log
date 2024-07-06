@@ -1,2 +1,0 @@
-ERROR 2024-06-17 16:09:57,196 log 484 12216 Internal Server Error: /featured_products
-ERROR 2024-06-17 16:09:57,197 basehttp 484 12216 "POST /featured_products HTTP/1.1" 500 59
