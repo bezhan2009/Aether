@@ -14,6 +14,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from .serializers import ProductUpdateSerializer, ProductSerializer
 from utils.tokens import get_user_id_from_token
+from rest_framework.viewsets import ViewSet
 
 logger = logging.getLogger('productapp.views')
 
@@ -54,21 +55,21 @@ class ProductDetail(APIView):
         product = self.get_object(_id)
         serializer = ProductUpDateNewSerializer(product, data=request.data, partial=True)
 
-        if serializer.is_valid():
-            cover_imgs = request.data.get('cover_img')
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            # Удаляем старые изображения перед добавлением новых
-            product.images.all().delete()
+        cover_imgs = request.data.get('cover_img')
 
-            if cover_imgs:
-                for cover_img in cover_imgs:
-                    ProductImage.objects.create(product=product, image=cover_img)
+        # Удаляем старые изображения перед добавлением новых
+        product.images.all().delete()
 
-            serializer.validated_data["category"] = product.category
-            serializer.save()
-            return Response(serializer.data)
+        if cover_imgs:
+            for cover_img in cover_imgs:
+                ProductImage.objects.create(product=product, image=cover_img)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.validated_data["category"] = product.category
+        serializer.save()
+        return Response(serializer.data)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -86,18 +87,18 @@ class ProductDetail(APIView):
         user_id = get_user_id_from_token(request)
         user_profile = UserProfile.objects.get(id=user_id)
 
-        if not product.is_deleted and user_profile.is_admin:
-            product.is_deleted = True
-            product.save()
-            logger.info(f"Product with ID {_id} marked as deleted.")
-            return Response({"message": "The product has been successfully removed"}, status=200)
-        else:
+        if product.is_deleted and not user_profile.is_admin:
             logger.warning(
                 f"Failed to delete product. Product with ID {_id} has already been deleted or user is not an admin.")
             return Response({"message": "Product has already been deleted or unauthorized access."}, status=404)
 
+        product.is_deleted = True
+        product.save()
+        logger.info(f"Product with ID {_id} marked as deleted.")
+        return Response({"message": "The product has been successfully removed"}, status=200)
 
-class ProductList(APIView):
+
+class ProductList(ViewSet):
     authentication_classes = [SessionAuthentication]
     permission_classes = [AllowAny]
 
@@ -108,7 +109,7 @@ class ProductList(APIView):
         ],
         query_serializer=ProductQuerySerializer(),
     )
-    def get(self, request):
+    def list(self, request, shop_id):
         query_serializer = ProductQuerySerializer(data=request.query_params)
         query_serializer.is_valid(raise_exception=True)
 
@@ -188,7 +189,7 @@ class ProductList(APIView):
         security=[],
     )
     @transaction.atomic
-    def post(self, request):
+    def update(self, request):
         try:
             # Get the array of images from the request data
             cover_imgs = request.data.get('cover_img')
@@ -282,4 +283,3 @@ class ProductUser(APIView):
         except Exception as e:
             logger.error(f"An error occurred while processing the request: {str(e)}")
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
