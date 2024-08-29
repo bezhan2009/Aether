@@ -110,6 +110,9 @@ class ProductList(ViewSet):
         query_serializer=ProductQuerySerializer(),
     )
     def list(self, request, shop_id):
+        query_data = request.query_params.copy()
+        query_data['shop_id'] = shop_id
+
         query_serializer = ProductQuerySerializer(data=request.query_params)
         query_serializer.is_valid(raise_exception=True)
 
@@ -122,8 +125,8 @@ class ProductList(ViewSet):
         try:
             user_id = get_user_id_from_token(request)
             user_profile = UserProfile.objects.get(id=user_id)
-            if 2 + 2 == 4:
-                products = Product.objects.filter(is_deleted=False, amount__gt=0)
+
+            products = Product.objects.filter(is_deleted=False, amount__gt=0, shop_id=shop_id)
             if user_profile.is_admin and not show_own_products:
                 products = products.filter(is_deleted=False, amount__gt=0)
             elif user_profile.is_admin and show_own_products:
@@ -149,7 +152,7 @@ class ProductList(ViewSet):
             return Response(serializer.data, status=200)
 
         except UserProfile.DoesNotExist:
-            products = Product.objects.filter(is_deleted=False)
+            products = Product.objects.filter(is_deleted=False, shop_id=shop_id)
 
             if search_query:
                 products = products.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
@@ -214,7 +217,8 @@ class ProductList(ViewSet):
                 'description': request.data.get('description'),
                 'price': request.data.get('price'),
                 'amount': request.data.get('amount'),
-                'default_account': request.data.get('default_account')
+                'default_account': request.data.get('default_account'),
+                'related_store': request.data.get('store_id')
             }
 
             # Log request data

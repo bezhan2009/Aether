@@ -53,4 +53,4 @@ class ProductQuerySerializer(serializers.Serializer):
     max_price = serializers.DecimalField(required=False, min_value=0, max_digits=10, decimal_places=2)
     category = serializers.CharField(required=False)
 
-    related_shop = serializers.IntegerField(required=False)
+    related_store = serializers.RelatedField(queryset=Store.objects.all(), required=False)
