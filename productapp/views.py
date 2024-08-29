@@ -14,6 +14,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from .serializers import ProductUpdateSerializer, ProductSerializer
 from utils.tokens import get_user_id_from_token
+from rest_framework.viewsets import ViewSet
 
 logger = logging.getLogger('productapp.views')
 
@@ -97,7 +98,7 @@ class ProductDetail(APIView):
         return Response({"message": "The product has been successfully removed"}, status=200)
 
 
-class ProductList(APIView):
+class ProductList(ViewSet):
     authentication_classes = [SessionAuthentication]
     permission_classes = [AllowAny]
 
@@ -108,7 +109,7 @@ class ProductList(APIView):
         ],
         query_serializer=ProductQuerySerializer(),
     )
-    def get(self, request, shop_id):
+    def list(self, request, shop_id):
         query_serializer = ProductQuerySerializer(data=request.query_params)
         query_serializer.is_valid(raise_exception=True)
 
@@ -188,7 +189,7 @@ class ProductList(APIView):
         security=[],
     )
     @transaction.atomic
-    def post(self, request):
+    def update(self, request):
         try:
             # Get the array of images from the request data
             cover_imgs = request.data.get('cover_img')
