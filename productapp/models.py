@@ -4,14 +4,15 @@ from accountapp.models import Account
 from categoryapp.models import Category
 
 
-class Shop(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+class Store(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField(unique=True)
+    description = models.TextField()
+    hash_password = models.CharField(max_length=100)
+    ownerId = models.IntegerField(unique=True)
+    owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    default_account = models.ForeignKey(Account, on_delete=models.CASCADE, null=True, default=None)
-    is_deleted = models.BooleanField(default=False)
-    views = models.IntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.name
@@ -28,7 +29,7 @@ class Product(models.Model):
     default_account = models.ForeignKey(Account, on_delete=models.CASCADE, null=True, default=None)
     is_deleted = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
-    related_shop = models.ForeignKey(Shop, on_delete=models.CASCADE, null=True)
+    related_store = models.ForeignKey(Store, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title
