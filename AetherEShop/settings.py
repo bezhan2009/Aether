@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "featured_productapp",
     'productapp',
     'orderapp',
+    'userapp',
     'storeapp',
     'accountapp',
     'addressapp',
@@ -94,7 +95,7 @@ WSGI_APPLICATION = 'AetherEShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'aether_main_db',
+        'NAME': 'biz_mart_db',
         'USER': 'postgres',
         'PASSWORD': 'bezhan2009',
         'HOST': 'localhost',
@@ -104,36 +105,6 @@ DATABASES = {
 
 django_heroku.settings(locals())
 
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'dquknpfd'),  # Имя базы данных
-        'USER': os.environ.get('DB_USER', 'dquknpfd'),  # Имя пользователя базы данных
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'cfiKLKfKPER590K83YNo_GBCS8mNC5ba'),  # Пароль пользователя базы данных
-        'HOST': os.environ.get('DB_HOST', 'tiny.db.elephantsql.com'),  # Хост базы данных
-        'PORT': os.environ.get('DB_PORT', '5432'),  # Порт базы данных (обычно 5432)
-    }
-}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'plfvzltv',
-        'USER': 'plfvzltv',
-        'PASSWORD': 'si2Yzx2w5iAQed0Iw9-0I5kT1rGhE6uD',
-        'HOST': 'john.db.elephantsql.com',
-        'PORT': '5432',
-    }
-}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-'''
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
