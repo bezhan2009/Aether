@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Address
-from userapp.models import UserProfile
+from storeapp.models import UserProfile
 
 
 class AddressSerializer(serializers.ModelSerializer):

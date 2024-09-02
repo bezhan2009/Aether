@@ -10,13 +10,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('addressapp', '0001_initial'),
-        ('userapp', '0001_initial'),
+        ('storeapp', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='address',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='userapp.userprofile'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='storeapp.userprofile'),
         ),
     ]

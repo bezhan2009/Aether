@@ -14,26 +14,22 @@ from rest_framework_simplejwt.tokens import RefreshToken
 logger = logging.getLogger('storeapp.views')
 
 
-class UserProfileList(APIView):
+class StoreList(APIView):
     @swagger_auto_schema(request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
         properties={
-            'username': openapi.Schema(type=openapi.TYPE_STRING),
-            'password': openapi.Schema(type=openapi.TYPE_STRING),
-            'email': openapi.Schema(type=openapi.TYPE_STRING),
-            'age': openapi.Schema(type=openapi.TYPE_INTEGER),
-            'is_admin': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+            'name': openapi.Schema(type=openapi.TYPE_STRING),
+            'description': openapi.Schema(type=openapi.TYPE_STRING),
+            'hash_password': openapi.Schema(type=openapi.TYPE_STRING),
         }
     ))
     def post(self, request):
         data = {
-            'username': request.data['username'],
-            'password': request.data['password'],
-            'email': request.data['email'],
-            'age': request.data['age'],
-            'is_admin': request.data['is_admin'],
+            'name': request.data['username'],
+            'description': request.data['description'],
+            'hash_password': request.data['password'],
         }
-        serializer = UserProfileSerializer(data=data)
+        serializer = StoreSerializer(data=data)
         if serializer.is_valid():
             user = UserProfile.objects.create_user(**data)
             refresh = RefreshToken.for_user(user)
@@ -46,12 +42,12 @@ class UserProfileList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserProfileDetails(APIView):
+class StoreDetails(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get_user(self, _id):
-        return get_object_or_404(UserProfile, id=_id)
+        return get_object_or_404(Store, id=_id)
 
     @swagger_auto_schema(
         manual_parameters=[
@@ -65,11 +61,11 @@ class UserProfileDetails(APIView):
         try:
             user = self.get_user(user_id)
             logger.info(f"User with ID {user_id} retrieved successfully.")
-        except UserProfile.DoesNotExist:
+        except Store.DoesNotExist:
             logger.warning(f"Failed to retrieve user. User with ID {user_id} not found.")
-            return Response({"message": "User Not Found"}, status=404)
+            return Response({"error": "User Not Found"}, status=404)
 
-        serializer = UserProfileSerializer(user, many=False)
+        serializer = StoreSerializer(user, many=False)
         return Response(serializer.data, status=200)
 
     @swagger_auto_schema(
@@ -87,20 +83,20 @@ class UserProfileDetails(APIView):
         security=[],
     )
     def put(self, request):
-        user_id = get_user_id_from_token(request)
+        store_id = get_user_id_from_token(request)
         try:
-            user = self.get_user(user_id)
-            logger.info(f"Attempting to update user with ID {user_id}.")
-        except UserProfile.DoesNotExist:
-            logger.warning(f"Failed to update user. User with ID {user_id} not found.")
-            return Response({"message": "User Not Found."}, status=404)
+            store = self.get_user(store_id)
+            logger.info(f"Attempting to update store with ID {store_id}.")
+        except Store.DoesNotExist:
+            logger.warning(f"Failed to update store. User with ID {store_id} not found.")
+            return Response({"error": "User Not Found."}, status=404)
 
-        serializer = UserProfileSerializer(user, data=request.data, partial=True)
-        if 'password' in request.data or 'is_deleted' in request.data or 'is_superuser' in request.data:
-            return Response({"message": "Changing password, is_superuser is not allowed."}, status=403)
+        serializer = StoreSerializer(store, data=request.data, partial=True)
+        if 'hash_password' in request.data:
+            return Response({"error": "Changing password is not allowed."}, status=403)
         if serializer.is_valid():
             serializer.save()
-            logger.info(f"User with ID {user_id} updated successfully.")
+            logger.info(f"User with ID {store_id} updated successfully.")
             return Response(serializer.data, status=200)
-        logger.error(f"Failed to update user with ID {user_id}: {serializer.errors}")
+        logger.error(f"Failed to update store with ID {store_id}: {serializer.errors}")
         return Response(serializer.errors, status=401)

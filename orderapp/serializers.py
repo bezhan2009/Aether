@@ -5,7 +5,7 @@ from orderapp.models import (Order,
                              OrderStatus,
                              )
 from productapp.models import Product
-from userapp.models import UserProfile
+from storeapp.models import UserProfile
 
 
 class OrderStatusSerializer(serializers.ModelSerializer):

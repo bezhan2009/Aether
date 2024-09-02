@@ -13,14 +13,14 @@ class Migration(migrations.Migration):
         ('addressapp', '0002_initial'),
         ('orderapp', '0001_initial'),
         ('productapp', '0001_initial'),
-        ('userapp', '0001_initial'),
+        ('storeapp', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='order',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='userapp.userprofile'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='storeapp.userprofile'),
         ),
         migrations.AddField(
             model_name='orderdetails',
@@ -55,6 +55,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='payment',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='userapp.userprofile'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='storeapp.userprofile'),
         ),
     ]

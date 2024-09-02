@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('accountapp', '0002_initial'),
         ('orderapp', '0003_delete_payment'),
-        ('userapp', '0001_initial'),
+        ('storeapp', '0001_initial'),
     ]
 
     operations = [
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('is_deleted', models.BooleanField(default=False)),
                 ('account', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accountapp.account')),
                 ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='orderapp.orderdetails')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='userapp.userprofile')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='storeapp.userprofile')),
             ],
         ),
     ]

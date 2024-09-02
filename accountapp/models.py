@@ -1,5 +1,5 @@
 from django.db import models
-from userapp.models import UserProfile
+from storeapp.models import UserProfile
 
 
 class Account(models.Model):

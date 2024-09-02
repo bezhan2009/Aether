@@ -1,7 +1,7 @@
 from django.db import models
 
 from productapp.models import Product
-from userapp.models import User
+from storeapp.models import User
 
 
 class FeaturedProduct(models.Model):

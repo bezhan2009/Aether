@@ -9,14 +9,14 @@ class Migration(migrations.Migration):
     dependencies = [
         ('accountapp', '0002_initial'),
         ('productapp', '0001_initial'),
-        ('userapp', '0001_initial'),
+        ('storeapp', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='product',
             name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='userapp.userprofile'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='storeapp.userprofile'),
         ),
         migrations.AddField(
             model_name='productimage',

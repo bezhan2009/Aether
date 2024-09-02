@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "featured_productapp",
     'productapp',
     'orderapp',
-    'userapp',
+    'storeapp',
     'accountapp',
     'addressapp',
     'categoryapp',
@@ -94,6 +94,20 @@ WSGI_APPLICATION = 'AetherEShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aether_main_db',
+        'USER': 'postgres',
+        'PASSWORD': 'bezhan2009',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+django_heroku.settings(locals())
+
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'dquknpfd'),  # Имя базы данных
         'USER': os.environ.get('DB_USER', 'dquknpfd'),  # Имя пользователя базы данных
         'PASSWORD': os.environ.get('DB_PASSWORD', 'cfiKLKfKPER590K83YNo_GBCS8mNC5ba'),  # Пароль пользователя базы данных
@@ -102,10 +116,6 @@ DATABASES = {
     }
 }
 
-django_heroku.settings(locals())
-
-'''
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -113,17 +123,6 @@ DATABASES = {
         'USER': 'plfvzltv',
         'PASSWORD': 'si2Yzx2w5iAQed0Iw9-0I5kT1rGhE6uD',
         'HOST': 'john.db.elephantsql.com',
-        'PORT': '5432',
-    }
-}
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'aether_main_db',
-        'USER': 'postgres',
-        'PASSWORD': 'bezhan2009',
-        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

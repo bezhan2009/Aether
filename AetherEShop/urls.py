@@ -44,7 +44,7 @@ urlpatterns = [
     path('auth/token/verify/', TokenVerifyView.as_view(), name='verify_refresh'),
     path('auth/sign-in/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
 
-    path('auth/', include('userapp.urls')),
+    path('auth/', include('storeapp.urls')),
     path('products/', include('productapp.urls')),
     path('orders/', include('orderapp.urls')),
     path('account/', include('accountapp.urls')),
