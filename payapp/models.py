@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from storeapp.models import UserProfile
+from userapp.models import UserProfile
 from productapp.models import Account
 
 

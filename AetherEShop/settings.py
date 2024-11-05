@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'productapp',
     'orderapp',
     'userapp',
-    'storeapp',
     'accountapp',
     'addressapp',
     'categoryapp',
@@ -95,7 +94,7 @@ WSGI_APPLICATION = 'AetherEShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'biz_mart_db',
+        'NAME': 'aether_main_db',
         'USER': 'postgres',
         'PASSWORD': 'bezhan2009',
         'HOST': 'localhost',

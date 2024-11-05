@@ -1,5 +1,5 @@
 from django.db import models
-from storeapp.models import UserProfile
+from userapp.models import UserProfile
 
 
 class Address(models.Model):

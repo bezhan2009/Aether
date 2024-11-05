@@ -9,13 +9,13 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('addressapp', '0001_initial'),
+        ('payapp', '0001_initial'),
         ('userapp', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='address',
+            model_name='payment',
             name='user',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='userapp.userprofile'),
         ),

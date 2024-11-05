@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Review
-from storeapp.models import UserProfile
+from userapp.models import UserProfile
 from productapp.models import Product
 
 

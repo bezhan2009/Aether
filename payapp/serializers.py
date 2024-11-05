@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Payment
 from accountapp.serializers import AccountSerializer
 from orderapp.serializers import OrderDetailsSerializer
-from storeapp.models import UserProfile
+from userapp.models import UserProfile
 
 
 class PaymentSerializer(serializers.ModelSerializer):

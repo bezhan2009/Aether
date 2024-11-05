@@ -1,5 +1,5 @@
 from django.db import models
-from storeapp.models import UserProfile
+from userapp.models import UserProfile
 from accountapp.models import Account
 from categoryapp.models import Category
 

@@ -12,7 +12,7 @@ from featured_productapp.serializers import FeaturesProductSerializer
 from productapp.models import Product
 from drf_yasg.utils import swagger_auto_schema
 from utils.tokens import get_user_id_from_token
-from storeapp.models import UserProfile
+from userapp.models import UserProfile
 
 
 logger = logging.getLogger('featured_productapp.views')
