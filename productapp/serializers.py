@@ -18,16 +18,19 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'user', 'category', 'title', 'description', 'price', 'amount', 'images', 'default_account', "views"]
+        fields = ['id', 'user', 'category', 'title', 'description', 'price', 'amount', 'images', 'default_account',
+                  "views"]
 
 
 class ProductUpDateNewSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all(), required=False)
     images = ProductImageSerializer(many=True, read_only=True)
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), required=False)
+
     class Meta:
         model = Product
-        fields = ['id', 'user', 'category', 'title', 'description', 'price', 'amount', 'images', 'default_account', "views"]
+        fields = ['id', 'user', 'category', 'title', 'description', 'price', 'amount', 'images', 'default_account',
+                  "views"]
 
 
 class ProductUpdateSerializer(serializers.Serializer):

@@ -11,7 +11,7 @@ from drf_yasg.utils import swagger_auto_schema
 from utils.tokens import get_user_id_from_token
 
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('addressapp.views')
 
 
 class AddressList(APIView):
@@ -129,7 +129,10 @@ class AddressDetails(APIView):
             address = self.get_object(request, _id)
         except Http404:
             logger.warning(f"Failed to delete address. Address with ID {_id} not found.")
-            return Response({"message": "Address not found"}, status=404)
+            return Response(
+                            data={"message": "Address not found"},
+                            status=404
+                        )
 
         address.is_deleted = True
         address.save()

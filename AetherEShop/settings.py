@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
+import django_heroku
 
 from pathlib import Path
 from datetime import timedelta
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-1%xo6y&@j&yj1r03fa*!@8%p(#0mn)9=s_1$n+6i7%ktq2#8!p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'aether2024-839adee54fd1.herokuapp.com']
 
 
 # Application definition
@@ -40,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'drf_yasg',
     'django.contrib.staticfiles',
-    'Aether',
+    "featured_productapp",
     'productapp',
     'orderapp',
     'userapp',
@@ -89,7 +91,6 @@ WSGI_APPLICATION = 'AetherEShop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -97,9 +98,11 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'bezhan2009',
         'HOST': 'localhost',
-        'PORT': '5432'
+        'PORT': '5432',
     }
 }
+
+django_heroku.settings(locals())
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -136,6 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

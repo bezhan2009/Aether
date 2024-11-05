@@ -15,7 +15,7 @@ from rest_framework import status
 from utils.tokens import get_user_id_from_token
 from utils.commentTree import build_comment_tree
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('commentapp.views')
 
 
 class CommentList(APIView):

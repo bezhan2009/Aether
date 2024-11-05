@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from drf_yasg import openapi
 from django.db import transaction
+
+from addressapp.models import Address
 from .serializers import *
 from rest_framework.exceptions import PermissionDenied
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -12,9 +14,10 @@ from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from utils.tokens import get_user_id_from_token
+from userapp.models import UserProfile
 
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('orderapp.views')
 
 
 class OrderDetail(APIView):

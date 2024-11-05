@@ -19,7 +19,7 @@ from payapp.models import Account
 from productapp.models import Product
 
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('payapp.views')
 
 
 class OrderPay(APIView):
